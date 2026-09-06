@@ -33,27 +33,34 @@ try {
     }
 
     # Gibt es ueberhaupt Aenderungen?
-    $status = git status --porcelain
-    if ([string]::IsNullOrWhiteSpace($status)) {
+    $changed = @(git status --porcelain | Where-Object { $_ -ne '' })
+    if ($changed.Count -eq 0) {
         Log 'Keine Aenderungen.'
     } else {
-        $count = ($status -split "`n").Count
         git add -A
-        $msg = "Auto-sync: {0} ({1} Dateien)" -f (Get-Date -Format 'yyyy-MM-dd HH:mm'), $count
-        git commit -m $msg | Out-Null
-        Log "Commit erstellt: $msg"
+        $msg = "Auto-sync: {0} ({1} Dateien)" -f (Get-Date -Format 'yyyy-MM-dd HH:mm'), $changed.Count
+        $out = git commit -m $msg 2>&1
+        if ($LASTEXITCODE -eq 0) { Log "Commit erstellt: $msg" }
+        else { Log "COMMIT FEHLGESCHLAGEN: $out" }
     }
 
     # Push (auch wenn nichts Neues: holt haengengebliebene Commits nach)
+    # Kein origin/main bekannt (Erst-Push) -> $ahead bleibt '?', es wird gepusht
     $ahead = git rev-list --count "origin/$Branch..$Branch" 2>$null
     if ($LASTEXITCODE -ne 0) { $ahead = '?' }
 
     if ($ahead -eq '0') {
         Log 'Nichts zu pushen.'
     } else {
-        git push origin $Branch 2>&1 | ForEach-Object { Log "push: $_" }
-        if ($LASTEXITCODE -eq 0) { Log "Push OK ($ahead Commits)." }
-        else { Log "PUSH FEHLGESCHLAGEN (Exit $LASTEXITCODE) - Token pruefen, siehe SYSTEM/SETUP/SETUP-GITHUB-TOKEN.md" }
+        # git schreibt Fortschritt auf stderr -> ErrorActionPreference kurz lockern
+        $prev = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $out = & git push origin $Branch 2>&1
+        $code = $LASTEXITCODE
+        $ErrorActionPreference = $prev
+        foreach ($line in $out) { Log "push: $line" }
+        if ($code -eq 0) { Log "Push OK ($ahead Commits)." }
+        else { Log "PUSH FEHLGESCHLAGEN (Exit $code) - Token pruefen, siehe SYSTEM/SETUP/SETUP-GITHUB-TOKEN.md" }
     }
 }
 catch {
