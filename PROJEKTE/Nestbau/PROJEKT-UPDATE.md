@@ -25,9 +25,9 @@
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
 - [ ] GitHub-Push Kildro93/Nestbau (aus Cloud blockiert → lokal via Claude Code)
-- [x] Erst-Push des Vault-Repos: erledigt 2026-09-06 (Repo: Kildro93/Obsidion-Claud, 8 Commits)
-- [x] Auto-Sync (alle 30 Min) + Backup (Sonntag 02:00) im Task Scheduler registriert
-- [x] Firebase-API-Key auf eigene Domains eingeschränkt (localhost, nestbau-app.web.app, nestbau-app.firebaseapp.com)
+- [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
+- [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
+- [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
 - [ ] Branch-Entscheidung: welche Fassung geht in den Play Store
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution

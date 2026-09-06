@@ -8,7 +8,7 @@ Ziel: Der Auto-Sync pusht ohne Passwort-Abfrage.
 2. Personal access tokens → Fine-grained tokens → Generate new token
 3. Name: `vault-autosync`
 4. Expiration: 90 Tage (Kalendereintrag zum Erneuern setzen)
-5. Repository access: Only select repositories → `obsidian-vault` (und `Nestbau`, wenn der gleiche Token dafuer gelten soll)
+5. Repository access: Only select repositories → `Obsidion-Claud` (und `Nestbau`, wenn der gleiche Token dafuer gelten soll)
 6. Permissions → Repository permissions → **Contents: Read and write**
 7. Generate → Token sofort kopieren (wird nur einmal angezeigt)
 
@@ -30,7 +30,7 @@ Danach liegt der Token im Windows Credential Manager und der Auto-Sync laeuft oh
 ## 3. Pruefen
 
 ```powershell
-git ls-remote https://github.com/Kildro93/obsidian-vault
+git ls-remote https://github.com/Kildro93/Obsidion-Claud
 ```
 
 Gibt Refs aus → Token funktioniert. Fehler 403 → Permissions pruefen (Contents: Read and write).
@@ -45,8 +45,13 @@ git credential-manager erase
 ```
 Danach naechster Push fragt erneut → neuen Token eingeben.
 
+## Token-Backup (optional)
+
+Im Vault-Root liegt `.env.local` (per `.gitignore` ausgeschlossen). Dort kann der Token als Referenz fuer die naechste Rotation hinterlegt werden — wird nie committet.
+
 ## No-Gos
 
-- Token nie in eine Vault-Datei schreiben
+- Token nie in eine getrackte Vault-Datei schreiben
 - Token nie in `.git/config` als URL (`https://TOKEN@github.com/...`)
 - Bei Verdacht auf Leak: Settings → Tokens → Revoke, neuen erzeugen
+- `.env.local` nie manuell zu Git hinzufuegen (`git add .env.local` → verboten)

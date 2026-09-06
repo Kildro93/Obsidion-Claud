@@ -28,6 +28,8 @@ Diese liefen als Bot-Runs; ihre Prompts liegen als Vorlagen unter `Claude output
 | Design System Architect | `Claude outputs/BOT_3_DESIGN_UPDATE.md` | warme Palette, Gradients – `design-modernization.patch` |
 | Local Folder Manager | `Claude outputs/BOT_4_FOLDER_MANAGER.md` | Ordnerstruktur `C:\KI Programme\Nestbau Boter\` |
 | Firebase Architect (Phase 1) | — | `Nestbau/FIREBASE-ARCHITECTURE.md`, Indexes, Functions-Templates |
+
+> **Hinweis (Cleanup 2026-09-06):** Folgende überholte Prompt-Dateien aus `Claude outputs/` nach `ARCHIV/cleanup-2026-09-06/` verschoben: firebase-setup-guide.md (ersetzt durch SETUP-FIREBASE), integration-checklist.md (ersetzt durch PROJEKT-LEARNINGS), nestbau-ceo-master-prompt.md (ersetzt durch PROJEKT-LOOP), github-chat-anleitung.md (ersetzt durch QUICK-START). Die BOT_0-4-Prompts bleiben als Referenz.
 | Build Optimizer | — | 43 Tests, CI/CD, Play-Store-Assets (`release/play-store`) |
 | Rezept-Import | — | `Claude outputs/nestbau-v2-recipe-import/` |
 | CEO Master-Prompt | `Claude outputs/nestbau-ceo-master-prompt.md` | Bot-System-Koordination |

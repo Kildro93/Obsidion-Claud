@@ -19,7 +19,7 @@ Ablage der echten Werte: siehe [[SETUP-ENV-LOCAL]].
 
 ```
 GITHUB_USER       Kildro93
-VAULT_REPO        https://github.com/Kildro93/obsidian-vault
+VAULT_REPO        https://github.com/Kildro93/Obsidion-Claud
 CODE_REPO         https://github.com/Kildro93/Nestbau
 FIREBASE_PROJECT  nestbau-app
 FIREBASE_CONSOLE  https://console.firebase.google.com/project/nestbau-app

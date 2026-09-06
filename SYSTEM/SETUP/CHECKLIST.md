@@ -1,41 +1,41 @@
 # Final-Checkliste: was noch von Hand zu tun ist
 
-Stand 2026-09-06.
+Stand 2026-09-06. Alles darunter braucht dich (Token, Passwoerter, Konsolen-Klicks) — kein Bot kann es uebernehmen.
 
-## 1. GitHub-Repo + Erst-Push (ERLEDIGT)
+## 1. GitHub-Repo anlegen und Erst-Push (10 Min)
 
-- [x] Repo angelegt: Kildro93/Obsidion-Claud (privat)
-- [x] Token erstellt (unbegrenzt) und im Credential Store hinterlegt
-- [x] git push -u origin main erfolgreich (8 Commits)
-- [x] Auf github.com geprueft: SYSTEM/, PROJEKTE/, scripts/ sind da
+- [x] ~~github.com → New repository~~ → Repo heisst `Obsidion-Claud` (bereits angelegt)
+- [ ] Token erstellen und in Windows hinterlegen: [[SETUP-GITHUB-TOKEN]]
+- [ ] In PowerShell im Vault-Ordner:
+  ```powershell
+  cd "C:\KI Programme\Obsidion für Claud"
+  git push -u origin main
+  ```
+- [ ] Auf github.com pruefen: SYSTEM/, PROJEKTE/, scripts/ sind da — `Nestbau/` und `nestbau-firebase/` nicht
 
-## 2. Auto-Sync aktivieren (ERLEDIGT)
+## 2. Auto-Sync aktivieren (2 Min)
 
-- [x] install-autosync-task.ps1 ausgefuehrt (Fix: TimeSpan MaxValue -> 9999 Tage)
-- [x] Task "Obsidian Vault Auto-Sync" registriert (alle 30 Min)
-- [x] Erster Auto-Sync erfolgreich gelaufen (3 Dateien committed + gepusht)
+- [ ] `powershell -ExecutionPolicy Bypass -File ".\scripts\install-autosync-task.ps1"`
+- [ ] Test: `Start-ScheduledTask -TaskName "Obsidian Vault Auto-Sync"`
+- [ ] Log pruefen: `Get-Content ".\scripts\logs\vault-sync.log" -Tail 10`
 
-## 3. Backups aktivieren (ERLEDIGT)
+## 3. Backups aktivieren (2 Min)
 
-- [x] install-backup-task.ps1 ausgefuehrt
-- [x] Task "Obsidian Vault Weekly Backup" registriert (Sonntag 02:00)
+- [ ] `powershell -ExecutionPolicy Bypass -File ".\scripts\install-backup-task.ps1"`
 - [ ] Einmal sofort testen: `powershell -ExecutionPolicy Bypass -File ".\scripts\weekly-backup.ps1"`
+- [ ] Ergebnis liegt in `backups/`
 
-## 4. Sicherheit (ERLEDIGT)
+## 4. Sicherheit abschliessen (15 Min)
 
-- [x] Firebase-API-Key auf eigene Domains eingeschraenkt (localhost, nestbau-app.web.app, nestbau-app.firebaseapp.com)
-- [x] Keystore + keystore.properties in OneDrive gesichert
-- [x] Token laeuft nicht ab (unbegrenzt)
+- [ ] Firebase-API-Key in der Google Cloud Console auf eigene Domains einschraenken ([[SETUP-FIREBASE]], Abschnitt 4)
+- [ ] Keystore `nestbau-release.jks` + `keystore.properties` ausser Haus sichern ([[BACKUP-STRATEGY]], Ebene 3)
+- [ ] Kalendereintrag: Token laeuft in 90 Tagen ab
 
-## 5. CEO-Chat (ERLEDIGT)
+## 5. Nestbau-Altlasten (offen aus PROJEKT-UPDATE)
 
-- [x] CEO-Prompt auf Loop-System aktualisiert (Claude outputs/nestbau-ceo-master-prompt.md)
-
-## 6. Nestbau-Altlasten (offen, fuer CEO-Chat)
-
-- [ ] 21 uncommittete Aenderungen im Nestbau/-Repo sichten und committen
+- [ ] 21 uncommittete Aenderungen im `Nestbau/`-Repo sichten und committen
 - [ ] Branch-Entscheidung: welche Fassung geht in den Play Store
-- [ ] Client-IDs in nb-config.local.js vervollstaendigen, dann firebase deploy --only firestore:rules,storage
+- [ ] Client-IDs in `nb-config.local.js` vervollstaendigen, dann `firebase deploy --only firestore:rules,storage`
 
 ## Danach
 

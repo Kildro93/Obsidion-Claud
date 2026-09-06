@@ -42,7 +42,7 @@ Vault komplett verloren:
 
 ```powershell
 cd "C:\KI Programme"
-git clone https://github.com/Kildro93/obsidian-vault "Obsidion für Claud"
+git clone https://github.com/Kildro93/Obsidion-Claud "Obsidion für Claud"
 cd "Obsidion für Claud"
 git clone https://github.com/Kildro93/Nestbau Nestbau
 ```

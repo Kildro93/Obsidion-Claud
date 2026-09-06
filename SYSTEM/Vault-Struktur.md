@@ -1,6 +1,6 @@
 # Vault-Struktur
 
-Übersicht über diese Vault und das Loop-System. Stand: 2026-09-06.
+Übersicht über diese Vault und das Loop-System. Stand: 2026-09-06 (nach Cleanup).
 
 ## Ordner
 
@@ -32,10 +32,11 @@ LERNEN/
 KOCH-WISSEN/                Persönliches Koch-Wissen (Rezepte, Techniken)
 ROUTINEN/                   Alltags-Workflows
 ARCHIV/                     Abgelegte / veraltete Dateien
+├─ cleanup-2026-09-06/      Vault-Cleanup: überholte Dateien (firebase-setup-guide, integration-checklist, ceo-master-prompt, github-chat-anleitung, GitHub-Projects.zip, Unbenannt.canvas)
 
 Nestbau/                    CODE – Git-Repo der App (nicht anfassen ausser im Projekt-Kontext)
 nestbau-firebase/           CODE – Firebase-Backend, eigenes Git-Repo
-Claude outputs/             CODE + generierte Bundles + Bot-Prompt-Vorlagen
+Claude outputs/             CODE + generierte Bundles + Bot-Prompt-Vorlagen (BOT_0-4, index.html, design-modernization.patch)
 .gitignore                  Vault-Root – schliesst Secrets + Build-Cache aus (für geplanten Push)
 ```
 
@@ -91,4 +92,4 @@ scripts/
   logs/                     vault-sync.log
 ```
 
-Git: Vault-Wurzel ist ein eigenes Repo (Kildro93/obsidian-vault). `Nestbau/` und `nestbau-firebase/` bleiben eigene Repos und sind per `.gitignore` ausgeschlossen — `PROJEKTE/Nestbau/` (Notizen) ist davon nicht betroffen.
+Git: Vault-Wurzel ist ein eigenes Repo (Kildro93/Obsidion-Claud). `Nestbau/` und `nestbau-firebase/` bleiben eigene Repos und sind per `.gitignore` ausgeschlossen — `PROJEKTE/Nestbau/` (Notizen) ist davon nicht betroffen.

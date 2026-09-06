@@ -49,9 +49,11 @@ Eine Progressive Web App für Paare, um gemeinsam ihren Haushalt zu verwalten. M
 ## 🔧 Tech-Stack
 
 ### Frontend
-- **Framework**: React 18+ mit TypeScript
+> **Hinweis (2026-09-06):** Tatsächlicher Tech-Stack ist **Vanilla JavaScript**, nicht React/TypeScript. Diese Angabe stammt aus einer verworfenen Planung. Maßgeblich: [[Tech-Stack]] (PROJEKTE/Nestbau/REQUIREMENTS/).
+
+- **Framework**: ~~React 18+ mit TypeScript~~ → Vanilla JavaScript (kein Build-Schritt)
 - **Styling**: Custom CSS mit CSS Variables (nestbau-design.css, 1028 Zeilen)
-- **State Management**: React Hooks (useState, useContext)
+- **State Management**: ~~React Hooks (useState, useContext)~~ → localStorage + plain State-Objekt
 - **Offline**: Service Worker + IndexedDB
 - **Icons**: SVG (custom icon.svg)
 - **Responsive**: Mobile-First (375px+)

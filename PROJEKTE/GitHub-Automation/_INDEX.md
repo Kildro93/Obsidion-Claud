@@ -8,17 +8,16 @@
 
 | Projekt | Status | Repo-Name | Beschreibung | Tech-Stack |
 |---------|--------|-----------|-------------|-----------|
-| [Nestbau](Projekte/nestbau.md) | active | Nestbau | PWA für gemeinsames Haushalt-Management | React, Firebase, PWA |
-| [Household-App](Projekte/household-app.md) | planning | household-app | Finance & Task Management | TypeScript, React |
+| [Nestbau](Projekte/nestbau.md) | active | Nestbau | PWA für gemeinsames Haushalt-Management | Vanilla JS, Firebase, PWA |
 
 ---
 
 ## 📈 Statistik
 
 - **Aktive Repos**: 1 (Nestbau)
-- **In Planung**: 1 (Household-App)
+- **In Planung**: 0
 - **Archived**: 0
-- **Total**: 2
+- **Total**: 1
 
 ---
 
@@ -49,4 +48,4 @@
 
 ---
 
-*Last Updated: 2026-09-05*
+*Last Updated: 2026-09-06 (Cleanup: Household-App-Phantom entfernt, Tech-Stack korrigiert)*

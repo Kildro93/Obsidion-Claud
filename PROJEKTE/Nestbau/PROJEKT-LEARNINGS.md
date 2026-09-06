@@ -73,7 +73,7 @@ Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haus
 
 ## Offene strukturelle Punkte
 
-- [ ] Vault-Wurzel ist noch KEIN Git-Repo – "Vault zu GitHub pushen" (Phase 1 Setup) offen. Nur `Nestbau/` und `nestbau-firebase/` sind eigene Repos.
+- [x] ~~Vault-Wurzel ist noch KEIN Git-Repo~~ – erledigt 2026-09-06: Vault-Wurzel als Git-Repo initialisiert (Kildro93/Obsidion-Claud). Erst-Push zu GitHub steht noch aus.
 - [ ] Repo Kildro93/Nestbau hat drei divergierte Stände: `main` (Firebase), `release/play-store` (Tests/CI/Store), `master` (nestbau-firebase-Struktur). Merge-Entscheidung offen.
 - [ ] Die 43 Tests prüfen die Fassung OHNE Firebase.
 
