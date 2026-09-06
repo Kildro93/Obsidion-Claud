@@ -23,7 +23,7 @@ Nie den kompletten Vault durchsuchen. Fehlt Kontext, gezielt per Suche nachladen
 3. Ueber echte UI-Interaktionen testen, nie ueber App-interne Closures
 4. Light- und Dark-Screenshot pruefen, bevor etwas veroeffentlicht wird
 5. `<Bot-Name>-Summary.md` nach `Chat-Exports/` schreiben
-6. Dem CEO melden: fertig, Link zur Summary
+6. **Sofort und direkt melden: "Fertig. [Was erledigt wurde]."** — nicht zwischen tausend Worten verstecken
 
 ## Vor Chat-Loeschung
 

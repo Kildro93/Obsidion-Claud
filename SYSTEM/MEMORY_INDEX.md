@@ -36,6 +36,7 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lese
 - Technik / Anime: LERNEN/
 - Koch-Wissen: KOCH-WISSEN/
 - Alltags-Routinen: ROUTINEN/
+- Vault-Cleanup & Integration: [[2026-09-06-Vault-Cleanup-Integration]]
 
 ---
-*Zuletzt aktualisiert: 2026-09-06 – Vault-Repo initialisiert, Setup/Auto-Sync/Backup/Audit ergänzt*
+*Zuletzt aktualisiert: 2026-09-06 – Cleanup durchgefuehrt, Bot-Abschluss-Regel eingefuehrt*

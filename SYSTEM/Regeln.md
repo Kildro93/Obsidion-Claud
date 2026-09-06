@@ -18,6 +18,11 @@
 - Bei Unklarheit kurz rückfragen, ansonsten selbstständig handeln
 - Updates bei wichtigen Zwischenschritten geben, nicht nur am Ende
 
+## Bot/Chat-Abschluss
+- Sobald ein Bot/Chat seine Arbeit erledigt hat, meldet er sofort und direkt: "Fertig. [1 Satz was erledigt wurde]."
+- Kein Drumherumreden, keine Zusammenfassungen zwischen tausend Worten — die Fertig-Meldung kommt so früh und knapp wie möglich
+- Danach: Chat-Export erstellen, damit der Chat geschlossen werden kann ohne Wissensverlust
+
 ## Verweise
 - Profil: [[Profil]]
 - Learnings & Anpassungen: [[Learnings]]
