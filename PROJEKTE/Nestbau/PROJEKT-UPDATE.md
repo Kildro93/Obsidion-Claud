@@ -19,10 +19,15 @@
 - 2026-09-06: `C:\Users\indra` durchsucht – redundanten Klon `~/Nestbau` gelöscht (= origin/main); 3 Dateien aus ~/Downloads in den Vault (2 Chat-Exports + 1 Daten-Sicherung); Release-Keystore `~/.nestbau-keys/` bleibt (Secret, nicht in Vault)
 - 2026-09-06: redundante Klone `C:\KI Programme\Nestbau Boter` + `C:\KI Programme\nestbau-app` gelöscht (0 uncommitted/unpushed); `.claude/launch.json` „nestbau" → Vault-Klon; Emulator `NestbauTest` (4,5 GB) gelöscht, Rebuild-Anleitung: [[Emulator-Setup]]
 
+- 2026-09-06: Vault-Wurzel als Git-Repo initialisiert (2 Commits), `.gitignore` auf Root-Pfade angepasst, Setup-Doku unter SYSTEM/SETUP/, Auto-Sync + Backup-Scripts unter scripts/, Security-Audit durchgeführt (keine Keys im Repo)
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
 - [ ] GitHub-Push Kildro93/Nestbau (aus Cloud blockiert → lokal via Claude Code)
+- [ ] Erst-Push des Vault-Repos: Repo `Kildro93/obsidian-vault` auf GitHub anlegen, dann `git push -u origin main` (Mensch, Token nötig — siehe [[SETUP-GITHUB-TOKEN]])
+- [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
+- [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
 - [ ] Branch-Entscheidung: welche Fassung geht in den Play Store
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution
@@ -31,7 +36,7 @@
 - GitHub-Push aus Cloud-Session: 403 (Repo nicht in Session-Sources) → lokal pushen
 - Nestbau-Repo hat 21 uncommittete Änderungen (Build-Optimizer-/Play-Store-Arbeit nie committet)
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
-- Vault-Wurzel → GitHub: vor Push verschachtelte `.git` (Nestbau/, nestbau-firebase/) klären, siehe Root-`.gitignore`
+- ~~Vault-Wurzel → GitHub: verschachtelte `.git` klären~~ erledigt 2026-09-06: beide Ordner bleiben eigene Repos, per `.gitignore` ausgeschlossen
 
 ## Wichtigste Dateien
 - Einstieg: [[README]]

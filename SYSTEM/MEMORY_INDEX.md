@@ -6,6 +6,13 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lese
 - Wer ich bin: [[Profil]]
 - Kommunikationsstil & No-Gos: [[Regeln]]
 - Vault-Aufbau & Loop-System: [[Vault-Struktur]]
+- Schnelleinstieg für neue Chats/Bots: [[QUICK-START]]
+
+## Betrieb & Zugänge
+- Zugangs-Übersicht (nur Templates): [[PROJEKT-CREDENTIALS]]
+- GitHub-Token: [[SETUP-GITHUB-TOKEN]] · Firebase: [[SETUP-FIREBASE]] · Lokale Konfig: [[SETUP-ENV-LOCAL]]
+- Auto-Sync: [[AUTO-SYNC]] · Backups: [[BACKUP-STRATEGY]] · Audit: [[SECURITY-AUDIT]]
+- Fehlersuche: [[DEBUGGING]]
 
 ## Projekte
 
@@ -31,4 +38,4 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lese
 - Alltags-Routinen: ROUTINEN/
 
 ---
-*Zuletzt aktualisiert: 2026-09-06 – Vault reorganisiert, Loop-System eingeführt*
+*Zuletzt aktualisiert: 2026-09-06 – Vault-Repo initialisiert, Setup/Auto-Sync/Backup/Audit ergänzt*

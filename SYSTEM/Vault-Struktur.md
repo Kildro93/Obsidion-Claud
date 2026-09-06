@@ -66,3 +66,29 @@ Dann erst arbeiten. Nicht die ganze Vault durchsuchen, nicht in anderen Projekte
 ## Neues Projekt anlegen
 
 Ordner unter PROJEKTE/ anlegen, die vier PROJEKT-Dateien aus Nestbau als Vorlage kopieren und anpassen, in MEMORY_INDEX.md verlinken.
+
+
+## Betriebs-Ebene (seit 2026-09-06)
+
+```
+SYSTEM/
+  QUICK-START.md      Einstieg für neue Chats/Bots
+  DEBUGGING.md        Fehlerbilder Git, Sync, Nestbau
+  SETUP/
+    PROJEKT-CREDENTIALS.md   Zugangs-Übersicht (Templates, keine Keys)
+    SETUP-GITHUB-TOKEN.md    PAT erstellen und in Windows hinterlegen
+    SETUP-FIREBASE.md        Projekt nestbau-app, Rules, Secrets
+    SETUP-ENV-LOCAL.md       nb-config.local.js, Function-Secrets, keystore.properties
+    AUTO-SYNC.md             Task Scheduler, alle 30 Minuten
+    BACKUP-STRATEGY.md       drei Ebenen: GitHub, ZIP, ausser Haus
+    SECURITY-AUDIT.md        Audit-Stand und Wiederholungs-Rezept
+scripts/
+  vault-sync.ps1            Commit + Push, läuft per Aufgabe
+  install-autosync-task.ps1 registriert die Aufgabe
+  weekly-backup.ps1         ZIP nach backups/, hält 8 Stück
+  install-backup-task.ps1   registriert die Backup-Aufgabe
+  push.ps1                  manueller Sofort-Push
+  logs/                     vault-sync.log
+```
+
+Git: Vault-Wurzel ist ein eigenes Repo (Kildro93/obsidian-vault). `Nestbau/` und `nestbau-firebase/` bleiben eigene Repos und sind per `.gitignore` ausgeschlossen — `PROJEKTE/Nestbau/` (Notizen) ist davon nicht betroffen.
