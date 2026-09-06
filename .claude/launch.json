@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nestbau",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-c",
+        "import os,functools,http.server as s;s.test(HandlerClass=functools.partial(s.SimpleHTTPRequestHandler,directory='C:/KI Programme/Obsidion für Claud/Nestbau'),port=int(os.environ.get('PORT') or 0),bind='127.0.0.1')"
+      ],
+      "autoPort": true
+    },
+    {
+      "name": "nestbau-auth",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-c",
+        "import os,functools,http.server as s;s.test(HandlerClass=functools.partial(s.SimpleHTTPRequestHandler,directory='C:/KI Programme/Obsidion für Claud/Claude outputs/nestbau-v2-auth'),port=int(os.environ.get('PORT') or 0),bind='127.0.0.1')"
+      ],
+      "autoPort": true
+    }
+  ]
+}

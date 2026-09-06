@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude GitHub Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .section h2 {
+            font-size: 18px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        input[type="password"],
+        input[type="text"],
+        textarea,
+        select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="password"]:focus,
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 200px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #38a169;
+        }
+        
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .status.success {
+            background: #f0fdf4;
+            color: #166534;
+            border-left: 4px solid #48bb78;
+        }
+        
+        .status.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border-left: 4px solid #f56565;
+        }
+        
+        .status.info {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left: 4px solid #667eea;
+        }
+        
+        .status.warning {
+            background: #fffbeb;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .log {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+        
+        .log-entry {
+            margin: 4px 0;
+        }
+        
+        .log-entry.success {
+            color: #4ec9b0;
+        }
+        
+        .log-entry.error {
+            color: #f48771;
+        }
+        
+        .log-entry.info {
+            color: #9cdcfe;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-card .label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Claude GitHub Automation</h1>
+            <p>Automatische Projekt-Verwaltung via Obsidian</p>
+        </div>
+        
+        <div class="content">
+            <!-- LEFT: Configuration -->
+            <div class="section">
+                <h2>⚙️ Konfiguration</h2>
+                
+                <div class="input-group">
+                    <label for="token">GitHub Personal Access Token</label>
+                    <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxx" />
+                    <small>Wird nur lokal gespeichert (localStorage)</small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="username">GitHub Username</label>
+                    <input type="text" id="username" placeholder="dein-github-username" />
+                </div>
+                
+                <div class="input-group">
+                    <label for="projectData">Projekt-Daten (JSON oder Markdown)</label>
+                    <textarea id="projectData" placeholder='Paste hier deine Obsidian-Notizen oder JSON mit Projekt-Daten'></textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="saveConfig()">✅ Konfiguration speichern</button>
+                    <button class="btn-secondary" onclick="toggleTokenVisibility()">👁️ Token anzeigen</button>
+                </div>
+                
+                <div id="configStatus" class="status hidden"></div>
+            </div>
+            
+            <!-- RIGHT: Operations & Logs -->
+            <div class="section">
+                <h2>🎯 Operationen</h2>
+                
+                <div class="button-group">
+                    <button class="btn-success" onclick="parseAndCreateProjects()">📦 Projekte erstellen</button>
+                    <button class="btn-primary" onclick="validateProjects()">🔍 Validieren</button>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="syncRepositories()">🔄 Mit GitHub synchen</button>
+                    <button class="btn-danger" onclick="clearLog()">🗑️ Log löschen</button>
+                </div>
+                
+                <div class="input-group">
+                    <label>📊 Status</label>
+                    <div class="log" id="log"></div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="number" id="repoCount">0</div>
+                        <div class="label">Repositorys</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="lastSync">—</div>
+                        <div class="label">Zuletzt aktualisiert</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Storage & Config
+        function saveConfig() {
+            const token = document.getElementById('token').value;
+            const username = document.getElementById('username').value;
+            
+            if (!token || !username) {
+                showStatus('configStatus', 'Bitte Token und Username eingeben', 'error');
+                return;
+            }
+            
+            localStorage.setItem('gh_token', token);
+            localStorage.setItem('gh_username', username);
+            
+            showStatus('configStatus', '✅ Konfiguration gespeichert', 'success');
+            addLog('INFO', 'Konfiguration lokal gespeichert');
+        }
+        
+        function loadConfig() {
+            const token = localStorage.getItem('gh_token');
+            const username = localStorage.getItem('gh_username');
+            
+            if (token) document.getElementById('token').value = '•'.repeat(20) + token.slice(-10);
+            if (username) document.getElementById('username').value = username;
+        }
+        
+        function toggleTokenVisibility() {
+            const input = document.getElementById('token');
+            const storedToken = localStorage.getItem('gh_token');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                if (storedToken) input.value = storedToken;
+            } else {
+                input.type = 'password';
+                input.value = '•'.repeat(20) + storedToken.slice(-10);
+            }
+        }
+        
+        // Logging
+        function addLog(level, message) {
+            const log = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${level.toLowerCase()}`;
+            
+            const timestamp = new Date().toLocaleTimeString('de-DE');
+            entry.textContent = `[${timestamp}] ${level}: ${message}`;
+            
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+            addLog('INFO', 'Log gelöscht');
+        }
+        
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `status ${type}`;
+            element.classList.remove('hidden');
+            
+            if (type !== 'error') {
+                setTimeout(() => element.classList.add('hidden'), 5000);
+            }
+        }
+        
+        // Project Parsing
+        function parseProjectData() {
+            const data = document.getElementById('projectData').value;
+            
+            try {
+                // Try JSON first
+                return JSON.parse(data);
+            } catch (e) {
+                // Parse Markdown-style data
+                addLog('INFO', 'Parsing Markdown-Format...');
+                return parseMarkdownProjects(data);
+            }
+        }
+        
+        function parseMarkdownProjects(markdown) {
+            const projects = [];
+            const sections = markdown.split(/^##\s+/m);
+            
+            sections.forEach(section => {
+                if (!section.trim()) return;
+                
+                const lines = section.split('\n');
+                const title = lines[0].trim();
+                
+                const project = {
+                    name: title,
+                    repoName: title.toLowerCase().replace(/\s+/g, '-'),
+                    description: '',
+                    type: 'Full-Stack',
+                    status: 'active'
+                };
+                
+                // Extract details
+                lines.forEach(line => {
+                    if (line.includes('- **Beschreibung**:')) {
+                        project.description = line.split(':')[1]?.trim() || '';
+                    }
+                    if (line.includes('- **Typ**:')) {
+                        project.type = line.split(':')[1]?.trim() || 'Full-Stack';
+                    }
+                    if (line.includes('- **Status**:')) {
+                        project.status = line.split(':')[1]?.trim() || 'active';
+                    }
+                });
+                
+                if (project.description) {
+                    projects.push(project);
+                }
+            });
+            
+            return projects;
+        }
+        
+        // Validation
+        function validateProjects() {
+            try {
+                const projects = parseProjectData();
+                addLog('SUCCESS', `✅ ${projects.length} Projekte validiert`);
+                
+                projects.forEach((p, i) => {
+                    addLog('INFO', `Projekt ${i + 1}: ${p.name} (${p.repoName})`);
+                });
+                
+                return projects;
+            } catch (e) {
+                addLog('ERROR', `Validierung fehlgeschlagen: ${e.message}`);
+                return null;
+            }
+        }
+        
+        // GitHub API
+        async function createRepository(token, username, project) {
+            const data = {
+                name: project.repoName,
+                description: project.description || `${project.name} project`,
+                private: false,
+                auto_init: true,
+                topics: [project.type.toLowerCase(), 'claude-automation']
+            };
+            
+            try {
+                const response = await fetch('https://api.github.com/user/repos', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Repository creation failed');
+                }
+                
+                const repo = await response.json();
+                addLog('SUCCESS', `Repository erstellt: ${repo.html_url}`);
+                return repo;
+            } catch (error) {
+                addLog('ERROR', `Failed to create ${project.repoName}: ${error.message}`);
+                throw error;
+            }
+        }
+        
+        async function createReadme(token, username, project) {
+            const content = `# ${project.name}
+
+${project.description || ''}
+
+## Features
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Installation
+
+\`\`\`bash
+git clone https://github.com/${username}/${project.repoName}.git
+cd ${project.repoName}
+\`\`\`
+
+## Usage
+
+[Füge Nutzungsbeispiele hier ein]
+
+## Tech Stack
+- Type: ${project.type}
+- Status: ${project.status}
+
+## Author
+Created by Claude Automation
+
+---
+**Last Updated**: ${new Date().toISOString().split('T')[0]}
+`;
+
+            const body = {
+                message: 'docs: initialize README',
+                content: btoa(content),
+                branch: 'main'
+            };
+            
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${username}/${project.repoName}/contents/README.md`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(body)
+                    }
+                );
+                
+                if (response.ok) {
+                    addLog('INFO', `README für ${project.repoName} erstellt`);
+                }
+            } catch (error) {
+                addLog('WARNING', `README-Erstellung fehlgeschlagen: ${error.message}`);
+            }
+        }
+        
+        // Main Operations
+        async function parseAndCreateProjects() {
+            const token = localStorage.getItem('gh_token');
+            const username = localStorage.getItem('gh_username');
+            
+            if (!token || !username) {
+                showStatus('configStatus', '❌ Token und Username erforderlich', 'error');
+                return;
+            }
+            
+            const projects = validateProjects();
+            if (!projects || projects.length === 0) return;
+            
+            addLog('INFO', `Starte Erstellung von ${projects.length} Repositories...`);
+            
+            let successful = 0;
+            for (const project of projects) {
+                try {
+                    await createRepository(token, username, project);
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Rate limit
+                    await createReadme(token, username, project);
+                    successful++;
+                } catch (e) {
+                    addLog('ERROR', `Fehler bei ${project.name}`);
+                }
+            }
+            
+            addLog('SUCCESS', `✅ ${successful}/${projects.length} Projekte erstellt`);
+            updateStats(successful);
+        }
+        
+        async function syncRepositories() {
+            const token = localStorage.getItem('gh_token');
+            const username = localStorage.getItem('gh_username');
+            
+            if (!token || !username) {
+                showStatus('configStatus', '❌ Token und Username erforderlich', 'error');
+                return;
+            }
+            
+            addLog('INFO', 'Synchronisiere mit GitHub...');
+            
+            try {
+                const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                const repos = await response.json();
+                addLog('SUCCESS', `✅ ${repos.length} Repositories gefunden`);
+                
+                const autoRepos = repos.filter(r => 
+                    r.topics && r.topics.includes('claude-automation')
+                );
+                
+                addLog('INFO', `${autoRepos.length} Claude-verwaltete Repositories`);
+                updateStats(autoRepos.length);
+                
+            } catch (error) {
+                addLog('ERROR', `Sync fehlgeschlagen: ${error.message}`);
+            }
+        }
+        
+        function updateStats(count) {
+            document.getElementById('repoCount').textContent = count;
+            document.getElementById('lastSync').textContent = new Date().toLocaleTimeString('de-DE');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadConfig();
+            addLog('INFO', '🚀 Claude GitHub Automation gestartet');
+        });
+    </script>
+</body>
+</html>

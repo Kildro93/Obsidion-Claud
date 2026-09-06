@@ -1,0 +1,19 @@
+# Obsidian-spezifisch
+.obsidian/
+.DS_Store
+
+# System
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Sensitive
+PAT-Setup.md (nur lokal halten!)
+
+# Optional - falls du Git versionierst
+node_modules/
+dist/
+*.log
+.env
+.env.local

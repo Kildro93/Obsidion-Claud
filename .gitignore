@@ -1,0 +1,67 @@
+# ── Vault-Root .gitignore ─────────────────────────────────────────────
+# Angelegt 2026-09-06, bevor die Vault-Wurzel nach GitHub gepusht wird.
+# Zweck: keine Secrets und kein regenerierbarer Build-Müll im Repo.
+
+# ── Secrets: NIE committen ───────────────────────────────────────────
+**/keystore.properties
+**/*.jks
+**/*.keystore
+**/local.properties
+**/nb-config.local.js
+**/.env
+**/.env.local
+**/.env.*.local
+**/google-services.json
+**/GoogleService-Info.plist
+**/serviceAccount*.json
+**/*serviceaccount*.json
+# .env.example / keystore.properties.example bleiben drin (Vorlagen)
+!**/.env.example
+!**/keystore.properties.example
+
+# App-Daten-Sicherungen (können persönliche Inhalte haben)
+PROJEKTE/Nestbau/Backups/
+**/nestbau-sicherung*.json
+
+# ── Build-Output & Caches (reproduzierbar) ───────────────────────────
+**/node_modules/
+**/.gradle/
+**/build/
+**/android/app/build/
+**/android/build/
+**/dist/
+**/www/
+*.apk
+*.aab
+**/*.log
+emulator.log
+firestore-debug.log
+
+# ── Lokale Tool-/Editor-Dateien ──────────────────────────────────────
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.claude/settings.local.json
+.claudian/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Hinweis: verschachtelte Git-Repos ───────────────────────────────
+# Nestbau/ und nestbau-firebase/ haben eigene .git-Ordner. Ein Push der
+# Vault-Wurzel als EIN Repo behandelt sie als eingebettete Repos
+# (Git fügt sie als "gitlink" ohne Inhalt hinzu). Vor dem Push
+# entscheiden: eigene Repos lassen (dann hier ignorieren) oder ihre
+# .git-Ordner entfernen und Inhalt mit aufnehmen.
+# Nestbau/
+# nestbau-firebase/
+
+# ── Verschachtelte Code-Repos: bleiben eigene GitHub-Repos ───────────
+# Entscheidung 2026-09-06: nicht ins Vault-Repo aufnehmen.
+Nestbau/
+nestbau-firebase/
+Claude outputs/nestbau-v2-auth/
+Claude outputs/nestbau-v2-recipe-import/
+
+# ── Lokale Backups ───────────────────────────────────────────────────
+backups/
