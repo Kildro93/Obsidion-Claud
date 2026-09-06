@@ -58,10 +58,11 @@ desktop.ini
 
 # ── Verschachtelte Code-Repos: bleiben eigene GitHub-Repos ───────────
 # Entscheidung 2026-09-06: nicht ins Vault-Repo aufnehmen.
-Nestbau/
-nestbau-firebase/
-Claude outputs/nestbau-v2-auth/
-Claude outputs/nestbau-v2-recipe-import/
+# Fuehrender Slash = nur im Vault-Root, damit PROJEKTE/Nestbau/ (Notizen) drin bleibt.
+/Nestbau/
+/nestbau-firebase/
+/Claude outputs/nestbau-v2-auth/
+/Claude outputs/nestbau-v2-recipe-import/
 
 # ── Lokale Backups ───────────────────────────────────────────────────
 backups/

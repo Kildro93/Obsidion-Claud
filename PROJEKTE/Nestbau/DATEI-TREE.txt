@@ -1,0 +1,55 @@
+PROJEKTE/Nestbau/   — Stand 2026-09-06
+│
+├─ README.md                 Einstieg / Wegweiser
+├─ PROJEKT-LOOP.md           CEO + Bot-Rollen + Workflow
+├─ PROJEKT-UPDATE.md         Aktueller Status (< 200 Worte)
+├─ PROJEKT-LEARNINGS.md      Top 5 + Patterns + Fehlertabelle (nur CEO schreibt)
+├─ PROJEKT-ACCESS.md         Zugangs-Vorlagen (keine echten Keys)
+├─ VERKNUEPFUNGEN.md         Abhängigkeits-Map
+├─ DATEI-TREE.txt            Diese Datei
+├─ NESTBAU_AKTUELL.md        Feature-Status im Detail
+├─ ARTIFACT_LINKS.md         Versions-URLs
+├─ Learnings.md              Chronologischer Feature-/UI-Entscheidungs-Log
+│
+├─ REQUIREMENTS/
+│   ├─ Features.md           Kern-Features, geplant/offen, Priorität, Akzeptanz
+│   ├─ User-Stories.md       Rollen: Ich / Partnerin; Alltag, Kalender, Kochbuch, Daten
+│   └─ Tech-Stack.md         Vanilla JS + Capacitor + Firebase; Branch-Lage
+│
+├─ DESIGN/
+│   ├─ Design-System.md      Palette, Typo, Komponenten, Motion, A11y
+│   └─ User-Flows.md         App-Navigation, Auth-Wizard, Migration, Clipper
+│
+├─ CODE/
+│   ├─ CODE-Landkarte.md     Wo liegt welcher Code (Repos/Bundles/Klone)
+│   ├─ Datenbank-Schema.md   Firestore-Collections + Regeln
+│   ├─ Emulator-Setup.md     Android-AVD NestbauTest 1:1 wiederherstellen
+│   └─ Snippets/
+│       ├─ kochbuch-naehrwert-berechnung.md
+│       ├─ menuplan-migration.md
+│       └─ css-spezifitaet-dark-mode-fix.md
+│
+├─ Knowledge/
+│   ├─ NESTBAU-KNOWLEDGE-INDEX.md   Navigation
+│   ├─ nestbau-tech.md              Firebase/Security/Architektur-Patterns
+│   ├─ nestbau-testing.md           17 Security-Tests, Bugs, Performance
+│   ├─ haushalts-app.md             Produkt-Kontext, Roadmap, Branch-Divergenz
+│   └─ nestbau-quickref.md          Cheat-Sheet (Deploy, Error-Codes)
+│
+├─ Chat-Exports/
+│   ├─ INDEX.md                     Session-Register
+│   ├─ 2026-09-04-Local-App-Test-Report.md   (aus ~/Downloads)
+│   ├─ 2026-09-05-Kochbuch-Menuplan-GitHub.md
+│   └─ 2026-09-06-Testing-CICD.md            (aus ~/Downloads)
+│
+├─ Backups/
+│   └─ nestbau-sicherung-2026-09-04.json     App-Daten-Sicherung (gitignored)
+│
+└─ Fact-Sheets/
+    ├─ Firebase-Architektur.md      Konsolidierte Kurzfassung
+    └─ Kochbuch-Datenmodell.md      Datenmodell + JS (aus System/Kochbuch-Entwurf)
+
+CODE liegt NICHT hier, sondern im Vault-Root:
+    Nestbau/                 Haupt-Repo (App + Android + Play-Store + Tests)
+    nestbau-firebase/        Firebase-Backend, eigenes Repo
+    Claude outputs/          Bundles (nestbau-v2-auth, nestbau-v2-recipe-import) + Bot-Prompts
