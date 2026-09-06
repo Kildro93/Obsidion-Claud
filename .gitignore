@@ -38,6 +38,7 @@ emulator.log
 firestore-debug.log
 
 # ── Lokale Tool-/Editor-Dateien ──────────────────────────────────────
+.obsidian/plugins/*/data.json
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
