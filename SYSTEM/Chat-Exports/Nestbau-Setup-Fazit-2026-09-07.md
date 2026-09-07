@@ -1,5 +1,7 @@
 # Fazit: Nestbau Setup & Multi-Chat-System – 07.09.2026
 
+> **Stand-Hinweis (07.09.2026, später):** Teile dieses Fazits sind überholt. Vault-Struktur, PAT und Push existieren inzwischen; der Repo-Name lautet `Kildro93/Obsidion-Claud`. Aktueller Stand: [[PROJEKT-UPDATE]] und [[2026-09-07-Vault-Setup-Repo-Cleanup]].
+
 ## Abgeschlossen
 
 - Google OAuth eingerichtet: Client-ID erzeugt, Scopes calendar.readonly + calendar.events, Redirect `http://localhost:8000/oauth-callback.html`, Consent Screen freigegeben
@@ -62,7 +64,7 @@ Vault aktualisiert: nein, Struktur existiert noch nicht.
 ## Offene Probleme
 
 - **PAT fehlt** – blockiert jede Automatisierung. Höchste Priorität.
-- **`js/nb-config.local.js` wird im Browser nicht geladen.** Datei liegt korrekt auf der Platte (196 Bytes), Settings zeigt trotzdem "Client-ID fehlt". Nicht gelöst. Zu prüfen: Browser-Konsole auf 404 oder Ladereihenfolge, ob das Script überhaupt im HTML eingebunden ist, ob `NB` zum Ausführungszeitpunkt schon existiert.
+- ~~**`js/nb-config.local.js` wird im Browser nicht geladen.**~~ **Gelöst 07.09.2026:** Die Datei wurde sehr wohl geladen (index.html:866). Sie enthielt aber nur Firebase-Emulator-Platzhalter und *keine* `google.clientId` — die stand in einer zweiten Fassung unter `Claude outputs/nb-config.local.js`, die nie nach `Nestbau/js/` kopiert wurde. Beide Fassungen zusammengeführt, Ladetest bestätigt die ID. Details: [[2026-09-07-Vault-Setup-Repo-Cleanup]]
 - **Outlook OAuth** – zurückgestellt. `indra.kroeger@live.com` existiert nicht im Microsoft-Services-Tenant. Braucht einen eigenen Azure-Tenant.
 - **Vault-Struktur** – MASTER-INDEX.md und die übrigen Kerndateien sind noch nicht angelegt.
 

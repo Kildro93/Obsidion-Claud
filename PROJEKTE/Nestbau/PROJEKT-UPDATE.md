@@ -27,9 +27,12 @@
 
 - 2026-09-07: Sicherheitsbefunde behoben (2 Commits, noch nicht gepusht): XSS-Härtung der Foto-Vorschauen + sharp ^0.35.4
 
+- 2026-09-07: Blocker „Client-ID fehlt" gelöst – die aktive `nb-config.local.js` enthielt nur Emulator-Platzhalter, die echte Google-Client-ID lag in einer zweiten Fassung unter `Claude outputs/`. Zusammengeführt, alte Fassung als `.bak-2026-09-07` daneben.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
-- [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
+- [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
+- [ ] Firebase-Web-Konfiguration aus der Konsole in `nb-config.local.js` (Block liegt auskommentiert bereit), dann `firebase deploy --only firestore:rules,storage`
 - [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
 - [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
 - [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)

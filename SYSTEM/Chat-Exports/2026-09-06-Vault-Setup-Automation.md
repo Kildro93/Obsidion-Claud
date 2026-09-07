@@ -1,4 +1,4 @@
-﻿# Chat-Export: Vault-Setup & Automation [2026-09-06]
+# Chat-Export: Vault-Setup & Automation [2026-09-06]
 
 ## Zusammenfassung
 Einrichtung eines GitHub-basierten Obsidian Vaults mit automatischer Verwaltung durch Claude. Ziel war es, GitHub als SOURCE OF TRUTH zu etablieren und Chat-basierte Vault-Pflege zu automatisieren. Erreicht: System-Prompt in Claude Settings, klare Vault-Struktur, Push-Prompt für on-demand Updates, Prozess-Dokumentation.
@@ -16,7 +16,8 @@ Einrichtung eines GitHub-basierten Obsidian Vaults mit automatischer Verwaltung 
 - Dateien: MEMORY_INDEX.md, Regeln.md, Profil.md
 - Ordnerstruktur: Lernen, Projekte, Koch-Wissen, Routinen, Templates
 - Chat-Export-Format standardisiert
-- GitHub-Repo: github.com/Kildro93/obsidian-vault
+- GitHub-Repo: github.com/Kildro93/obsidian-vault  
+  *(Korrektur 07.09.2026: Repo heisst inzwischen `Kildro93/Obsidion-Claud`.)*
 
 ## Erkenntnisse
 - Obsidian ist Markdown + .obsidian/ Config → perfekt für Git
@@ -33,3 +34,6 @@ Offen: Phase 1 lokal durchführen, Phase 2 validieren
 *Exportiert am 2026-09-06*
 *Chat-Länge: 15 Nachrichten*
 *Typ: Setup & Automation*
+
+---
+*Verschoben 07.09.2026 aus dem Restordner `📋 Routinen/` (Altstruktur vor der Reorganisation) nach `SYSTEM/Chat-Exports/`.*
