@@ -30,8 +30,8 @@
 
 ## Offen daraus
 
-- [ ] Die 2 mittleren XSS-Befunde entschärfen (escapeHtml um die beiden Stellen)
-- [ ] `npm install` einmal in `Nestbau/` laufen lassen — `jsdom` ist neu als devDependency, sonst schlägt `npm test` fehl
+- [x] XSS-Befunde entschärft (07.09.2026): vier Vorschauen über `setPhotoPreview()` per DOM-API, zwei HTML-String-Stellen mit `escapeHtml()`. Audit danach 0 hoch / 0 mittel / 0 niedrig.
+- [x] `npm install` gelaufen; `sharp` auf ^0.35.4 angehoben, `npm audit` meldet 0 Schwachstellen
 - [ ] Entscheiden, ob `master` in ein eigenes Repo umzieht
 
 ## Verweise

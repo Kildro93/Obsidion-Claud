@@ -102,3 +102,9 @@ Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haus
 - `emulator.log` und `firestore-debug.log` waren getrackt — Laufzeit-Artefakte gehören per `.gitignore` raus, sonst rauscht jeder Commit.
 - Aus der Cloud-Session lässt sich nicht pushen: der Token liegt im Windows Credential Manager, die Session sieht den Ordner über eine Linux-Shell. Committen geht, Pushen macht der PC.
 - Push wurde als non-fast-forward abgelehnt: der lokale Klon hatte seit dem 05.09. kein `fetch` gesehen und kannte einen Remote-Commit nicht. `git fetch` + `git rebase origin/main` reichte, kein Konflikt. Regel: vor dem ersten Push nach längerer Pause immer erst `git fetch` und `git rev-list --left-right --count origin/main...main`.
+
+**2026-09-07 – Branch-Entscheidung + Sicherheitshärtung (CEO)**
+- Ein Branch ohne gemeinsame History (`master`, eigener Root-Commit) ist kein Merge-Kandidat, sondern ein eigenes Projekt. Prüfrezept: `git merge-base A B` — kommt nichts zurück, gibt es keine gemeinsame Basis.
+- Alte Feature-Branches lohnen sich selektiv: aus `release/play-store` waren nur die auslieferungs-unabhängigen Teile (Tests, Audit-Skripte) wertvoll, die TWA-Kette nicht. Die 43 Tests liefen 19 Commits später unverändert grün — gut geschriebene Tests altern langsamer als der Code.
+- `innerHTML = '<img src="' + wert + '"…'` ist auch bei scheinbar eigenen Daten angreifbar, sobald es einen Import-Pfad gibt. Fix-Muster: Element per `createElement` bauen, oder bei HTML-Strings `escapeHtml()` um jeden Attributwert.
+- `npm audit` nach jedem Abhängigkeits-Update lesen: die hohe Schwachstelle steckte in `sharp` (nur Build-Werkzeug, nicht in der App) — trotzdem billig zu beheben.

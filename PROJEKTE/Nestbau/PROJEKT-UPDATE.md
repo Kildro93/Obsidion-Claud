@@ -25,6 +25,8 @@
 
 - 2026-09-07: Branch-Lage analysiert und entschieden; 43 Tests + Audit-Skripte nach `main` portiert (6fa2fbe), alle grün, Security 0 hoch / Performance im Budget
 
+- 2026-09-07: Sicherheitsbefunde behoben (2 Commits, noch nicht gepusht): XSS-Härtung der Foto-Vorschauen + sharp ^0.35.4
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
@@ -33,8 +35,8 @@
 - [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
 - [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
 - [x] ~~Branch-Entscheidung~~ – entschieden 2026-09-07: `main` geht in den Play Store, Tests aus `release/play-store` portiert, `master` ist ein eigenes Projekt. Begründung: [[Branch-Entscheidung]]
-- [ ] `npm install` in `Nestbau/` (jsdom neu als devDependency), danach `npm test`
-- [ ] 2 mittlere XSS-Befunde in index.html entschärfen (Zeilen 2110, 2477)
+- [x] ~~XSS-Befunde entschärft~~ – 2026-09-07: Foto-Vorschauen über DOM-API, Attribute escaped, Audit 0/0/0
+- [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution
 
