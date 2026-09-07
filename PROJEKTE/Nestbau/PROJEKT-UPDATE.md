@@ -6,8 +6,8 @@
 ## Status
 
 **Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen
-**Aktuell:** Kein Bot aktiv. Kochbuch/Menüplan/Rezepte zuletzt überarbeitet und als Artifact veröffentlicht (05.09.2026).
-**Nächster Schritt:** Firebase Phase 2 (Testing) oder GitHub-Push der lokalen Änderungen.
+**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Regeln sind ausgerollt (07.09.2026).
+**Nächster Schritt:** Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
 
 ## Erledigt (letzte Sessions)
 - Firebase Architect Phase 1: Datenmodell, Rules, Indexes, Functions-Templates
@@ -37,12 +37,14 @@
 
 - 2026-09-07: **Firebase-Anmeldung läuft.** Web-Konfiguration in `nb-config.local.js` eingetragen, Emulator-Zwang im Code entfernt, Google als Anmeldeanbieter in Firebase Authentication aktiviert (vorher nur E-Mail/Passwort). Kochbuch-Cloud verbunden.
 
+- 2026-09-07: Firestore- und Storage-Regeln ausgerollt (`firebase deploy`), `.firebaserc` mit Standardprojekt angelegt. Damit ist Phase 1 der Firebase-Einrichtung abgeschlossen.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
 - [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
-- [ ] `firebase deploy --only firestore:rules,storage` – Regeln sind noch nicht ausgerollt
-- [ ] Firestore-Datenbank anlegen, falls noch nicht geschehen (Region europe-west6 oder eur3)
+- [x] ~~`firebase deploy --only firestore:rules,storage`~~ – 07.09.2026 ausgerollt, beide Regelsätze kompiliert und freigegeben
+- [x] ~~Firestore-Datenbank~~ – existiert, Indexes wurden gelesen
 - [ ] Clientschlüssel des OAuth-Clients bei Google löschen (wird nicht gebraucht, PKCE)
 - [ ] Vor dem Play-Store-Release: Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen (aktuell nur `http://localhost:8000/oauth-callback.html`)
 - [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
