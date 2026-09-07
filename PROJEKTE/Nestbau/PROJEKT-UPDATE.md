@@ -23,6 +23,8 @@
 
 - 2026-09-07: Nestbau-Arbeitsverzeichnis aufgeräumt, committet und gepusht (4 Commits): .gitattributes/LF-Normalisierung + Logs untracked, Kamera-Entfernung inkl. Berechtigungen, Build-Tools, Play-Store-Unterlagen. Arbeitsverzeichnis ist sauber.
 
+- 2026-09-07: Branch-Lage analysiert und entschieden; 43 Tests + Audit-Skripte nach `main` portiert (6fa2fbe), alle grün, Security 0 hoch / Performance im Budget
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
@@ -30,7 +32,9 @@
 - [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
 - [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
 - [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
-- [ ] Branch-Entscheidung: welche Fassung geht in den Play Store
+- [x] ~~Branch-Entscheidung~~ – entschieden 2026-09-07: `main` geht in den Play Store, Tests aus `release/play-store` portiert, `master` ist ein eigenes Projekt. Begründung: [[Branch-Entscheidung]]
+- [ ] `npm install` in `Nestbau/` (jsdom neu als devDependency), danach `npm test`
+- [ ] 2 mittlere XSS-Befunde in index.html entschärfen (Zeilen 2110, 2477)
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution
 
