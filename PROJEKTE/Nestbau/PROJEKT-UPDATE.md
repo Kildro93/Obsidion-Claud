@@ -55,7 +55,7 @@
 - [x] ~~XSS-Befunde entschärft~~ – 2026-09-07: Foto-Vorschauen über DOM-API, Attribute escaped, Audit 0/0/0
 - [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
-- [ ] Multi-Device-Konflikt-Resolution
+- [ ] Multi-Device-Konflikt-Resolution — Konzept liegt vor: [[Konzept-Multi-Device-Konflikte]], empfohlen ist Option A (~1–2 h), erst nach Test 7
 - [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
 - [ ] Design-Frage: `icon.svg` nutzt noch die alte Palette (Petrol/Grün `#1c7d70`/`#4a6741`), `theme_color` ist Orange `#FF8C42`
 - [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.

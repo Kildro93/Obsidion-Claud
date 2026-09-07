@@ -21,6 +21,9 @@
   - Zielgruppe: wer den Sync abnimmt
   - Schlüssel: Kernpfad in 20 Minuten, Klickpfade aus dem Code, erwartete Ergebnisse
 
+### Konzepte
+- **[[Konzept-Multi-Device-Konflikte]]** – heutiges Verhalten, drei Optionen, Empfehlung (Entwurf, nicht umgesetzt)
+
 ### Testing & Validierung
 - **[[nestbau-testing]]** – Security-Tests, Bugs & Fixes, Performance, Deployment-Checklist
   - Zielgruppe: QA, Deployment-Manager
