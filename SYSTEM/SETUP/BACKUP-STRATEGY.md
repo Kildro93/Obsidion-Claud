@@ -16,7 +16,8 @@ powershell -ExecutionPolicy Bypass -File .\install-backup-task.ps1
 - Laeuft sonntags 02:00, holt nach wenn der PC aus war
 - Ziel: `backups/vault-backup-JJJJ-MM-TT.zip` (git-ignoriert)
 - Haelt die letzten 8 ZIPs, loescht aeltere automatisch
-- Ausgeschlossen: `node_modules`, `.git`, `build`, `dist`, `.gradle`, `backups`
+- Ausgeschlossen **auf jeder Ebene** (nicht nur im Vault-Root): `node_modules`, `.git`, `build`, `dist`, `.gradle`, `www`, `backups`, `logs` sowie `.apk`, `.aab`, `.log`
+- Zur Einordnung: mit Root-only-Filter waren es 42,5 MB (96 MB node_modules aus `Nestbau/` waren drin), gefiltert bleibt der eigentliche Wissensstand
 
 Sofort testen:
 
