@@ -66,3 +66,14 @@ Lose Code-Fragmente, die nur in Chats/Notizen existieren (nicht im Repo als solc
 - [[css-spezifitaet-dark-mode-fix]] – eigene Klasse statt `.chip-btn.active`
 
 Vollständiges Datenmodell mit JS: [[Kochbuch-Datenmodell]].
+
+## Lokal starten (Stand 07.09.2026)
+
+```powershell
+cd Nestbau
+node scripts/server.mjs --port 8000
+```
+
+Port 8000 ist Pflicht, nicht der Standard 3000: die Google-OAuth-Client-ID ist auf
+`http://localhost:8000/oauth-callback.html` registriert, und Google vergleicht die
+Redirect-URI zeichengenau.

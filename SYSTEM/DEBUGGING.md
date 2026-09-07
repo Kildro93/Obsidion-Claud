@@ -18,6 +18,7 @@
 | Weisse Seite | Browser-Konsole: fehlendes Script oder Syntaxfehler; `node --check js/<datei>.js` |
 | Firebase "permission denied" | Firestore Rules, Nutzer im richtigen Haushalt? |
 | Login geht nicht | Authorized Domains in Firebase Auth, Redirect-URI in Cloud Console |
+| Google-Login: `redirect_uri_mismatch` | Dev-Server laeuft auf Port 3000, registriert ist `http://localhost:8000/oauth-callback.html`. Server mit `node scripts/server.mjs --port 8000` starten |
 | Kalender-Sync leer | OAuth-Scopes, Token abgelaufen, `nb-config.local.js` gesetzt? |
 | Dark Mode kaputt | CSS-Spezifitaet, siehe [[css-spezifitaet-dark-mode-fix]] |
 | Emulator startet nicht | [[Emulator-Setup]] |
