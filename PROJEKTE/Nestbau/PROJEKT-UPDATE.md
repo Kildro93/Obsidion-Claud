@@ -29,6 +29,8 @@
 
 - 2026-09-07: Blocker „Client-ID fehlt" gelöst – die aktive `nb-config.local.js` enthielt nur Emulator-Platzhalter, die echte Google-Client-ID lag in einer zweiten Fassung unter `Claude outputs/`. Zusammengeführt, alte Fassung als `.bak-2026-09-07` daneben.
 
+- 2026-09-07: Fix in der laufenden App verifiziert (localhost:8000): `NB.config.google.clientId` gesetzt (72 Zeichen), Google-Karte zeigt „Nicht verbunden – Verbinden", Redirect-URI der Installation stimmt mit der Registrierung überein. „Client-ID fehlt" steht jetzt nur noch bei Outlook (zurückgestellt) und Firebase (Werte fehlen noch).
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
@@ -42,6 +44,7 @@
 - [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution
+- [ ] Prüfen: Service Worker registrierte sich in der Vorschau-Ansicht nicht („unknown error when fetching the script"), obwohl `/sw.js` mit 200 und `text/javascript` ausgeliefert wird. Vermutlich eine Einschränkung der Vorschau, nicht der App — in Chrome gegenprüfen (DevTools → Application → Service Workers)
 
 ## Blockers
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
