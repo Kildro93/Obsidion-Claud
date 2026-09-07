@@ -31,6 +31,8 @@
 
 - 2026-09-07: Fix in der laufenden App verifiziert (localhost:8000): `NB.config.google.clientId` gesetzt (72 Zeichen), Google-Karte zeigt „Nicht verbunden – Verbinden", Redirect-URI der Installation stimmt mit der Registrierung überein. „Client-ID fehlt" steht jetzt nur noch bei Outlook (zurückgestellt) und Firebase (Werte fehlen noch).
 
+- 2026-09-07: Manifest-Fehler behoben – Chrome meldete „icon.svg failed to load" und fehlende quadratische Icons; das Manifest verwies nur auf das SVG, die PNGs (192/512) lagen ungenutzt unter `assets/icons/`. Verlinkt, `build-web.js` kopiert `assets/` jetzt mit.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
@@ -44,7 +46,9 @@
 - [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
 - [ ] Multi-Device-Konflikt-Resolution
-- [ ] Prüfen: Service Worker registrierte sich in der Vorschau-Ansicht nicht („unknown error when fetching the script"), obwohl `/sw.js` mit 200 und `text/javascript` ausgeliefert wird. Vermutlich eine Einschränkung der Vorschau, nicht der App — in Chrome gegenprüfen (DevTools → Application → Service Workers)
+- [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
+- [ ] Design-Frage: `icon.svg` nutzt noch die alte Palette (Petrol/Grün `#1c7d70`/`#4a6741`), `theme_color` ist Orange `#FF8C42`
+- [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.
 
 ## Blockers
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
