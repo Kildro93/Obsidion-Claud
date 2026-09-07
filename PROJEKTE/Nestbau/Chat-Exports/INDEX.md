@@ -10,6 +10,12 @@ Ergebnisse abgeschlossener Sessions und Bot-Läufe. Ein Export = eine Datei, Sch
   - Top 3: (1) Cloud-Session-Git-Proxy blockt Push zu nicht-autorisierten Repos → 403. (2) CSS-Spezifität versteckt Dark-Mode-Bugs. (3) Migrationslogik bei jeder Datenmodell-Änderung mitdenken.
   - Snippets: [[menuplan-migration]], [[css-spezifitaet-dark-mode-fix]]
 
+### Setup & Repo-Pflege
+- **2026-09-07 – [[2026-09-07-Vault-Setup-Repo-Cleanup]]**
+  - Thema: Vault-Repo + Auto-Sync + Backup-Strategie, Security-Audit, Nestbau-Arbeitsverzeichnis committet, Branch-Entscheidung, 43 Tests portiert, XSS-Härtung
+  - Top 3: (1) GitHub Actions kann keinen lokalen Vault syncen – nur Task Scheduler. (2) `.gitignore`-Muster ohne führenden Slash greifen auf jeder Ebene. (3) Branch ohne gemeinsame History ist ein eigenes Projekt, kein Merge-Kandidat.
+  - Fact-Sheet: [[Branch-Entscheidung]]
+
 ### Testing & Build
 - **2026-09-04 – [[2026-09-04-Local-App-Test-Report]]** (aus ~/Downloads)
   - „Local App Tester"-Report der v1-Fassung: Deployment, 11 JS-Module, HTTP-Server, Funktionsprüfung
