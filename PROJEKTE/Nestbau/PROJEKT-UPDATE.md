@@ -33,10 +33,14 @@
 
 - 2026-09-07: Manifest-Fehler behoben – Chrome meldete „icon.svg failed to load" und fehlende quadratische Icons; das Manifest verwies nur auf das SVG, die PNGs (192/512) lagen ungenutzt unter `assets/icons/`. Verlinkt, `build-web.js` kopiert `assets/` jetzt mit.
 
+- 2026-09-07: **Google-Kalender-Sync läuft.** OAuth neu aufgesetzt: Zustimmungsbildschirm („Nestbau Haushalt"), Web-Client `Nestbau Web (lokal)` im Projekt nestbau-app, Client-ID in `nb-config.local.js`. Abgleich erfolgreich, vier Kalender erkannt.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
 - [ ] Firebase-Web-Konfiguration aus der Konsole in `nb-config.local.js` (Block liegt auskommentiert bereit), dann `firebase deploy --only firestore:rules,storage`
+- [ ] Clientschlüssel des OAuth-Clients bei Google löschen (wird nicht gebraucht, PKCE)
+- [ ] Vor dem Play-Store-Release: Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen (aktuell nur `http://localhost:8000/oauth-callback.html`)
 - [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
 - [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
 - [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
