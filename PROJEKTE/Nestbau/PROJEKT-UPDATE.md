@@ -40,7 +40,7 @@
 - 2026-09-07: Firestore- und Storage-Regeln ausgerollt (`firebase deploy`), `.firebaserc` mit Standardprojekt angelegt. Damit ist Phase 1 der Firebase-Einrichtung abgeschlossen.
 
 ## Offen
-- [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
+- [ ] Phase 2 Testing: Two-Device-Sync, Offline, Fehlerszenarien — Testplan liegt bereit: [[Phase-2-Testplan]] (Kernpfad ~20 Min)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
 - [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
 - [x] ~~`firebase deploy --only firestore:rules,storage`~~ – 07.09.2026 ausgerollt, beide Regelsätze kompiliert und freigegeben

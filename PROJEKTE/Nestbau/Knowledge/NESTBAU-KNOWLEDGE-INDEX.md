@@ -16,6 +16,11 @@
   - Zielgruppe: Developer, die Code lesen/ändern
   - Schlüssel: Rules-Logik, Email-Versand, Custom Claims, SSRF-Schutz
 
+### Testpläne
+- **[[Phase-2-Testplan]]** – Two-Device-Sync, Offline, Konflikt, Regeln (Stand 07.09.2026)
+  - Zielgruppe: wer den Sync abnimmt
+  - Schlüssel: Kernpfad in 20 Minuten, Klickpfade aus dem Code, erwartete Ergebnisse
+
 ### Testing & Validierung
 - **[[nestbau-testing]]** – Security-Tests, Bugs & Fixes, Performance, Deployment-Checklist
   - Zielgruppe: QA, Deployment-Manager
