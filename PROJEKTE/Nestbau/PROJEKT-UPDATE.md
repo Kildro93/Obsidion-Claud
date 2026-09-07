@@ -1,6 +1,6 @@
 # PROJEKT-UPDATE: Nestbau
 
-**Stand:** 2026-09-06
+**Stand:** 2026-09-07
 **Aktualisiert von:** Code-Bot (Vault-Reorganisation)
 
 ## Status
@@ -35,10 +35,14 @@
 
 - 2026-09-07: **Google-Kalender-Sync läuft.** OAuth neu aufgesetzt: Zustimmungsbildschirm („Nestbau Haushalt"), Web-Client `Nestbau Web (lokal)` im Projekt nestbau-app, Client-ID in `nb-config.local.js`. Abgleich erfolgreich, vier Kalender erkannt.
 
+- 2026-09-07: **Firebase-Anmeldung läuft.** Web-Konfiguration in `nb-config.local.js` eingetragen, Emulator-Zwang im Code entfernt, Google als Anmeldeanbieter in Firebase Authentication aktiviert (vorher nur E-Mail/Passwort). Kochbuch-Cloud verbunden.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
-- [ ] Firebase-Web-Konfiguration aus der Konsole in `nb-config.local.js` (Block liegt auskommentiert bereit), dann `firebase deploy --only firestore:rules,storage`
+- [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
+- [ ] `firebase deploy --only firestore:rules,storage` – Regeln sind noch nicht ausgerollt
+- [ ] Firestore-Datenbank anlegen, falls noch nicht geschehen (Region europe-west6 oder eur3)
 - [ ] Clientschlüssel des OAuth-Clients bei Google löschen (wird nicht gebraucht, PKCE)
 - [ ] Vor dem Play-Store-Release: Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen (aktuell nur `http://localhost:8000/oauth-callback.html`)
 - [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
