@@ -21,10 +21,12 @@
 
 - 2026-09-06: Vault-Wurzel als Git-Repo initialisiert (2 Commits), `.gitignore` auf Root-Pfade angepasst, Setup-Doku unter SYSTEM/SETUP/, Auto-Sync + Backup-Scripts unter scripts/, Security-Audit durchgeführt (keine Keys im Repo)
 
+- 2026-09-07: Nestbau-Arbeitsverzeichnis aufgeräumt und committet (4 Commits): .gitattributes/LF-Normalisierung + Logs untracked, Kamera-Entfernung inkl. Berechtigungen, Build-Tools, Play-Store-Unterlagen. Arbeitsverzeichnis ist sauber.
+
 ## Offen
 - [ ] Phase 2 Testing: Emulator, Two-Device-Sync, Offline, Error-Szenarien (~7h)
 - [ ] Client-IDs in `nb-config.local.js` eintragen, `firebase deploy --only firestore:rules,storage`
-- [ ] GitHub-Push Kildro93/Nestbau (aus Cloud blockiert → lokal via Claude Code)
+- [ ] GitHub-Push Kildro93/Nestbau: 4 Commits liegen lokal bereit, Push braucht den Token auf dem PC → `cd Nestbau; git push origin main`
 - [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
 - [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
 - [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
@@ -34,7 +36,6 @@
 
 ## Blockers
 - GitHub-Push aus Cloud-Session: 403 (Repo nicht in Session-Sources) → lokal pushen
-- Nestbau-Repo hat 21 uncommittete Änderungen (Build-Optimizer-/Play-Store-Arbeit nie committet)
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
 - ~~Vault-Wurzel → GitHub: verschachtelte `.git` klären~~ erledigt 2026-09-06: beide Ordner bleiben eigene Repos, per `.gitignore` ausgeschlossen
 

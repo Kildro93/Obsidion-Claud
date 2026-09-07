@@ -95,3 +95,9 @@ Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haus
 - `C:\nestbau-build` (152 MB) war 100% redundant (Artefakte byte-identisch mit `Nestbau/dist/`, Scaffold identisch mit `Nestbau/android/`, Rest Cache) → gelöscht.
 - Neue Erkenntnis (Security): `keystore.properties` mit Klartext-Passwörtern lag in zwei Ordnern. Regel: vor jedem geplanten Repo-Push eine passende `.gitignore` anlegen (Secrets + `node_modules`/`build`/`.gradle`/`dist`). Vault-Root-`.gitignore` erstellt.
 - Neue Erkenntnis (Struktur): Build-Workspaces gehören nicht in die Notiz-Vault. Reproduzierbar aus dem Repo (`npm run sync && node tools/android-build.js release`).
+
+**2026-09-07 – Nestbau-Arbeitsverzeichnis committet (CEO)**
+- 44 offene Änderungen waren nur zu 10 Dateien echt: Windows-Editoren hatten CRLF eingestreut, git zeigte 23 Dateien als komplett geändert (6803+/6729-). Prüfrezept: `git diff --ignore-all-space --stat` — steht dort deutlich weniger, ist es Zeilenenden-Rauschen.
+- Fix dauerhaft: `.gitattributes` mit `* text=auto eol=lf`, `*.bat text eol=crlf`, Bilder als `binary`. Danach blieben 23 Scheinänderungen von selbst weg, ohne Datei-Rewrite.
+- `emulator.log` und `firestore-debug.log` waren getrackt — Laufzeit-Artefakte gehören per `.gitignore` raus, sonst rauscht jeder Commit.
+- Aus der Cloud-Session lässt sich nicht pushen: der Token liegt im Windows Credential Manager, die Session sieht den Ordner über eine Linux-Shell. Committen geht, Pushen macht der PC.
