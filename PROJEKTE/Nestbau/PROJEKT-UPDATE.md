@@ -39,8 +39,12 @@
 
 - 2026-09-07: Firestore- und Storage-Regeln ausgerollt (`firebase deploy`), `.firebaserc` mit Standardprojekt angelegt. Damit ist Phase 1 der Firebase-Einrichtung abgeschlossen.
 
+- 2026-09-08: Test 1–3 begonnen. Haushalt angelegt (Code KJS7DB90), Upload blieb hängen. **Ursache statisch gefunden:** die Firestore-Regeln kannten `lists`, `events` und `subscriptions` nicht — der Sync deckt sie seit der Erweiterung von `NB.cloud.COLLECTIONS` ab, die Regeln nicht. Der Auffangblock sperrte sie, und `lists` steht in der Schreibreihenfolge an erster Stelle. Regeln ergänzt (Commit 76cd20e), noch **nicht ausgerollt**.
+
 ## Offen
-- [ ] Phase 2 Testing: Two-Device-Sync, Offline, Fehlerszenarien — Testplan liegt bereit: [[Phase-2-Testplan]] (Kernpfad ~20 Min)
+- [ ] `firebase deploy --only firestore:rules` — die ergänzten Regeln für lists/events/subscriptions ausrollen, **danach** Upload erneut versuchen
+- [ ] Phase 2 Testing fortsetzen: Test 2 wiederholen, dann Test 3–5 — Testplan: [[Phase-2-Testplan]]
+- [ ] Google-Kalender: Token läuft nach 1 h ab, danach „Neu anmelden" nötig. PKCE im Browser liefert kein Refresh-Token. Dauerhafte Lösung: Token-Tausch über Cloud Function (Code existiert in `nestbau-firebase/functions/src/tokens.js`, nicht ausgerollt)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
 - [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
 - [x] ~~`firebase deploy --only firestore:rules,storage`~~ – 07.09.2026 ausgerollt, beide Regelsätze kompiliert und freigegeben

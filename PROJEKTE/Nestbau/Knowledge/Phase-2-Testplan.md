@@ -3,6 +3,8 @@
 **Erstellt:** 2026-09-07 · **Dauer Kernpfad:** ~20 Minuten
 **Voraussetzung:** Kalender-Sync und Firebase-Anmeldung laufen, Regeln ausgerollt (alles erledigt am 07.09.2026)
 
+> **Lauf vom 08.09.2026:** Test 1 bestanden. Test 2 scheiterte, weil die Firestore-Regeln `lists`, `events` und `subscriptions` nicht kannten. Regeln ergänzt (76cd20e) — vor dem nächsten Versuch `firebase deploy --only firestore:rules` ausführen.
+
 ## Vorbereitung
 
 1. Dev-Server läuft: `node scripts/server.mjs --port 8000` im Nestbau-Ordner
