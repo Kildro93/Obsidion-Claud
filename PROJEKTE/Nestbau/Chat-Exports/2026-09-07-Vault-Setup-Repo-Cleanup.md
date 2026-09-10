@@ -40,10 +40,16 @@
 - **Firebase:** Web-Konfiguration eingetragen, Google als Anmeldeanbieter aktiviert (vorher nur E-Mail/Passwort), Firestore- und Storage-Regeln ausgerollt. Anmeldung verbunden.
 - **Drei Code-Bugs gefunden und behoben:** Manifest verwies auf ein SVG statt auf die vorhandenen PNGs; Emulator-Modus hing am Hostnamen und zwang jeden lokalen Lauf gegen nicht laufende Emulatoren; Firestore-Regeln kannten `lists`, `events`, `subscriptions` nicht.
 
-### 7. Phase 2 Testing begonnen (08.09.)
-- Test 1 (Haushalt anlegen) bestanden, Beitrittscode `KJS7DB90`.
-- Test 2 (Kochbuch hochladen) scheiterte: die Migration brach beim ersten Schreibvorgang ab, weil `lists` keine Regel hatte. Ursache statisch gefunden, Regeln ergänzt (76cd20e).
-- Tests 3–9 stehen aus.
+### 7. Phase 2 Testing, Kernpfad bestanden (08.–10.09.)
+- Test 1–5 bestanden: Haushalt anlegen, Kochbuch hochladen, Beitritt über Code, Änderungen wandern in beide Richtungen zwischen zwei Browser-Profilen.
+- Test 2 scheiterte zunächst zweifach: fehlende Firestore-Regeln für `lists` (statisch gefunden, 76cd20e) und Brave Shields, die `firestore.googleapis.com` blockten (`ERR_BLOCKED_BY_CLIENT`).
+- Tests 6–9 (Offline, Konflikt, Regelprüfung, falscher Code) stehen aus.
+
+### 8. Sync ohne Schalter umgebaut (10.09.)
+- Speichern geht immer nach Firebase: `cloud.canSync()` ersetzt die Kopplung an den Live-Abgleich.
+- Der Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Kein Ein/Aus mehr.
+- Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr — sie werden behalten und anschliessend hochgeladen (Option A aus dem Konfliktkonzept).
+- Commits 9dae12f und 97583da.
 
 ## Status
 
@@ -58,7 +64,9 @@
 | Google-Kalender-Sync | läuft (Token nur 1 h gültig, siehe unten) |
 | Firebase-Anmeldung | verbunden |
 | Firestore-/Storage-Regeln | ausgerollt; Nachtrag für lists/events/subscriptions committet, Deploy-Status unbestätigt |
-| Kochbuch-Upload | offen — nach dem Regel-Deploy erneut versuchen |
+| Kochbuch-Upload | erledigt, Live-Abgleich läuft |
+| Two-Device-Sync | bestanden (Tests 1–5) |
+| Sync-Verhalten | ohne Schalter, startet selbstständig |
 
 ## Wichtigste Erkenntnisse
 
@@ -71,10 +79,12 @@
 
 ## Nächste Schritte
 
-Als Erstes beim nächsten Mal:
-1. `firebase deploy --only firestore:rules` im Nestbau-Ordner (der letzte Lauf wurde nicht bestätigt — läuft er durch, ist er auch beim zweiten Mal harmlos)
-2. `node scripts/server.mjs --port 8000`, dann „Kochbuch hochladen" — sollte jetzt durchlaufen
-3. Weiter mit Test 3–5 aus [[Phase-2-Testplan]]
+**Der einzige echte Blocker für den Alltag:** die Partnerin ist noch nicht im Haushalt. Der Beitritt am 10.09. sah nur so aus — ihre Kennung steht nicht in `memberUids`. Sie muss sich auf ihrem Gerät anmelden und den Code `KJS7DB90` eingeben. Zwei Minuten.
+
+Für den Play Store:
+- Signierten AAB neu bauen (der vorhandene stammt vom 06.09. und kennt keine der Änderungen seither)
+- Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen
+- GitHub Pages für `assetlinks.json` aktivieren
 
 Braucht dich:
 - [ ] Backup-Aufgabe registrieren: `powershell -ExecutionPolicy Bypass -File ".\scripts\install-backup-task.ps1"`
@@ -103,9 +113,9 @@ Nestbau/scripts/                               health-check, security-check, per
 
 ## Offene Probleme
 
-- **Kochbuch-Upload nicht abgeschlossen.** Regeln ergänzt und committet, Deploy nicht bestätigt. Danach erneut versuchen.
 - **Google-Token läuft nach 1 Stunde ab.** PKCE im Browser liefert kein Refresh-Token, der 15-Minuten-Auto-Sync greift nur innerhalb dieser Stunde. Dauerhafte Lösung nur serverseitig: Token-Tausch über Cloud Function, Code liegt ungenutzt in `nestbau-firebase/functions/src/tokens.js`.
-- **Multi-Device-Konflikte:** Konzept liegt vor ([[Konzept-Multi-Device-Konflikte]]), Option A empfohlen (~1–2 h). Beim Codelesen fiel ein Fall auf, der ohne Offline-Phase auftritt: der Upload ist 1,2 s verzögert, trifft in diesem Fenster ein fremder Snapshot ein, überschreibt er die eigene Änderung, bevor sie gesendet wurde.
+- **Multi-Device-Konflikte:** Option A ist umgesetzt (10.09.), das Verzögerungsfenster ist geschlossen. Offen bleibt der echte Offline-Konflikt: ändern beide Geräte dasselbe Dokument, während eines offline ist, gewinnt der letzte Schreibvorgang — lautlos. Siehe [[Konzept-Multi-Device-Konflikte]].
+- **Brave Shields blocken Firestore.** Für `localhost` heruntergefahren, aber auf jedem Gerät mit Adblocker trifft es euch wieder. Symptom: hängender Upload ohne Fehlermeldung, in der Konsole `ERR_BLOCKED_BY_CLIENT`.
 - **Clientschlüssel des OAuth-Clients** war in einem Screenshot sichtbar und wird nicht gebraucht (PKCE) — bei Gelegenheit in der Console löschen.
 - Keine weiteren Blocker. Der Vault-Klon war zwei Tage ohne `fetch` – bei nächster längerer Pause zuerst `git fetch`, sonst wieder non-fast-forward.
 - `master` bleibt als fremder Branch im App-Repo liegen; kein Fehler, aber dauerhaft verwirrend.
@@ -118,4 +128,6 @@ Nestbau/scripts/                               health-check, security-check, per
 - Lokal starten immer mit `--port 8000`. Die OAuth-Weiterleitung ist auf diesen Port registriert, der Standard 3000 scheitert mit `redirect_uri_mismatch`.
 - Bei jeder Erweiterung von `NB.cloud.COLLECTIONS`: Sammlungsnamen gegen die `match`-Blöcke in `firestore.rules` halten. Der Auffangblock sperrt neue Sammlungen lautlos.
 - Werte, die ein früherer Chat „erzeugt" hat, ohne dass sie jemand aus einer Console kopiert hat, sind unbestätigt. Eine erfundene Client-ID ist am Format nicht von einer echten zu unterscheiden.
+- Die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen. Ob ein Beitritt wirklich stattfand, steht in `memberUids` des Haushalts-Dokuments — nicht auf der Karte.
+- `ERR_BLOCKED_BY_CLIENT` heisst Browser oder Erweiterung, nie Server.
 - `npm install` ist Pflicht nach dem Pull – `jsdom` und `sharp` haben sich geändert.
