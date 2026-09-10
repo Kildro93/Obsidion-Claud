@@ -45,8 +45,8 @@
 - 2026-09-10: **Abgleich ohne Schalter umgebaut** (97583da): Speichern geht immer nach Firebase, der Live-Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr.
 
 ## Offen
-- [ ] `firebase deploy --only firestore:rules` — die ergänzten Regeln für lists/events/subscriptions ausrollen, **danach** Upload erneut versuchen
-- [ ] Phase 2 Testing fortsetzen: Test 2 wiederholen, dann Test 3–5 — Testplan: [[Phase-2-Testplan]]
+- [x] ~~`firebase deploy --only firestore:rules`~~ – 10.09.2026 ausgerollt, Upload läuft
+- [x] ~~Phase 2, Test 1–5~~ – 10.09.2026 bestanden (Haushalt, Upload, Beitritt, Sync in beide Richtungen)
 - [ ] Google-Kalender: Token läuft nach 1 h ab, danach „Neu anmelden" nötig. PKCE im Browser liefert kein Refresh-Token. Dauerhafte Lösung: Token-Tausch über Cloud Function (Code existiert in `nestbau-firebase/functions/src/tokens.js`, nicht ausgerollt)
 - [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
 - [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
@@ -56,8 +56,8 @@
 - [ ] Vor dem Play-Store-Release: Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen (aktuell nur `http://localhost:8000/oauth-callback.html`)
 - [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
 - [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
-- [ ] Auto-Sync- und Backup-Aufgabe registrieren (`scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`)
-- [ ] Firebase-API-Key in der Cloud Console auf eigene Domains einschränken (siehe [[SECURITY-AUDIT]])
+- [x] ~~Auto-Sync- und Backup-Aufgabe~~ – 07.09.2026 registriert und getestet
+- [x] ~~Firebase-API-Key auf eigene Domains eingeschränkt~~ – erledigt
 - [x] ~~Branch-Entscheidung~~ – entschieden 2026-09-07: `main` geht in den Play Store, Tests aus `release/play-store` portiert, `master` ist ein eigenes Projekt. Begründung: [[Branch-Entscheidung]]
 - [x] ~~XSS-Befunde entschärft~~ – 2026-09-07: Foto-Vorschauen über DOM-API, Attribute escaped, Audit 0/0/0
 - [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen

@@ -8,13 +8,9 @@ Repo: `Kildro93/Obsidion-Claud`. Vault und Nestbau sind gepusht, Push laeuft ueb
 
 
 - [x] ~~github.com → New repository~~ → Repo heisst `Obsidion-Claud` (bereits angelegt)
-- [ ] Token erstellen und in Windows hinterlegen: [[SETUP-GITHUB-TOKEN]]
-- [ ] In PowerShell im Vault-Ordner:
-  ```powershell
-  cd "C:\KI Programme\Obsidion für Claud"
-  git push -u origin main
-  ```
-- [ ] Auf github.com pruefen: SYSTEM/, PROJEKTE/, scripts/ sind da — `Nestbau/` und `nestbau-firebase/` nicht
+- [x] Token erstellt und im Windows Credential Manager hinterlegt
+- [x] Vault gepusht, Auto-Sync pusht seither selbstständig
+- [x] Auf github.com geprüft: SYSTEM/, PROJEKTE/, scripts/ sind da, die Code-Repos nicht
 
 ## 2. Auto-Sync aktivieren (2 Min) — ERLEDIGT 07.09.2026
 
@@ -24,8 +20,7 @@ Repo: `Kildro93/Obsidion-Claud`. Vault und Nestbau sind gepusht, Push laeuft ueb
 ## 3. Backups aktivieren (2 Min)
 
 - [x] Aufgabe "Obsidian Vault Weekly Backup" registriert (07.09.2026, sonntags 02:00)
-- [ ] Einmal sofort testen: `powershell -ExecutionPolicy Bypass -File ".\scripts\weekly-backup.ps1"`
-- [ ] Ergebnis liegt in `backups/`
+- [x] Getestet 07.09.2026: 411 Dateien, 3,5 MB, ohne node_modules und Build-Müll
 
 ## 4. Sicherheit abschliessen (15 Min)
 
@@ -37,7 +32,7 @@ Repo: `Kildro93/Obsidion-Claud`. Vault und Nestbau sind gepusht, Push laeuft ueb
 
 - [x] ~~Uncommittete Aenderungen im `Nestbau/`-Repo~~ – 07.09.2026 in 6 Commits aufgeteilt und gepusht
 - [x] ~~Branch-Entscheidung~~ – `main` geht in den Play Store, siehe [[Branch-Entscheidung]]
-- [ ] Client-IDs in `nb-config.local.js` vervollstaendigen, dann `firebase deploy --only firestore:rules,storage`
+- [x] Client-IDs eingetragen und Regeln ausgerollt (10.09.2026)
 
 ## Danach
 

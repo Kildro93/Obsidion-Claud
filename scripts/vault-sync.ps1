@@ -1,69 +1,46 @@
-<#
-  vault-sync.ps1 - Committet und pusht den Obsidian-Vault nach GitHub.
-  Laeuft per Windows Task Scheduler alle 30 Minuten.
-  Registrierung: install-autosync-task.ps1 (einmalig, als Admin nicht noetig).
-  Log: scripts/logs/vault-sync.log
-#>
+# OneNote to GitHub Sync Script
+param([string]$LogPath = "C:\KI Programme\Obsidion für Claud\scripts\logs\vault-sync.log")
 
-$ErrorActionPreference = 'Stop'
+$VaultPath = "C:\KI Programme\Obsidion für Claud"
 
-$VaultRoot = Split-Path -Parent $PSScriptRoot
-$LogDir    = Join-Path $PSScriptRoot 'logs'
-$LogFile   = Join-Path $LogDir 'vault-sync.log'
-$Branch    = 'main'
-
-if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir | Out-Null }
-
-function Log($msg) {
-    $line = "{0}  {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $msg
-    Add-Content -Path $LogFile -Value $line -Encoding UTF8
+function Log {
+    param([string]$Message, [string]$Level = "INFO")
+    $Timestamp = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+    $LogMessage = "[$Timestamp] [$Level] $Message"
+    Write-Host $LogMessage
+    Add-Content -Path $LogPath -Value $LogMessage
 }
 
-# Log kappen, wenn > 1 MB
-if ((Test-Path $LogFile) -and ((Get-Item $LogFile).Length -gt 1MB)) {
-    Get-Content $LogFile -Tail 200 | Set-Content $LogFile -Encoding UTF8
-}
+$LogDir = Split-Path $LogPath
+if (!(Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir -Force | Out-Null }
+Log "=== OneNote Sync started ===" "START"
 
 try {
-    Set-Location $VaultRoot
+    Set-Location $VaultPath
+    Log "Working directory: $VaultPath"
 
-    if (-not (Test-Path (Join-Path $VaultRoot '.git'))) {
-        Log 'ABBRUCH: kein Git-Repo im Vault-Root.'
-        exit 1
-    }
-
-    # Gibt es ueberhaupt Aenderungen?
-    $changed = @(git status --porcelain | Where-Object { $_ -ne '' })
-    if ($changed.Count -eq 0) {
-        Log 'Keine Aenderungen.'
+    $GitStatus = git status --porcelain
+    
+    if ([string]::IsNullOrWhiteSpace($GitStatus)) {
+        Log "✅ No changes detected" "INFO"
     } else {
-        git add -A
-        $msg = "Auto-sync: {0} ({1} Dateien)" -f (Get-Date -Format 'yyyy-MM-dd HH:mm'), $changed.Count
-        $out = git commit -m $msg 2>&1
-        if ($LASTEXITCODE -eq 0) { Log "Commit erstellt: $msg" }
-        else { Log "COMMIT FEHLGESCHLAGEN: $out" }
+        Log "📝 Changes detected:" "INFO"
+        $GitStatus | ForEach-Object { Log "  $_" }
+
+        git add PROJEKTE/Primarlehrer-Studium/Studienmaterial/
+        Log "✅ Files staged" "INFO"
+
+        $CommitMsg = "Auto-Sync OneNote: $(Get-Date -Format 'dd.MM.yyyy HH:mm') [$(Get-Date -Format 'dddd')]"
+        git commit -m $CommitMsg
+        Log "✅ Committed" "INFO"
+
+        git push origin main
+        Log "✅ Pushed to GitHub" "INFO"
     }
 
-    # Push (auch wenn nichts Neues: holt haengengebliebene Commits nach)
-    # Kein origin/main bekannt (Erst-Push) -> $ahead bleibt '?', es wird gepusht
-    $ahead = git rev-list --count "origin/$Branch..$Branch" 2>$null
-    if ($LASTEXITCODE -ne 0) { $ahead = '?' }
-
-    if ($ahead -eq '0') {
-        Log 'Nichts zu pushen.'
-    } else {
-        # git schreibt Fortschritt auf stderr -> ErrorActionPreference kurz lockern
-        $prev = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $out = & git push origin $Branch 2>&1
-        $code = $LASTEXITCODE
-        $ErrorActionPreference = $prev
-        foreach ($line in $out) { Log "push: $line" }
-        if ($code -eq 0) { Log "Push OK ($ahead Commits)." }
-        else { Log "PUSH FEHLGESCHLAGEN (Exit $code) - Token pruefen, siehe SYSTEM/SETUP/SETUP-GITHUB-TOKEN.md" }
-    }
+    Log "=== Sync completed ===" "COMPLETE"
 }
 catch {
-    Log ("FEHLER: " + $_.Exception.Message)
+    Log "❌ Error: $($_.Exception.Message)" "ERROR"
     exit 1
 }
