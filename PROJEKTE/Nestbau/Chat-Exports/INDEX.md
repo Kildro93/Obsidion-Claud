@@ -12,7 +12,7 @@ Ergebnisse abgeschlossener Sessions und Bot-Läufe. Ein Export = eine Datei, Sch
 
 ### Setup & Repo-Pflege
 - **2026-09-07 – [[2026-09-07-Vault-Setup-Repo-Cleanup]]**
-  - Thema: Vault-Repo + Auto-Sync + Backup-Strategie, Security-Audit, Nestbau-Arbeitsverzeichnis committet, Branch-Entscheidung, 43 Tests portiert, XSS-Härtung
+  - Thema: Vault-Repo + Auto-Sync + Backup-Strategie, Security-Audit, Nestbau-Arbeitsverzeichnis committet, Branch-Entscheidung, 43 Tests portiert, XSS-Härtung, Kalender- und Firebase-Integration ans Laufen gebracht, Phase 2 begonnen
   - Top 3: (1) GitHub Actions kann keinen lokalen Vault syncen – nur Task Scheduler. (2) `.gitignore`-Muster ohne führenden Slash greifen auf jeder Ebene. (3) Branch ohne gemeinsame History ist ein eigenes Projekt, kein Merge-Kandidat.
   - Fact-Sheet: [[Branch-Entscheidung]]
 
