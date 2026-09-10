@@ -41,6 +41,9 @@
 
 - 2026-09-08: Test 1–3 begonnen. Haushalt angelegt (Code KJS7DB90), Upload blieb hängen. **Ursache statisch gefunden:** die Firestore-Regeln kannten `lists`, `events` und `subscriptions` nicht — der Sync deckt sie seit der Erweiterung von `NB.cloud.COLLECTIONS` ab, die Regeln nicht. Der Auffangblock sperrte sie, und `lists` steht in der Schreibreihenfolge an erster Stelle. Regeln ergänzt (Commit 76cd20e), noch **nicht ausgerollt**.
 
+- 2026-09-10: **Phase-2-Kernpfad bestanden** (Tests 1–5). Zwei weitere Ursachen gefunden: Brave Shields blockten `firestore.googleapis.com` im zweiten Profil (`ERR_BLOCKED_BY_CLIENT`), und ein vermeintlicher Beitritt der Partnerin hatte nie stattgefunden — die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen.
+- 2026-09-10: **Abgleich ohne Schalter umgebaut** (97583da): Speichern geht immer nach Firebase, der Live-Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr.
+
 ## Offen
 - [ ] `firebase deploy --only firestore:rules` — die ergänzten Regeln für lists/events/subscriptions ausrollen, **danach** Upload erneut versuchen
 - [ ] Phase 2 Testing fortsetzen: Test 2 wiederholen, dann Test 3–5 — Testplan: [[Phase-2-Testplan]]
@@ -59,7 +62,8 @@
 - [x] ~~XSS-Befunde entschärft~~ – 2026-09-07: Foto-Vorschauen über DOM-API, Attribute escaped, Audit 0/0/0
 - [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
 - [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
-- [ ] Multi-Device-Konflikt-Resolution — Konzept liegt vor: [[Konzept-Multi-Device-Konflikte]], empfohlen ist Option A (~1–2 h), erst nach Test 7
+- [x] ~~Multi-Device-Konflikte, Option A~~ – 10.09.2026 umgesetzt: der 1,2-Sekunden-Fall ist geschlossen, offene lokale Änderungen überleben einen Snapshot und werden danach hochgeladen. Offen bleibt nur der echte Offline-Konflikt (beide Geräte ändern dasselbe Dokument offline) — dort gewinnt weiterhin der letzte Schreibvorgang, siehe [[Konzept-Multi-Device-Konflikte]]
+- [ ] Test 6–9 (Offline, Konflikt, Regeln, falscher Code) aus [[Phase-2-Testplan]]
 - [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
 - [ ] Design-Frage: `icon.svg` nutzt noch die alte Palette (Petrol/Grün `#1c7d70`/`#4a6741`), `theme_color` ist Orange `#FF8C42`
 - [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.

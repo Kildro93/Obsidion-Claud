@@ -1,6 +1,8 @@
 # Konzept: Multi-Device-Konflikte
 
-**Stand:** 2026-09-07 · **Status:** Entwurf, nicht umgesetzt
+**Stand:** 2026-09-10 · **Status:** Option A umgesetzt (Commit 97583da)
+
+> **Umgesetzt:** Das Verzögerungsfenster (Fall 1) ist geschlossen — ein eintreffender Snapshot überschreibt keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr; sie werden behalten und anschliessend hochgeladen. Ebenfalls erledigt: der Abgleich braucht keinen manuellen Start mehr. **Offen bleibt Fall 2 und 3** (beide Geräte ändern dasselbe Dokument, während eines offline ist) — dort gewinnt weiterhin der letzte Schreibvorgang, ohne Meldung.
 **Anlass:** letzter offener Architektur-Punkt aus [[PROJEKT-UPDATE]]
 
 ## Wie es heute funktioniert
