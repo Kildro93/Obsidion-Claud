@@ -15,7 +15,7 @@ aktualisiert: 2026-09-12
 ## Zahlen
 - Dateien geändert: 6 (`install-autosync-task.ps1`, `install-backup-task.ps1`, `PROJEKT-UPDATE.md`, `MEMORY_INDEX.md`, `AUTO-SYNC.md`, `BACKUP-STRATEGY.md`)
 - Dateien erstellt: 2 (Task-Ergebnisse + dieses Fazit)
-- Commits: `a74f3d4`, `1590342` auf `claude/nestbau-5-task-koordination-tsj44x`
+- Commits: `a74f3d4`, `1590342`, `cef3355`, gemergt via PR #1 als `e1d0ba7` in `main`
 - Tests bestanden: 2/2 live auf Windows (Auto-Sync-Aktion korrekt, Weekly-Backup erzeugt korrektes ZIP)
 
 ## Wichtigste Erkenntnisse
@@ -25,20 +25,19 @@ aktualisiert: 2026-09-12
 4. Die `.vbs`-Dateien sind absichtlich ANSI/Windows-1252-kodiert, nicht UTF-8 — beim Betrachten in UTF-8-Tools sieht `für` kaputt aus (`f?r`), ist es aber nicht. Nicht versehentlich „reparieren".
 
 ## Nächste Schritte
-1. Indra: `git push origin main` — lokales `main` ist durch den Merge des Fix-Branches jetzt vor `origin/main`
+1. Indra: `git pull origin main` im Vault-Ordner — lokaler Stand ist inhaltlich identisch, holt nur den Merge-Commit nach
 2. Indra: GitHub PAT erzeugen/erneuern falls der bestehende Token abgelaufen ist (Anleitung: [[SETUP-GITHUB-TOKEN]])
 3. Nächste Nestbau-Session: Auth-Bot-Auftrag aus [[PROJEKT-UPDATE]] („Vorbereiteter nächster Bot-Auftrag") starten
 
 ## Wo liegt was
 - Dateien: `scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`, `PROJEKTE/Nestbau/PROJEKT-UPDATE.md`, `SYSTEM/MEMORY_INDEX.md`, `SYSTEM/SETUP/AUTO-SYNC.md`, `SYSTEM/SETUP/BACKUP-STRATEGY.md`, `SYSTEM/Chat-Exports/CEO-Nestbau-5-Task-Koordination-Tasks-2026-09-12.md`
 - Lokal committet: ja
-- GitHub gepusht: ja, Branch `claude/nestbau-5-task-koordination-tsj44x`
+- GitHub gepusht: ja, PR #1 gemergt in `main` (Kildro93/Obsidion-Claud)
 - Vault aktualisiert: ja
 
 ## Offene Probleme
-- Lokales `main` bei Indra ist vor `origin/main` (Fix-Branch dort hineingemergt statt in einen Feature-Branch) — Push steht noch aus
 - GitHub-PAT-Status (gültig/abgelaufen) unbekannt — nur Indra kann das im Windows Credential Manager prüfen
-- `claude/nestbau-5-task-koordination-tsj44x` ist noch nicht per PR nach `main` gemergt
+- Indras lokales Git muss noch `git pull origin main` machen, um den Merge-Commit zu holen (rein kosmetisch, keine Inhaltsänderung)
 
 ## Für zukünftige Chats
 - Vor jeder „Script X funktioniert nicht"-Vermutung erst prüfen, ob der aufrufende Layer (hier: Install-Script) den vorhandenen Baustein (hier: VBS-Wrapper) überhaupt nutzt
