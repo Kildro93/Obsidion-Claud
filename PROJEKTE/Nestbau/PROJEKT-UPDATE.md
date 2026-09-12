@@ -11,7 +11,7 @@ aktualisiert: 2026-09-12
 ## Status
 
 **Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen, Design-System-Bug behoben
-**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Design konsistent auf `claude/new-session-je60jy` (PR noch nicht erstellt).
+**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Design konsistent auf `main` (PR #1 gemergt). Chat-Fazit: [[2026-09-12-Design-System-Fix]].
 **Nächster Schritt:** Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
 
 ## Erledigt (letzte Sessions)

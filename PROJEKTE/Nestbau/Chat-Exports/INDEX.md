@@ -4,6 +4,11 @@ Ergebnisse abgeschlossener Sessions und Bot-Läufe. Ein Export = eine Datei, Sch
 
 ## Sessions (als Datei vorhanden)
 
+### Design
+- **2026-09-12 – [[2026-09-12-Design-System-Fix]]**
+  - Thema: Ursache für „Design nicht konsistent" gefunden (dupliziertes Inline-CSS überschrieb `nestbau-design.css`) und behoben, WCAG-AA-Kontrastfehler korrigiert, mit `main` gemergt, PR #1 erstellt und gemergt
+  - Top 3: (1) BUILD-GUIDE.md vor der Diagnose lesen – der Bug war dort schon dokumentiert. (2) Feature-Branch gegen aktuellen `main` prüfen, nicht gegen den Erstellungs-Stand. (3) WCAG-Kontrast bei Pastell-Paletten rechnerisch prüfen, nicht nach Augenmass.
+
 ### Kochbuch / Menüplan
 - **2026-09-05 – [[2026-09-05-Kochbuch-Menuplan-GitHub]]**
   - Thema: Kochbuch/Menüplan/Zutaten/Rezepte in zwei Feinschliff-Runden, veröffentlicht; GitHub-Push-Versuch
@@ -31,7 +36,7 @@ Diese liefen als Bot-Runs; ihre Prompts liegen als Vorlagen unter `Claude output
 | Git Automation Engineer | `Claude outputs/BOT_0_GIT_AUTOMATION.md` | automatisierter Clone/Commit/Push-Workflow |
 | Settings UI Architect | `Claude outputs/BOT_1_SETTINGS_UI.md` | Settings-Redesign (Sections, Cards) |
 | Auth & Profile Developer | `Claude outputs/BOT_2_AUTH_PROFILE.md` | Auth-System – Umsetzung: `Claude outputs/nestbau-v2-auth/` |
-| Design System Architect | `Claude outputs/BOT_3_DESIGN_UPDATE.md` | warme Palette, Gradients – `design-modernization.patch` |
+| Design System Architect (1. Lauf) | `Claude outputs/BOT_3_DESIGN_UPDATE.md` | warme Palette, Gradients – `design-modernization.patch`; Nachfolge-Fix siehe [[2026-09-12-Design-System-Fix]] |
 | Local Folder Manager | `Claude outputs/BOT_4_FOLDER_MANAGER.md` | Ordnerstruktur `C:\KI Programme\Nestbau Boter\` |
 | Firebase Architect (Phase 1) | — | `Nestbau/FIREBASE-ARCHITECTURE.md`, Indexes, Functions-Templates |
 
@@ -42,6 +47,6 @@ Diese liefen als Bot-Runs; ihre Prompts liegen als Vorlagen unter `Claude output
 
 ## Statistik
 
-- Session-Exports als Datei: 1
+- Session-Exports als Datei: 2
 - Bot-Runs dokumentiert: 9
 - Hauptthemen: Firebase-Integration, Kochbuch, Auth, Design, Build/Play-Store

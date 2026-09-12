@@ -1,7 +1,12 @@
+---
+tags: [projekt/nestbau, typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # PROJEKT-LEARNINGS: Nestbau
 
 **Zweck:** Zentrale Sammlung von Erkenntnissen aus abgeschlossenen Bot-Sessions – für den CEO und zukünftige Projekte.
-**Last Updated:** 2026-09-06
+**Last Updated:** 2026-09-12
 
 Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haushalts-app]], [[NESTBAU-KNOWLEDGE-INDEX]].
 
@@ -128,3 +133,10 @@ Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haus
 - `ERR_BLOCKED_BY_CLIENT` in der Konsole heisst Browser oder Erweiterung, nicht Server: Brave Shields blockten `firestore.googleapis.com` als Google-Tracker. Symptom war ein hängender Upload ohne Fehlermeldung — die Anfrage ging nie raus. Fix: Schilde für localhost herunterfahren. Gilt genauso für Adblocker auf dem Zielgerät.
 - Die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen. Nach einem Kontowechsel sah es deshalb nach erfolgreichem Beitritt aus, obwohl die neue Kennung nie in `memberUids` stand. Wer prüfen will, ob ein Beitritt wirklich stattfand, liest `memberUids` des Haushalts-Dokuments — nicht die Karte.
 - Ein Sync, der von Hand gestartet werden muss, ist kein Sync. Nach jedem Neuladen stand er auf pausiert; wer das übersah, verlor beim nächsten Snapshot seine Änderungen. Seit 10.09.2026 gibt es keinen Schalter mehr.
+
+**2026-09-12 – Design-System-Fix (Design-Bot)**
+- Ein dupliziertes Inline-`<style>` in `index.html` überschrieb `nestbau-design.css` per Cascade-Reihenfolge – das war der eigentliche Grund, warum die alte Palette trotz „fertigem" Design-System weiter sichtbar war. War in `BUILD-GUIDE.md` § 10 bereits dokumentiert, aber nur mit einem Workaround-Kommentar umschifft statt behoben. Regel: vor jeder Bug-Diagnose `BUILD-GUIDE.md` und `git log <Datei>` prüfen, ob das Problem schon mal jemand gefunden hat.
+- Feature-Branch war beim PR-Erstellen 20+ Commits hinter `main` – und `main` hatte denselben Bug parallel, unvollständig gepatcht (andere Hex-Werte, Duplikat blieb bestehen). Ohne `git diff --name-only <branchpoint> origin/main` vor dem PR wäre der kaputte Parallel-Patch beim Merge wiederhergestellt worden. Regel: bei länger laufenden Branches immer gegen den aktuellen `main`-Stand prüfen, nicht gegen den Stand bei Branch-Erstellung.
+- Weisser Text auf hellen Pastell-Verläufen (Orange/Peach/Grün) sieht am Bildschirm oft „okay" aus, lag hier aber rechnerisch bei 1,6–2,3:1 statt der geforderten 4,5:1 (WCAG AA). Eine kleine Luminanz-/Kontrast-Funktion vorab laufen lassen ist schneller als Nachbessern nach Reviewer-Fund – gilt für jede warme/pastellige Palette.
+- GitHub-Schreibzugriff kann sich mitten in der Session ändern: `git push` scheiterte zuerst mit 403, klappte kurz danach ohne weiteres Zutun. Git-Proxy-Schreibzugriff und GitHub-API-Schreibzugriff (`create_branch` etc.) sind getrennte Berechtigungen – eines kann funktionieren, während das andere weiter 403 gibt.
+- Diese Session hatte Zugriff auf zwei Repos gleichzeitig (Nestbau + Vault `Obsidion-Claud`) und konnte den Vault direkt nach jedem Schritt aktuell halten, statt es am Ende in einem Rutsch nachzuholen – für Design-/Code-Sessions künftig beide Repos gleich zu Beginn anfragen.
