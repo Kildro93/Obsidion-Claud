@@ -7,7 +7,7 @@
 
 **Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen, Design-System-Bug behoben
 **Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Design konsistent auf `claude/new-session-je60jy` (PR noch nicht erstellt).
-**Nächster Schritt:** PR #1 reviewen und mergen; danach Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
+**Nächster Schritt:** Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
 
 ## Erledigt (letzte Sessions)
 - Firebase Architect Phase 1: Datenmodell, Rules, Indexes, Functions-Templates
@@ -45,7 +45,7 @@
 - 2026-09-10: **Abgleich ohne Schalter umgebaut** (97583da): Speichern geht immer nach Firebase, der Live-Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr.
 
 - 2026-09-12: **Design-System-Bug gefunden und behoben.** Ursache für „Design nicht konsistent": `index.html` hatte ein dupliziertes Inline-`<style>` mit der alten Palette (`#1c7d70`/`#4a6741`/`#8B4545`), das nach dem `<link>` zu `nestbau-design.css` stand und die neue Palette per Cascade überschrieb — deckt sich mit dem in `BUILD-GUIDE.md` § 10 unabhängig dokumentierten Befund. ~150 Zeilen dupliziertes/widersprüchliches CSS aus `index.html` entfernt, nur app-spezifische Styles (Kalender/Uhr/Kochbuch/Menüplan) bleiben inline. Zusätzlich mehrere WCAG-AA-Kontrastfehler in der neuen Palette gefunden (weisser Text auf hellen Orange/Peach/Grün-Verläufen, teils nur 1,6:1 statt 4,5:1) und behoben: neue Variablen `--on-warm`, `--flame-fg` (dunkler), `--amber-fg`, `--secondary-green-fg`, vereinheitlichtes `--maroon`. `.icon-btn`/`.todo-add-btn` auf 48×48px Touch-Targets gebracht. Alte Farben auch in `icon.svg` (jetzt Orange→Peach-Verlauf, Grün-Akzent), `capacitor.config.json`, `tools/generate-assets.js`, `firebase-bridge.html` ersetzt.
-- 2026-09-12: **Mit `main` gemergt und PR erstellt.** `main` war seit Branch-Erstellung um 20+ Commits weiter (Bots 1–4, Firebase-Sync, Testsuite, Play-Store-Pipeline) und hatte den Design-Bug unabhängig mit einem eigenen, unvollständigen Patch (andere Hex-Werte, Duplikat blieb bestehen) angefasst — Konflikt in `index.html`/`tools/generate-assets.js` zugunsten der tatsächlichen Ursachenbehebung aufgelöst. `npm test` (43/43) und `npm run audit:security` (0 Befunde) grün. Icon-/Splash-/Store-Assets per `npm run assets` mit der neuen Palette neu erzeugt (Android-Launcher alle Dichten, PWA-Icons, Play-Store-Icon + Feature-Graphic). PR: https://github.com/Kildro93/Nestbau/pull/1 (Monitoring aktiv)
+- 2026-09-12: **Mit `main` gemergt, PR erstellt und gemergt.** `main` war seit Branch-Erstellung um 20+ Commits weiter (Bots 1–4, Firebase-Sync, Testsuite, Play-Store-Pipeline) und hatte den Design-Bug unabhängig mit einem eigenen, unvollständigen Patch (andere Hex-Werte, Duplikat blieb bestehen) angefasst — Konflikt in `index.html`/`tools/generate-assets.js` zugunsten der tatsächlichen Ursachenbehebung aufgelöst. `npm test` (43/43) und `npm run audit:security` (0 Befunde) grün. Icon-/Splash-/Store-Assets per `npm run assets` mit der neuen Palette neu erzeugt (Android-Launcher alle Dichten, PWA-Icons, Play-Store-Icon + Feature-Graphic). PR #1 auf Freigabe hin gemergt (91197f5), Branch `claude/new-session-je60jy` kann gelöscht werden. Design-System ist damit auf `main` konsistent.
 
 ## Offen
 - [x] ~~`firebase deploy --only firestore:rules`~~ – 10.09.2026 ausgerollt, Upload läuft
@@ -70,7 +70,7 @@
 - [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
 - [x] ~~Design-Frage: `icon.svg` nutzt noch die alte Palette~~ – 12.09.2026 behoben, siehe Eintrag oben (Commit `eebccee`)
 - [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.
-- [ ] PR #1 (`claude/new-session-je60jy` → `main`) reviewen und mergen
+- [x] ~~PR #1 (`claude/new-session-je60jy` → `main`)~~ – 12.09.2026 gemergt (91197f5)
 
 ## Blockers
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
