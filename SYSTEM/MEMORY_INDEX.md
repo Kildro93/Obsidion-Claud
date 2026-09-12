@@ -37,6 +37,7 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lese
 - Koch-Wissen: KOCH-WISSEN/
 - Alltags-Routinen: ROUTINEN/
 - Vault-Cleanup & Integration: [[2026-09-06-Vault-Cleanup-Integration]]
+- Offene Vault-Baustellen (Stand 12.09.2026): [[Vault-Analyse-Fazit-2026-09-12]]
 
 ---
-*Zuletzt aktualisiert: 2026-09-06 – Cleanup durchgefuehrt, Bot-Abschluss-Regel eingefuehrt*
+*Zuletzt aktualisiert: 2026-09-12 – Vault-Analyse verlinkt*
