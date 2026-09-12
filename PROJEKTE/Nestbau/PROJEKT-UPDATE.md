@@ -81,6 +81,21 @@ aktualisiert: 2026-09-12
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
 - ~~Vault-Wurzel → GitHub: verschachtelte `.git` klären~~ erledigt 2026-09-06: beide Ordner bleiben eigene Repos, per `.gitignore` ausgeschlossen
 
+## Vorbereiteter nächster Bot-Auftrag (Stand 12.09.2026, CEO-Vorbereitung)
+
+**Bot:** Auth-Bot (Token-Refresh)
+**Aufgabe:** Google-Kalender-Token-Ablauf beheben. PKCE im Browser liefert kein Refresh-Token, nach 1h ist „Neu anmelden" nötig. Code für den Token-Tausch über eine Cloud Function existiert bereits (`nestbau-firebase/functions/src/tokens.js`), ist aber nicht ausgerollt und nicht an den Client angebunden.
+**Input:** `nestbau-firebase/functions/src/tokens.js` (bestehender Code), `js/nb-config.local.js` (Google-Client-Konfiguration), Kalender-Sync-Modul im Frontend (Ort per grep `googleapis.com|calendar` lokalisieren)
+**Schritte:**
+1. `nestbau-firebase/functions/src/tokens.js` lesen, prüfen ob Secrets (`GOOGLE_CLIENT_SECRET`) gesetzt sind ([[SETUP-ENV-LOCAL]])
+2. `firebase deploy --only functions:<name>` ausrollen
+3. Frontend so anpassen, dass bei Ablauf des Access-Tokens die Function statt „Neu anmelden" aufgerufen wird
+4. Test: Token künstlich ablaufen lassen (oder 1h warten), prüfen dass Sync ohne erneuten Login weiterläuft
+**Output:** Funktionierender Token-Refresh + `Auth-Bot-Summary.md` in `Chat-Exports/`
+**Danach:** CEO aktualisiert PROJEKT-LEARNINGS.md, hakt „Google-Kalender: Token läuft nach 1h ab" unter „Offen" ab
+
+Alternative, falls Token-Refresh blockiert: „Tasks zu Firestore-Subsammlung refaktorieren (Perf)" aus der Offen-Liste — unabhängig vom Auth-Thema, ebenfalls bounded.
+
 ## Wichtigste Dateien
 - Einstieg: [[README]]
 - Ergebnisse: [[INDEX|Chat-Exports/INDEX]]
