@@ -1,3 +1,8 @@
+---
+tags: [projekt/nestbau, typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # Nestbau – Projekt-Übersicht
 
 Household-Management-App für einen Zweipersonenhaushalt (Indra + Partnerin). Web-App (Vanilla JS), Android via Capacitor, optionaler Firebase-Sync. Repo: https://github.com/Kildro93/Nestbau

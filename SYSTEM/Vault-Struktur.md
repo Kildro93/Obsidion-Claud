@@ -1,3 +1,8 @@
+---
+tags: [typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # Vault-Struktur
 
 Übersicht über diese Vault und das Loop-System. Stand: 2026-09-06 (nach Cleanup).
@@ -93,3 +98,22 @@ scripts/
 ```
 
 Git: Vault-Wurzel ist ein eigenes Repo (Kildro93/Obsidion-Claud). `Nestbau/` und `nestbau-firebase/` bleiben eigene Repos und sind per `.gitignore` ausgeschlossen — `PROJEKTE/Nestbau/` (Notizen) ist davon nicht betroffen.
+
+## Tags & Frontmatter (seit 2026-09-12)
+
+Jede aktiv gepflegte Notiz bekommt Frontmatter:
+
+```yaml
+---
+tags: [projekt/nestbau, bereich/design, typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+```
+
+Tag-Namespaces:
+- `projekt/` – z. B. `nestbau`, `github-automation`, `primarlehrer-studium`
+- `bereich/` – z. B. `design`, `firebase`, `kalender`, `kochbuch`, `security`
+- `typ/` – z. B. `status`, `regel`, `setup`, `wissen`, `chat-export`
+- `status/` – `aktuell` oder `archiv`
+
+Rollout: auf den zentralen Steuer-Dateien (SYSTEM/, PROJEKT-LOOP/-UPDATE) bereits gesetzt. Ältere Notizen bekommen Frontmatter, sobald sie inhaltlich bearbeitet werden – kein mechanischer Massendurchlauf über unangesehene Dateien.

@@ -1,1 +1,9 @@
-{}
+{
+  "userIgnoreFilters": [
+    "Nestbau/node_modules",
+    "Nestbau/android",
+    "Nestbau/dist",
+    "nestbau-firebase/node_modules",
+    "Nestbau/play-store"
+  ]
+}

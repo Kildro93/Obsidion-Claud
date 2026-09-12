@@ -8,8 +8,6 @@
 - Diese Struktur reduziert Redundanzen und verbessert die Navigierbarkeit
 
 ## Changelog
-
-## Changelog
 - 2026-08-27: Neue Format-Regel in [[Regeln]] ergänzt – Bulletpoints statt Schachtelsätze bei Aufzählungen
 - 2026-08-27: Interview durchgeführt – [[Profil]] und [[Regeln]] mit Berufsweg, Projektziel (Haushalts-App), Interessen und Kommunikationsvorlieben aktualisiert
 - 2026-08-27: Nestbau MVP (To-Do + Kalender, Web-App für Android) gebaut und als Artefakt veröffentlicht, siehe [[Profil]]

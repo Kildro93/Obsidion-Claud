@@ -1,108 +1,120 @@
 # Chat-Closure-Protocol
 
-> Automatisches Fazit-System für alle Claude-Chats.
-> Stellt sicher, dass Erkenntnisse nie verloren gehen und neue Chats nahtlos weitermachen können.
+Speicherort im Vault: `SYSTEM/Chat-Closure-Protocol.md`
+Zweck: Kein Chat endet, ohne dass Erkenntnisse und offene Punkte gesichert sind.
 
 ---
 
-## Wann wird das Protokoll ausgelöst?
+## Teil 1: Chat meldet Fertigstellung selbst
 
-Bei jedem Schließ-Befehl:
+Sobald die Aufgabe erledigt ist, meldet der Chat von sich aus – ohne dass gefragt wird, und ohne die Meldung in Fließtext zu verstecken:
+
+```
+FERTIG: <Aufgabe>
+Status: <was gemacht wurde, ein Satz>
+Nächster Schritt: <was Indra jetzt tut>
+Chat kann geschlossen werden: ja | nein, weil <grund>
+```
+
+Falsch: "Bin ich fertig? Soll ich noch was machen?" – der Chat entscheidet das selbst.
+Falsch: die Fertigmeldung im vierten Absatz vergraben.
+
+Teilfertig ist auch eine Meldung. Dann `Status: teilweise` und die offenen Punkte benennen.
+
+---
+
+## Teil 2: Schließ-Befehl
+
+Diese Formulierungen lösen alle dasselbe aus:
+
 - "Schließ dich"
-- "Bye"
 - "Chat schließen"
-- "Fertig, schließen"
-- Sinngemäße Varianten
+- "Bye"
+- "Danke, fertig für heute"
+- "Fazit schreiben"
+- jede Variante mit schließ / close / bye / done
 
-## Fazit-Struktur
+---
 
-Jedes Fazit folgt diesem Template:
+## Teil 3: Fazit-Format
 
-```markdown
-# Fazit: [Chat-Name] – [Datum]
-
-## Abgeschlossene Aufgaben
-- [Was wurde erledigt, kurz & konkret]
-
-## Status
-- [Aktueller Stand des Projekts/der Aufgabe]
-- [Was läuft, was wartet]
-
-## Wichtigste Erkenntnisse
-- [Top-Learnings aus diesem Chat]
-- [Patterns, die sich bewährt haben]
-- [Fehler, die aufgetreten sind + Lösung]
-
-## Nächste Schritte
-- [Was als Nächstes getan werden muss]
-- [Priorisierung, falls mehrere Punkte]
-
-## Dateipfade
-- [Alle erstellten/geänderten Dateien mit vollständigem Pfad]
-
-## Offene Probleme
-- [Ungelöste Issues, Blocker, bekannte Bugs]
-
-## Tipps für zukünftige Chats
-- [Kontext, den der nächste Chat wissen muss]
-- [Fallstricke, die vermieden werden sollten]
-- [Empfohlene Vorgehensweise]
-```
-
-## Speicherort
-
-| Kontext | Pfad |
-|---------|------|
-| Allgemein | `SYSTEM/Chat-Exports/[Name]-Fazit-[Datum].md` |
-| Projektspezifisch | `PROJEKTE/[Projekt]/Chat-Exports/[Name]-Fazit-[Datum].md` |
-
-## Regeln
-
-- Fazit wird **automatisch** erstellt – User muss nicht danach fragen
-- Maximal **200 Worte** pro Fazit (knapp & scanbar)
-- Keine Wiederholung von Dingen, die schon in anderen Vault-Dateien stehen
-- Dateipfade immer **vollständig** angeben
-- Bei projektspezifischen Chats: Fazit im **Projektordner** speichern
-- Erkenntnisse, die allgemein nützlich sind: zusätzlich in `PROJEKT-LEARNINGS.md` konsolidieren
-- Keine Tokens, Keys oder Passwörter im Fazit – stattdessen `[REDACTED]`
-
-## Beispiel-Fazit
+Bei Schließ-Befehl erzeugt der Chat sofort diesen Block, ohne Rückfrage:
 
 ```markdown
-# Fazit: Firebase-Setup-Bot – 2026-09-06
+# Fazit: <Chat-Name> – <Datum>
 
-## Abgeschlossene Aufgaben
-- Firebase-Projekt "nestbau-app" konfiguriert
-- Security Rules für Firestore geschrieben
-- Test-Script erstellt und validiert
+## Abgeschlossen
+- <Aufgabe>: <Ergebnis>
 
-## Status
-- Firebase läuft, Auth + Firestore aktiv
-- Hosting noch nicht eingerichtet
+## Zahlen
+- Dateien erstellt: <n>
+- Dateien geändert: <n>
+- Commits: <hashes>
+- Tests bestanden: <n/n>
 
 ## Wichtigste Erkenntnisse
-- Firebase Web-API-Key ist public by design, aber Domain-Restriction nötig
-- Firestore Rules: deny all als Default, dann explizit freigeben
-- Test mit test-firebase.js vor Deployment spart Debugging-Zeit
+1. <Erkenntnis>: <warum relevant für später>
+2. <Erkenntnis>: <warum relevant für später>
 
 ## Nächste Schritte
-- Firebase Hosting aktivieren
-- Domain-Restriction in Cloud Console setzen
-- Auth-Flow in App integrieren
+1. <Schritt> – wer, wann
+2. <Schritt> – wer, wann
 
-## Dateipfade
-- PROJEKTE/Nestbau/Knowledge/firebase-rules.md
-- nestbau-firebase/test-firebase.js
-- SYSTEM/SETUP/SETUP-FIREBASE.md
+## Wo liegt was
+- Dateien: <pfade>
+- Lokal committet: ja | nein
+- GitHub gepusht: ja | nein, weil <grund>
+- Vault aktualisiert: ja | nein
 
 ## Offene Probleme
-- API-Key noch nicht auf Domains beschränkt
+- <Problem>: <Status, was blockiert>
 
-## Tipps für zukünftige Chats
-- Immer PROJEKT-LEARNINGS.md lesen vor Firebase-Arbeit
-- test-firebase.js als Smoke-Test nach jeder Änderung nutzen
+## Für zukünftige Chats
+- <was funktioniert hat>
+- <welche Falle zu vermeiden ist>
+- <Lessons Learned>
 ```
 
-## Integration in Custom Instructions
+---
 
-Damit alle Chats dieses Protokoll automatisch befolgen, folgenden Text in Claude Settings → Profile → Custom Instructions einfügen (siehe Schritt 2 des AUTOMATION-Bots).
+## Teil 4: Speicherort
+
+Allgemeine Chats:
+
+```
+SYSTEM/Chat-Exports/<Chat-Name>-Fazit-<YYYY-MM-DD>.md
+```
+
+Projektbezogene Chats zusätzlich:
+
+```
+PROJEKTE/<Projekt>/Chat-Exports/<Chat-Name>-Fazit-<YYYY-MM-DD>.md
+```
+
+Hat der Chat Vault-Zugriff: direkt schreiben, committen, pushen.
+Hat er keinen: den Block als Copy-Paste ausgeben und den Zielpfad nennen.
+
+---
+
+## Teil 5: Checkliste vor dem Schließen
+
+Der Chat prüft selbst:
+
+- Fazit erstellt
+- Erkenntnisse dokumentiert, nicht nur Tätigkeiten aufgelistet
+- Nächste Schritte konkret, mit Zuständigkeit
+- Offene Probleme benannt statt weggelassen
+- Dateipfade vollständig
+- Git- und Vault-Status eindeutig
+- MASTER-INDEX.md aktualisiert
+
+Danach: "Chat kann geschlossen werden."
+
+---
+
+## Teil 6: Warum
+
+Ohne Protokoll geht beim Schließen der Kontext verloren und der nächste Chat beginnt von vorn.
+Mit Protokoll liest der nächste Chat das Fazit und arbeitet direkt weiter.
+
+Die Erkenntnisse sind der eigentliche Wert, nicht die Tätigkeitsliste. Ein Fazit, das nur aufzählt was gemacht wurde, ist wertlos. Es muss festhalten, was beim nächsten Mal Zeit spart.

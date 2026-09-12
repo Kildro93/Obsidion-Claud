@@ -1,3 +1,8 @@
+---
+tags: [projekt/nestbau, typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # PROJEKT-LOOP: Nestbau
 
 ## Was ist dieses Projekt?

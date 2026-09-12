@@ -1,3 +1,8 @@
+---
+tags: [typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # Gedächtnis & Kontext-Index
 
 Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lesen.

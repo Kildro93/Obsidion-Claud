@@ -1,3 +1,8 @@
+---
+tags: [typ/regel, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # Regeln & Kommunikationsstil
 
 ## Tonalität

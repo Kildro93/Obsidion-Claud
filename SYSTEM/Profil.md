@@ -1,3 +1,8 @@
+---
+tags: [typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # Profil
 
 ## Person

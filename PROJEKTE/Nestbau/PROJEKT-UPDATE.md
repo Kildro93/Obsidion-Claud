@@ -1,3 +1,8 @@
+---
+tags: [projekt/nestbau, typ/status, status/aktuell]
+aktualisiert: 2026-09-12
+---
+
 # PROJEKT-UPDATE: Nestbau
 
 **Stand:** 2026-09-12
