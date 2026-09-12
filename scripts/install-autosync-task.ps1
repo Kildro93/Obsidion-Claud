@@ -1,4 +1,4 @@
-<#
+﻿<#
   Registriert vault-sync.ps1 als Windows-Aufgabe (alle 30 Minuten).
   Start ueber wscript.exe + VBS-Wrapper statt "-WindowStyle Hidden": Hidden
   unterdrueckt unter dem Taskplaner das kurze Aufblitzen des Konsolenfensters

@@ -1,4 +1,4 @@
-<#
+﻿<#
   Registriert weekly-backup.ps1 als Windows-Aufgabe (Sonntag 02:00).
   Start ueber wscript.exe + VBS-Wrapper statt "-WindowStyle Hidden": Hidden
   unterdrueckt unter dem Taskplaner das kurze Aufblitzen des Konsolenfensters

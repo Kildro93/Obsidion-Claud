@@ -1,4 +1,4 @@
-<#
+﻿<#
   push.ps1 - Manueller Sofort-Push (fuer Zwischendurch).
   Aufruf: powershell -ExecutionPolicy Bypass -File .\push.ps1 "Mein Commit-Text"
 #>

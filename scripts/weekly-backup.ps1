@@ -1,4 +1,4 @@
-<#
+﻿<#
   weekly-backup.ps1 - Wochen-ZIP des Vaults nach backups/ (git-ignoriert).
   Haelt die letzten 8 Backups, loescht aeltere.
   Registrierung: install-backup-task.ps1
