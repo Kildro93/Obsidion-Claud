@@ -6,102 +6,122 @@ aktualisiert: 2026-09-12
 # PROJEKT-UPDATE: Nestbau
 
 **Stand:** 2026-09-12
-**Aktualisiert von:** Design-System-Bot (Claude Code)
+**Aktualisiert von:** CEO-Nestbau (Cowork)
 
 ## Status
 
-**Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen, Design-System-Bug behoben
-**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Design konsistent auf `main` (PR #1 gemergt). Chat-Fazit: [[2026-09-12-Design-System-Fix]].
-**Nächster Schritt:** Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
+**Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen, Design-System konsistent auf `main` (PR #1 gemergt, 43/43 Tests grün).
+**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync läuft (1h-Token-Limit). Firebase-Anmeldung + Multi-Device-Sync live (ohne manuellen Schalter). Phase-2-Kernpfad (Test 1–5) bestanden.
+**Nächster Schritt:** Auth-Bot für Token-Refresh starten. Brief liegt vor: `docs/auth-bot-token-refresh-brief-2026-09-12.md`.
 
-## Erledigt (letzte Sessions)
-- Firebase Architect Phase 1: Datenmodell, Rules, Indexes, Functions-Templates
-- Bot 1–4: Auth, Firestore, Kalender-Sync, Rezept-Import
-- Build Optimizer: 43 Tests, CI/CD, Play-Store-Assets (Branch release/play-store)
-- Kochbuch/Menüplan/Zutaten/Rezepte: zwei Feinschliff-Runden, veröffentlicht
-- Release-Keystore angelegt (`~/.nestbau-keys/nestbau-release.jks`), signiertes AAB gebaut → `Nestbau/dist/nestbau-2.0.0-release.aab` (versionCode 1, 2.0.0)
-- 2026-09-06: Vault konsolidiert (REQUIREMENTS/DESIGN/CODE/…); Wegwerf-Ordner `C:\nestbau-build` gelöscht; Vault-Root-`.gitignore` angelegt
-- 2026-09-06: `C:\Users\indra` durchsucht – redundanten Klon `~/Nestbau` gelöscht (= origin/main); 3 Dateien aus ~/Downloads in den Vault (2 Chat-Exports + 1 Daten-Sicherung); Release-Keystore `~/.nestbau-keys/` bleibt (Secret, nicht in Vault)
-- 2026-09-06: redundante Klone `C:\KI Programme\Nestbau Boter` + `C:\KI Programme\nestbau-app` gelöscht (0 uncommitted/unpushed); `.claude/launch.json` „nestbau" → Vault-Klon; Emulator `NestbauTest` (4,5 GB) gelöscht, Rebuild-Anleitung: [[Emulator-Setup]]
+---
 
-- 2026-09-06: Vault-Wurzel als Git-Repo initialisiert (2 Commits), `.gitignore` auf Root-Pfade angepasst, Setup-Doku unter SYSTEM/SETUP/, Auto-Sync + Backup-Scripts unter scripts/, Security-Audit durchgeführt (keine Keys im Repo)
+## A) WAS FUNKTIONIERT
 
-- 2026-09-07: Nestbau-Arbeitsverzeichnis aufgeräumt, committet und gepusht (4 Commits): .gitattributes/LF-Normalisierung + Logs untracked, Kamera-Entfernung inkl. Berechtigungen, Build-Tools, Play-Store-Unterlagen. Arbeitsverzeichnis ist sauber.
+| Feature | Status | Quelle |
+|---------|--------|--------|
+| Aufgaben & Listen (5 Standard + eigene, Filter, Wiederholung) | live | NESTBAU_AKTUELL, Features.md |
+| Kalender (Wochen-/Monatsansicht, SBB-Uhr, Kategorien, To-Dos) | live | NESTBAU_AKTUELL |
+| Finanzen/Abos (Kategorien, Intervalle, Jahresübersicht, Diagramm) | live | NESTBAU_AKTUELL |
+| Kochbuch: Zutaten (Datenbank, Nährwerte, Kamera, Allergene) | live | NESTBAU_AKTUELL |
+| Kochbuch: Rezepte (Kacheln, Filter, Leseansicht, Nährwert-Berechnung) | live | NESTBAU_AKTUELL |
+| Kochbuch: Menüplan (4 Slots/Tag, Stepper, saisonale Vorschläge) | live | NESTBAU_AKTUELL |
+| Kochbuch: Einkaufsliste aus Menüplan | live | NESTBAU_AKTUELL |
+| Profile (2 Profile, lokaler Login) | live | NESTBAU_AKTUELL |
+| Firebase Auth (Google Sign-In) | live | PROJEKT-UPDATE 07.09., Fazit 07.09. |
+| Firestore-Sync (Aufgaben, Events, Abos, Kochbuch komplett) | live | Phase-2-Testplan, Test 1–5 bestanden |
+| Multi-Device-Sync (ohne manuellen Schalter, 1,2s-Fenster geschlossen) | live | Commit 97583da, Konzept-Multi-Device |
+| Haushalt teilen via Beitrittscode | live | Test 3 bestanden |
+| Google-Kalender-Sync (OAuth PKCE, bidirektional) | eingeschränkt | Token läuft nach 1h ab, kein Refresh |
+| Design-System (warme Palette, WCAG-AA, Dark Mode) | live | PR #1 gemergt (91197f5) |
+| Test-Suite (43 Tests) | grün | npm test, Fazit 07.09. |
+| Security-Audit | 0 Befunde | npm run audit:security |
+| Vault Auto-Sync & Backup | live | VBS-Wrapper verifiziert 12.09. |
+| Release-Keystore + signiertes AAB | vorhanden | dist/nestbau-2.0.0-release.aab |
 
-- 2026-09-07: Branch-Lage analysiert und entschieden; 43 Tests + Audit-Skripte nach `main` portiert (6fa2fbe), alle grün, Security 0 hoch / Performance im Budget
+**Nicht verifiziert / fraglich:**
+- NESTBAU_AKTUELL.md behauptet "Outlook Kalender: ✅ Live" — kein anderes Dokument stützt das. **Bitte manuell prüfen.**
 
-- 2026-09-07: Sicherheitsbefunde behoben (2 Commits, noch nicht gepusht): XSS-Härtung der Foto-Vorschauen + sharp ^0.35.4
+---
 
-- 2026-09-07: Blocker „Client-ID fehlt" gelöst – die aktive `nb-config.local.js` enthielt nur Emulator-Platzhalter, die echte Google-Client-ID lag in einer zweiten Fassung unter `Claude outputs/`. Zusammengeführt, alte Fassung als `.bak-2026-09-07` daneben.
+## B) WAS NICHT FUNKTIONIERT
 
-- 2026-09-07: Fix in der laufenden App verifiziert (localhost:8000): `NB.config.google.clientId` gesetzt (72 Zeichen), Google-Karte zeigt „Nicht verbunden – Verbinden", Redirect-URI der Installation stimmt mit der Registrierung überein. „Client-ID fehlt" steht jetzt nur noch bei Outlook (zurückgestellt) und Firebase (Werte fehlen noch).
+| Problem | Ursache | Schweregrad | Aufwand |
+|---------|---------|-------------|---------|
+| Google-Kalender-Token läuft nach 1h ab | PKCE liefert kein Refresh-Token im Browser | **hoch** | ~2h (Code liegt vor in `nestbau-firebase/functions/src/tokens.js`) |
+| Tests decken Firebase nicht ab | 43 Tests stammen von vor der Firebase-Integration | mittel | ~3–4h (neue Test-Szenarien mit Emulator) |
+| Phase-2-Tests 6–9 nicht durchgeführt | Brauchen zwei echte Browser-Profile gegen echtes Firebase | mittel | ~30min (manuell, am PC) |
+| Zwei parallele Function-Sets | `nestbau-firebase/functions/` vs. `Claude outputs/nestbau-v2-auth/functions/` — unklar welches maßgeblich | mittel | ~1h (Abgleich + Entscheidung) |
+| Tasks als nested items[] statt Subsammlung | Architektur-Altlast, Perf bei vielen Tasks | niedrig | ~2–3h |
+| Offline-Konflikt: last-write-wins ohne Meldung | Option A (Meldung) konzipiert, nicht umgesetzt | niedrig (2 Nutzer) | ~1–2h |
+| Play-Store-Release blockiert | GitHub Pages nicht aktiviert + Produktions-Redirect-URI fehlt | blockiert | Manuelle Aktion + ~15min |
+| OAuth-Client-Secret bei Google löschen | Unnötiger PKCE-Restwert | niedrig | 2min (Console) |
+| Branch `claude/new-session-je60jy` auf GitHub | Gemergt, nicht gelöscht (403 beim Versuch) | kosmetisch | 1min |
 
-- 2026-09-07: Manifest-Fehler behoben – Chrome meldete „icon.svg failed to load" und fehlende quadratische Icons; das Manifest verwies nur auf das SVG, die PNGs (192/512) lagen ungenutzt unter `assets/icons/`. Verlinkt, `build-web.js` kopiert `assets/` jetzt mit.
+---
 
-- 2026-09-07: **Google-Kalender-Sync läuft.** OAuth neu aufgesetzt: Zustimmungsbildschirm („Nestbau Haushalt"), Web-Client `Nestbau Web (lokal)` im Projekt nestbau-app, Client-ID in `nb-config.local.js`. Abgleich erfolgreich, vier Kalender erkannt.
+## C) WAS UNKLAR IST
 
-- 2026-09-07: **Firebase-Anmeldung läuft.** Web-Konfiguration in `nb-config.local.js` eingetragen, Emulator-Zwang im Code entfernt, Google als Anmeldeanbieter in Firebase Authentication aktiviert (vorher nur E-Mail/Passwort). Kochbuch-Cloud verbunden.
+1. **Outlook-Kalender:** NESTBAU_AKTUELL.md sagt "Live", aber kein Fazit, kein Test, kein Commit erwähnt eine funktionierende Outlook-Integration. Entweder veraltet oder nie verifiziert.
 
-- 2026-09-07: Firestore- und Storage-Regeln ausgerollt (`firebase deploy`), `.firebaserc` mit Standardprojekt angelegt. Damit ist Phase 1 der Firebase-Einrichtung abgeschlossen.
+2. **Maßgebliches Function-Set:** CODE-Landkarte warnt: "Zwei parallele Function-Sets — vor Deploy klären, welches der Stand ist." Die `nestbau-firebase/functions/` haben die Token-Refresh-Logik, die `Claude outputs/nestbau-v2-auth/functions/` haben den Auth-Flow. Beides zeigt auf dasselbe Firebase-Projekt `nestbau-app`. Der Repo-Merge (aufgaben/repo-merge-nestbau-firebase.md) würde das lösen, ist aber offen.
 
-- 2026-09-08: Test 1–3 begonnen. Haushalt angelegt (Code KJS7DB90), Upload blieb hängen. **Ursache statisch gefunden:** die Firestore-Regeln kannten `lists`, `events` und `subscriptions` nicht — der Sync deckt sie seit der Erweiterung von `NB.cloud.COLLECTIONS` ab, die Regeln nicht. Der Auffangblock sperrte sie, und `lists` steht in der Schreibreihenfolge an erster Stelle. Regeln ergänzt (Commit 76cd20e), noch **nicht ausgerollt**.
+3. **Git-Stand des Vault-Klons:** CODE-Landkarte (07.09.) sagt "1 Commit hinter origin/main". War inzwischen `git pull` gemacht? Die 5-Task-Session (12.09.) hat auf `main` gemergt und gepusht — unklar, ob lokal synchron.
 
-- 2026-09-10: **Phase-2-Kernpfad bestanden** (Tests 1–5). Zwei weitere Ursachen gefunden: Brave Shields blockten `firestore.googleapis.com` im zweiten Profil (`ERR_BLOCKED_BY_CLIENT`), und ein vermeintlicher Beitritt der Partnerin hatte nie stattgefunden — die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen.
-- 2026-09-10: **Abgleich ohne Schalter umgebaut** (97583da): Speichern geht immer nach Firebase, der Live-Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr.
+4. **GitHub-PAT-Status:** Unbekannt ob gültig oder abgelaufen. Nur am Windows-PC prüfbar (Credential Manager).
 
-- 2026-09-12: **Design-System-Bug gefunden und behoben.** Ursache für „Design nicht konsistent": `index.html` hatte ein dupliziertes Inline-`<style>` mit der alten Palette (`#1c7d70`/`#4a6741`/`#8B4545`), das nach dem `<link>` zu `nestbau-design.css` stand und die neue Palette per Cascade überschrieb — deckt sich mit dem in `BUILD-GUIDE.md` § 10 unabhängig dokumentierten Befund. ~150 Zeilen dupliziertes/widersprüchliches CSS aus `index.html` entfernt, nur app-spezifische Styles (Kalender/Uhr/Kochbuch/Menüplan) bleiben inline. Zusätzlich mehrere WCAG-AA-Kontrastfehler in der neuen Palette gefunden (weisser Text auf hellen Orange/Peach/Grün-Verläufen, teils nur 1,6:1 statt 4,5:1) und behoben: neue Variablen `--on-warm`, `--flame-fg` (dunkler), `--amber-fg`, `--secondary-green-fg`, vereinheitlichtes `--maroon`. `.icon-btn`/`.todo-add-btn` auf 48×48px Touch-Targets gebracht. Alte Farben auch in `icon.svg` (jetzt Orange→Peach-Verlauf, Grün-Akzent), `capacitor.config.json`, `tools/generate-assets.js`, `firebase-bridge.html` ersetzt.
-- 2026-09-12: **Mit `main` gemergt, PR erstellt und gemergt.** `main` war seit Branch-Erstellung um 20+ Commits weiter (Bots 1–4, Firebase-Sync, Testsuite, Play-Store-Pipeline) und hatte den Design-Bug unabhängig mit einem eigenen, unvollständigen Patch (andere Hex-Werte, Duplikat blieb bestehen) angefasst — Konflikt in `index.html`/`tools/generate-assets.js` zugunsten der tatsächlichen Ursachenbehebung aufgelöst. `npm test` (43/43) und `npm run audit:security` (0 Befunde) grün. Icon-/Splash-/Store-Assets per `npm run assets` mit der neuen Palette neu erzeugt (Android-Launcher alle Dichten, PWA-Icons, Play-Store-Icon + Feature-Graphic). PR #1 auf Freigabe hin gemergt (91197f5), Branch `claude/new-session-je60jy` kann gelöscht werden. Design-System ist damit auf `main` konsistent.
+5. **NESTBAU_AKTUELL.md insgesamt veraltet:** "Letzte Änderung: 28.08.2026", listet unter "Nächste Schritte" Punkte, die seit 07.09. erledigt sind (Client-IDs, firebase deploy). Braucht ein Update oder Deprecation zugunsten von PROJEKT-UPDATE.md.
 
-## Offen
-- [x] ~~`firebase deploy --only firestore:rules`~~ – 10.09.2026 ausgerollt, Upload läuft
-- [x] ~~Phase 2, Test 1–5~~ – 10.09.2026 bestanden (Haushalt, Upload, Beitritt, Sync in beide Richtungen)
-- [ ] Google-Kalender: Token läuft nach 1 h ab, danach „Neu anmelden" nötig. PKCE im Browser liefert kein Refresh-Token. Dauerhafte Lösung: Token-Tausch über Cloud Function (Code existiert in `nestbau-firebase/functions/src/tokens.js`, nicht ausgerollt)
-- [x] ~~Google-Client-ID in `nb-config.local.js`~~ – 07.09.2026 eingetragen (lag ungenutzt unter `Claude outputs/`), Ladetest bestätigt
-- [x] ~~Firebase-Web-Konfiguration~~ – 07.09.2026 eingetragen, Anmeldung verbunden
-- [x] ~~`firebase deploy --only firestore:rules,storage`~~ – 07.09.2026 ausgerollt, beide Regelsätze kompiliert und freigegeben
-- [x] ~~Firestore-Datenbank~~ – existiert, Indexes wurden gelesen
-- [ ] Clientschlüssel des OAuth-Clients bei Google löschen (wird nicht gebraucht, PKCE)
-- [ ] Vor dem Play-Store-Release: Weiterleitungs-URI der Produktionsdomain im OAuth-Client ergänzen (aktuell nur `http://localhost:8000/oauth-callback.html`)
-- [x] ~~GitHub-Push Kildro93/Nestbau~~ – erledigt 2026-09-07: 4 Commits auf `main` gepusht (4bbd515..6e689ce)
-- [x] ~~Erst-Push des Vault-Repos~~: Repo `Kildro93/Obsidion-Claud` existiert auf GitHub. Push via Token (siehe [[SETUP-GITHUB-TOKEN]])
-- [x] ~~Auto-Sync- und Backup-Aufgabe~~ – 07.09.2026 registriert und getestet
-- [x] ~~Firebase-API-Key auf eigene Domains eingeschränkt~~ – erledigt
-- [x] ~~Branch-Entscheidung~~ – entschieden 2026-09-07: `main` geht in den Play Store, Tests aus `release/play-store` portiert, `master` ist ein eigenes Projekt. Begründung: [[Branch-Entscheidung]]
-- [x] ~~XSS-Befunde entschärft~~ – 2026-09-07: Foto-Vorschauen über DOM-API, Attribute escaped, Audit 0/0/0
-- [x] ~~sharp-Schwachstelle~~ – 2026-09-07: auf ^0.35.4, npm audit 0 Schwachstellen
-- [ ] Tasks zu Firestore-Subsammlung refaktorieren (Perf)
-- [x] ~~Multi-Device-Konflikte, Option A~~ – 10.09.2026 umgesetzt: der 1,2-Sekunden-Fall ist geschlossen, offene lokale Änderungen überleben einen Snapshot und werden danach hochgeladen. Offen bleibt nur der echte Offline-Konflikt (beide Geräte ändern dasselbe Dokument offline) — dort gewinnt weiterhin der letzte Schreibvorgang, siehe [[Konzept-Multi-Device-Konflikte]]
-- [ ] Test 6–9 (Offline, Konflikt, Regeln, falscher Code) aus [[Phase-2-Testplan]]
-- [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
-- [x] ~~Design-Frage: `icon.svg` nutzt noch die alte Palette~~ – 12.09.2026 behoben, siehe Eintrag oben (Commit `eebccee`)
-- [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.
-- [x] ~~PR #1 (`claude/new-session-je60jy` → `main`)~~ – 12.09.2026 gemergt (91197f5)
+---
 
-## Blockers
-- Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
-- ~~Vault-Wurzel → GitHub: verschachtelte `.git` klären~~ erledigt 2026-09-06: beide Ordner bleiben eigene Repos, per `.gitignore` ausgeschlossen
+## D) ROADMAP — Nächste 5 Schritte
 
-## Vorbereiteter nächster Bot-Auftrag (Stand 12.09.2026, CEO-Vorbereitung)
+| # | Schritt | Bot-Rolle | Blocker | Aufwand |
+|---|---------|-----------|---------|---------|
+| 1 | **Token-Refresh ausrollen** — Cloud Function deployen, Frontend anbinden, testen | Auth-Bot (Claude Code) | GOOGLE_CLIENT_SECRET muss gesetzt sein | ~2h |
+| 2 | **Phase-2-Tests 6–9 durchführen** — Offline, Konflikt, Regeln, falscher Code | Manuell (Indra am PC) | Keiner (Testplan liegt vor) | ~30min |
+| 3 | **Repo-Merge: nestbau-firebase → Nestbau** — Ein Repo statt zwei, Function-Konflikt lösen | Infra-Bot (Claude Code) | Beide Repos auf main, alles committet | ~2–3h |
+| 4 | **Tasks → Firestore-Subsammlung** — Perf-Refactor, nested items[] ablösen | Code-Bot (Claude Code) | Nach Repo-Merge (sonst unklar wo) | ~2–3h |
+| 5 | **Play-Store-Vorbereitung** — GitHub Pages aktivieren, Produktions-Redirect-URI, assetlinks.json | Manuell + Bot | GitHub Pages = manuell | ~1h |
+
+**Sofort von Indra zu erledigen (kein Bot nötig):**
+- `git pull origin main` im Vault-Ordner (falls nicht seit 12.09. geschehen)
+- GitHub-PAT prüfen/erneuern
+- Outlook-Kalender-Behauptung verifizieren (App öffnen, testen)
+- NESTBAU_AKTUELL.md als veraltet markieren oder aktualisieren
+
+---
+
+## Vorbereiteter nächster Bot-Auftrag
 
 **Bot:** Auth-Bot (Token-Refresh)
-**Aufgabe:** Google-Kalender-Token-Ablauf beheben. PKCE im Browser liefert kein Refresh-Token, nach 1h ist „Neu anmelden" nötig. Code für den Token-Tausch über eine Cloud Function existiert bereits (`nestbau-firebase/functions/src/tokens.js`), ist aber nicht ausgerollt und nicht an den Client angebunden.
-**Input:** `nestbau-firebase/functions/src/tokens.js` (bestehender Code), `js/nb-config.local.js` (Google-Client-Konfiguration), Kalender-Sync-Modul im Frontend (Ort per grep `googleapis.com|calendar` lokalisieren)
-**Schritte:**
-1. `nestbau-firebase/functions/src/tokens.js` lesen, prüfen ob Secrets (`GOOGLE_CLIENT_SECRET`) gesetzt sind ([[SETUP-ENV-LOCAL]])
-2. `firebase deploy --only functions:<name>` ausrollen
-3. Frontend so anpassen, dass bei Ablauf des Access-Tokens die Function statt „Neu anmelden" aufgerufen wird
-4. Test: Token künstlich ablaufen lassen (oder 1h warten), prüfen dass Sync ohne erneuten Login weiterläuft
-**Output:** Funktionierender Token-Refresh + `Auth-Bot-Summary.md` in `Chat-Exports/`
-**Danach:** CEO aktualisiert PROJEKT-LEARNINGS.md, hakt „Google-Kalender: Token läuft nach 1h ab" unter „Offen" ab
+**Brief:** `PROJEKTE/Nestbau/docs/auth-bot-token-refresh-brief-2026-09-12.md` ✅ Ready
+**Kurzfassung:** PKCE liefert kein Refresh-Token → nach 1h "Neu anmelden". Code für Token-Tausch über Cloud Function existiert (`nestbau-firebase/functions/src/tokens.js`), nicht ausgerollt. Bot soll: prüfen, deployen, Frontend anbinden, testen, dokumentieren.
+**Fallback:** Tasks zu Firestore-Subsammlung refaktorieren (unabhängig, bounded).
 
-Alternative, falls Token-Refresh blockiert: „Tasks zu Firestore-Subsammlung refaktorieren (Perf)" aus der Offen-Liste — unabhängig vom Auth-Thema, ebenfalls bounded.
+---
+
+## Erledigt (letzte Sessions)
+
+- 2026-09-12: Design-System-Bug behoben (dupliziertes Inline-CSS), WCAG-AA-Kontrast korrigiert, PR #1 gemergt (91197f5), Icon/Splash/Store-Assets neu generiert
+- 2026-09-12: VBS-Wrapper für Auto-Sync/Backup verdrahtet, Weekly-Backup getestet, Loop-Vorbereitung (Auth-Bot-Brief)
+- 2026-09-10: Phase-2-Kernpfad bestanden (Test 1–5), Multi-Device-Sync ohne Schalter umgebaut (97583da)
+- 2026-09-08: Firestore-Regeln für lists/events/subscriptions ergänzt (76cd20e)
+- 2026-09-07: Branch-Entscheidung, 43 Tests portiert, XSS-Härtung, Google-Kalender + Firebase ans Laufen gebracht
+- 2026-09-06: Vault konsolidiert, Wegwerf-Ordner gelöscht, Git-Repo initialisiert
 
 ## Wichtigste Dateien
-- Einstieg: [[README]]
-- Ergebnisse: [[INDEX|Chat-Exports/INDEX]]
-- Learnings: [[PROJEKT-LEARNINGS]]
-- Struktur: [[PROJEKT-LOOP]] · [[VERKNUEPFUNGEN]]
-- Features: [[Features]] / [[NESTBAU_AKTUELL]]
-- Code: [[CODE-Landkarte]]
 
-**Tipps für nächsten Bot:** Vor Code-Änderung Bereich per grep lokalisieren. Nach jedem Batch `node --check`. Tests nur über UI, nie über App-Closures. Light/Dark-Screenshot-Review vor Publish.
+| Frage | Datei |
+|-------|-------|
+| Einstieg | [[README]] |
+| Loop-Struktur | [[PROJEKT-LOOP]] |
+| Erkenntnisse | [[PROJEKT-LEARNINGS]] |
+| Zugänge | [[PROJEKT-ACCESS]] |
+| Features | [[Features]] / [[NESTBAU_AKTUELL]] (⚠️ veraltet) |
+| Code | [[CODE-Landkarte]] |
+| Testplan | [[Phase-2-Testplan]] |
+| Repo-Merge-Aufgabe | [[repo-merge-nestbau-firebase]] |
+| Auth-Bot-Brief | `docs/auth-bot-token-refresh-brief-2026-09-12.md` |
+
+**Tipps für nächsten Bot:** Vor Code-Änderung Bereich per grep lokalisieren. Nach jedem Batch `node --check`. Tests nur über UI, nie über App-Closures. Light/Dark-Screenshot-Review vor Publish. BUILD-GUIDE.md lesen, bevor man ein Problem als "neu" diagnostiziert.
