@@ -54,6 +54,30 @@ Durchgeführt durch: Gehirn-Admin-Chat (Cowork)
 - `Claude outputs/Nestbau-Session-Backup-2026-09-07/`
 - `PROJEKTE/Nestbau/Backups/nestbau-sicherung-2026-09-04.json`
 
-### Migration-Scripts
+### Migration-Scripts (nach Abschluss geloescht)
 - `vault-migration.ps1` — Phasen 1-9 (teilweise)
 - `vault-migration-continue.ps1` — Phasen 9-12 (Abschluss)
+- `vault-nachbearbeitung.ps1` — Frontmatter + Wikilinks
+
+## 2026-09-12 — STUDIUM-Cleanup + Root-Bereinigung
+
+Durchgefuehrt durch: Gehirn-Admin-Chat (Cowork)
+
+### STUDIUM/
+- 8 leere Untitled-Stubs geloescht (nur onenote-id, kein Inhalt)
+- 2 inhaltslose Stub-Dateien geloescht (Link Liste.md, Dokumente.md)
+- 6 leere Fach-Ordner entfernt (Deutsch, Mathematik, Naturwissenschaften, Paedagogik, Praktikum, Sprache-und-Literatur)
+- STUDIUM-Ausnahme in ordnungs-regeln.md dokumentiert: OneNote-Namen bleiben, kein kebab-case-Zwang
+
+### Root-Bereinigung
+- `2026-09-12.md` geloescht (leer)
+- `Unbenannt.base` geloescht (leere Base-Tabelle)
+- `Unbenannt.canvas` geloescht (leeres Canvas)
+- `desktop.ini` war bereits in .gitignore
+
+### Neue Dateien
+- `PROJEKTE/Nestbau/aufgaben/repo-merge-nestbau-firebase.md` — Auftrag: Nestbau + nestbau-firebase zusammenfuehren
+
+### Aktualisierte Dateien
+- `MEMORY/ordnungs-regeln.md` — STUDIUM-Ausnahme, Frontmatter-Ausnahme dokumentiert
+- `MEMORY/changelog.md` — Dieser Eintrag

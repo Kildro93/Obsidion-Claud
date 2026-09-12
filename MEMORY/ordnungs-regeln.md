@@ -69,17 +69,28 @@ Ablauf: CEO schreibt Aufgabe in README → Worker liest README → Worker arbeit
 
 ## 5. STUDIUM/ Struktur
 
-Nach Semester, dann nach Fach (wie OneNote):
+Wird ausschliesslich durch OneNote-Import gefuettert. **Ausnahme von kebab-case**: OneNote-Ordnernamen bleiben wie importiert (Leerzeichen, Klammern, Umlaute erlaubt), damit Re-Imports nicht brechen.
 
 ```
 STUDIUM/
-├── semester-01/
-│   ├── mathematik/
-│   ├── deutsch/
-│   └── ...
-├── semester-02/
-└── ...
+└── semester-01/
+    └── FHNW Bach/
+        └── Module/
+            ├── Basisseminar _ Grundlagen Studium/
+            │   ├── (BPBS1) Basisseminar/
+            │   └── (GLST1) Grundlagen Studium/
+            └── Grundlagen Modul/
+                ├── (EWBU1) Bildung und Unterricht/
+                └── ...weitere Module
 ```
+
+Regeln fuer STUDIUM:
+- Ordnerstruktur folgt OneNote: Notizbuch → Abschnitt → Seite
+- Modulkuerzel in Klammern vorangestellt (z.B. `(BPBS1)`)
+- Leere Untitled-Stubs (nur `onenote-id`, kein Inhalt) werden bei Aufraeumung geloescht
+- Leere Platzhalter-Ordner ohne Dateien werden entfernt
+- OneNote-Frontmatter (`onenote-id`) bleibt, Pflicht-Frontmatter wird nicht erzwungen
+- Neue Semester als `semester-02/`, `semester-03/` etc.
 
 ## 6. FAZITE/ Struktur
 
@@ -97,7 +108,7 @@ FAZITE/
 
 - Dateinamen: `kebab-case` (kleinbuchstaben, bindestrich)
 - Ordnernamen: `kebab-case` (Ausnahme: Top-Level bleibt GROSSBUCHSTABEN)
-- Keine Leerzeichen, keine Umlaute in Dateinamen
+- Keine Leerzeichen, keine Umlaute in Dateinamen (**Ausnahme: STUDIUM/** — OneNote-Namen bleiben)
 - Fazite: `<thema>-fazit-<YYYY-MM-DD>.md`
 
 ## 8. Sprache
