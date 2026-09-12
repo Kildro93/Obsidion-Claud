@@ -30,8 +30,8 @@ README  ──►  PROJEKT-LOOP ──► PROJEKT-UPDATE ──► PROJEKT-LEARN
 | Datei | verweist auf | Beziehung |
 |-------|--------------|-----------|
 | README.md | alle Kern-Dateien | Einstieg |
-| PROJEKT-LOOP.md | PROJEKT-UPDATE, -LEARNINGS, -ACCESS, NESTBAU_AKTUELL | Loop-Steuerung |
-| Features.md | User-Stories, NESTBAU_AKTUELL, Learnings | Was |
+| PROJEKT-LOOP.md | PROJEKT-UPDATE, -LEARNINGS, -ACCESS | Loop-Steuerung |
+| Features.md | User-Stories, Learnings | Was |
 | User-Stories.md | Features | Warum / Rollen |
 | Tech-Stack.md | CODE-Landkarte, haushalts-app (Branch-Divergenz) | Womit |
 | CODE-Landkarte.md | Nestbau/, nestbau-firebase/, Claude outputs/*, Datenbank-Schema, Snippets | Wo liegt Code |

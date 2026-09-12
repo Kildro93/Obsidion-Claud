@@ -71,6 +71,6 @@ Neue Bots nach gleichem Muster ergänzen: Name, Aufgabe, Input, Output, nächste
 - Design: [[Design-System]] · [[User-Flows]]
 - Code-Landkarte: [[CODE-Landkarte]]
 - Verknüpfungen: [[VERKNUEPFUNGEN]]
-- Feature-Übersicht: [[NESTBAU_AKTUELL]]
+- Feature-Übersicht: [[Features]]
 - Knowledge Base: [[NESTBAU-KNOWLEDGE-INDEX]]
 - Sessions: [[INDEX|Chat-Exports/INDEX]]

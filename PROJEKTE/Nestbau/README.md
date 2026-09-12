@@ -29,7 +29,6 @@ PROJEKTE/Nestbau/
 ├─ PROJEKT-LOOP / -UPDATE / -LEARNINGS / -ACCESS   Loop-Steuerung
 ├─ README.md            Diese Datei
 ├─ VERKNUEPFUNGEN.md    Abhängigkeits-Map
-├─ NESTBAU_AKTUELL.md   Feature-Status im Detail
 ├─ ARTIFACT_LINKS.md    Versions-URLs
 ├─ Learnings.md         Chronologischer Feature-/UI-Entscheidungs-Log
 ├─ REQUIREMENTS/        Features, User-Stories, Tech-Stack

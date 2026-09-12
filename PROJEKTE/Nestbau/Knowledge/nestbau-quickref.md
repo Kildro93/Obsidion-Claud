@@ -8,7 +8,6 @@
 
 ```
 PROJEKTE/Nestbau/
-├── NESTBAU_AKTUELL.md              ← Feature-Übersicht + Status
 ├── PROJEKT-UPDATE / -LOOP / -LEARNINGS / -ACCESS
 ├── Learnings.md                    ← Feature-Changelog
 ├── Knowledge/
@@ -25,7 +24,7 @@ PROJEKTE/Nestbau/
 
 | Frage | Datei | Inhalt |
 |-------|-------|--------|
-| "Was hat Nestbau gerade?" | NESTBAU_AKTUELL.md | Features, bekannte Issues, Roadmap |
+| "Was hat Nestbau gerade?" | PROJEKT-UPDATE.md | Status, Features, Roadmap |
 | "Wie funktioniert v2?" | nestbau-tech.md | Module, Firestore-Flow, Best Practices |
 | "Welche Fehler gab es?" | nestbau-testing.md | Bugs + Fixes, Test-Coverage |
 | "Wer arbeitet daran?" | haushalts-app.md | Produkt-Kontext, Team, Links |
@@ -135,7 +134,7 @@ python -m http.server 8000
 
 ## 🔗 Obsidian Links
 
-- [[NESTBAU_AKTUELL]] – App-Features
+- [[Features]] – App-Features
 - [[haushalts-app]] – Produkt-Kontext
 - [[nestbau-tech]] – Architektur
 - [[nestbau-testing]] – Testing & Bugs

@@ -3,7 +3,7 @@
 ## Struktur-Updates (28.08.2026)
 - MEMORY_INDEX.md neu strukturiert → zentrales Dashboard mit Projekt-Links
 - Profil.md gekürzt → nur Person + Projekt-Überblick, Details in separaten Dateien
-- Neue Datei NESTBAU_AKTUELL.md → App-Features, Status, Bugs auf einen Blick
+- ~~NESTBAU_AKTUELL.md~~ → gelöscht 12.09.2026, Inhalt lebt in [[Features]] + [[PROJEKT-UPDATE]]
 - Neue Datei ARTIFACT_LINKS.md → zentrale Verwaltung aller Versions-URLs
 - Diese Struktur reduziert Redundanzen und verbessert die Navigierbarkeit
 

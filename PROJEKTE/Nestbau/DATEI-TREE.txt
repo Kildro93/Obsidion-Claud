@@ -7,7 +7,6 @@ PROJEKTE/Nestbau/   — Stand 2026-09-06
 ├─ PROJEKT-ACCESS.md         Zugangs-Vorlagen (keine echten Keys)
 ├─ VERKNUEPFUNGEN.md         Abhängigkeits-Map
 ├─ DATEI-TREE.txt            Diese Datei
-├─ NESTBAU_AKTUELL.md        Feature-Status im Detail
 ├─ ARTIFACT_LINKS.md         Versions-URLs
 ├─ Learnings.md              Chronologischer Feature-/UI-Entscheidungs-Log
 │

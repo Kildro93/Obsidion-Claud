@@ -134,6 +134,9 @@ Detailtiefe in den Knowledge-Docs: [[nestbau-tech]], [[nestbau-testing]], [[haus
 - Die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen. Nach einem Kontowechsel sah es deshalb nach erfolgreichem Beitritt aus, obwohl die neue Kennung nie in `memberUids` stand. Wer prüfen will, ob ein Beitritt wirklich stattfand, liest `memberUids` des Haushalts-Dokuments — nicht die Karte.
 - Ein Sync, der von Hand gestartet werden muss, ist kein Sync. Nach jedem Neuladen stand er auf pausiert; wer das übersah, verlor beim nächsten Snapshot seine Änderungen. Seit 10.09.2026 gibt es keinen Schalter mehr.
 
+**2026-09-12 – NESTBAU_AKTUELL.md gelöscht (CEO-Cleanup)**
+- Datei war seit 28.08.2026 nicht aktualisiert, behauptete u.a. "Outlook Kalender: Live" ohne Beleg. Inhalt vollständig abgedeckt durch [[Features]] (Feature-Liste) und [[PROJEKT-UPDATE]] (Status). 12 Verweise in 9 Dateien repariert, dann gelöscht. Regel: eine zentrale Status-Datei reicht – Duplikate veralten garantiert.
+
 **2026-09-12 – Design-System-Fix (Design-Bot)**
 - Ein dupliziertes Inline-`<style>` in `index.html` überschrieb `nestbau-design.css` per Cascade-Reihenfolge – das war der eigentliche Grund, warum die alte Palette trotz „fertigem" Design-System weiter sichtbar war. War in `BUILD-GUIDE.md` § 10 bereits dokumentiert, aber nur mit einem Workaround-Kommentar umschifft statt behoben. Regel: vor jeder Bug-Diagnose `BUILD-GUIDE.md` und `git log <Datei>` prüfen, ob das Problem schon mal jemand gefunden hat.
 - Feature-Branch war beim PR-Erstellen 20+ Commits hinter `main` – und `main` hatte denselben Bug parallel, unvollständig gepatcht (andere Hex-Werte, Duplikat blieb bestehen). Ohne `git diff --name-only <branchpoint> origin/main` vor dem PR wäre der kaputte Parallel-Patch beim Merge wiederhergestellt worden. Regel: bei länger laufenden Branches immer gegen den aktuellen `main`-Stand prüfen, nicht gegen den Stand bei Branch-Erstellung.

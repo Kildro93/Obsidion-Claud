@@ -193,7 +193,7 @@ Gemessen am 2026-09-03 mit `scripts/perf-audit.mjs`:
 ## 📞 Kontakt
 
 - Repo-Issues: https://github.com/Kildro93/Nestbau/issues
-- Obsidian: [[NESTBAU_AKTUELL]]
+- Obsidian: [[Features]]
 
 ---
 

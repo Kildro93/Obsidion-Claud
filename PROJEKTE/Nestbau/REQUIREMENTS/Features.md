@@ -1,6 +1,6 @@
 # Nestbau – Features & Anforderungen
 
-Konsolidiert aus [[NESTBAU_AKTUELL]], [[haushalts-app]], Play-Store-Listing und den Bot-Prompts. Detaillierter Feature-Stand: [[NESTBAU_AKTUELL]]. Chronologie: [[Learnings]].
+Konsolidiert aus [[haushalts-app]], Play-Store-Listing und den Bot-Prompts. Chronologie: [[Learnings]].
 
 ## Produktziel
 
