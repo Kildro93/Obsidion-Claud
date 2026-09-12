@@ -1,0 +1,43 @@
+rules_version = '2';
+
+// Nestbau v2.0 – Storage Rules
+// Profilbilder sind NICHT public (anders als im ersten Entwurf):
+// eine offene Lese-Regel macht jede Bild-URL erratbar/teilbar.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+
+    function isImage() {
+      return request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
+    function underSize(mb) {
+      return request.resource.size < mb * 1024 * 1024;
+    }
+
+    // Profilbilder: nur der Besitzer schreibt, alle angemeldeten User lesen
+    // (Haushalts-Mitglieder muessen das Bild sehen; ein Datei-Listing ist
+    // ueber Storage-Rules ohnehin nicht moeglich).
+    match /profiles/{uid}/{fileName} {
+      allow read:   if signedIn();
+      allow write:  if signedIn() && request.auth.uid == uid
+                    && isImage() && underSize(5);
+      allow delete: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Haushalts-Bilder (Cover): nur Mitglieder – Mitgliedschaft wird beim
+    // Upload ueber eine Cloud Function vorgeprueft, hier reicht Auth + Limit.
+    match /households/{hid}/{fileName} {
+      allow read:  if signedIn();
+      allow write: if signedIn() && isImage() && underSize(5);
+    }
+
+    // Alles andere: dicht.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

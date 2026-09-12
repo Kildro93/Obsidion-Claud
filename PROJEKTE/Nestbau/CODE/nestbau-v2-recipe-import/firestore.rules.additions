@@ -1,0 +1,67 @@
+// Nestbau v2.0 – Firestore-Rules-Ergaenzungen fuer den Rezept-Import.
+//
+// EINFUEGEN in die bestehende firestore.rules:
+//   - die drei match-Bloecke unten INNERHALB von `match /households/{hid} { ... }`
+//   - den clipperTokens-Block auf oberster Ebene (neben /invites und /mail)
+//
+// Nicht als eigene Datei deployen: Rules werden vereinigt (OR), eine zweite
+// Datei gibt es nicht – firebase.json zeigt auf genau eine firestore.rules.
+
+// ============================================================
+// INNERHALB von: match /households/{hid} { ... }
+// ============================================================
+
+    // ---------- recipeImports ----------
+    // Der Posteingang fuer geclippte Rezepte. Geschrieben wird ausschliesslich
+    // serverseitig (HTTP-Endpunkt + Trigger + commit/delete-Callables). Der
+    // Client liest nur – wuerde er `parsed` selbst schreiben duerfen, koennte
+    // er die Allergie-Warnungen und Naehrwerte manipulieren, die genau dort
+    // vom Server hinterlegt wurden.
+    match /recipeImports/{importId} {
+      allow get:  if isMember(hid);
+      allow list: if isMember(hid) && request.query.limit <= 50;
+      allow write: if false;
+    }
+
+    // ---------- ingredients ----------
+    // Zutaten-Datenbank des Haushalts. Mitglieder duerfen pflegen; der Import
+    // legt fehlende Zutaten ueber das Admin SDK an (umgeht diese Regeln).
+    match /ingredients/{ingredientId} {
+      allow read: if isMember(hid);
+      allow create, update: if isMember(hid) && validIngredient();
+      allow delete: if isMember(hid);
+
+      function validIngredient() {
+        let d = request.resource.data;
+        return isString(d.name, 80)
+               && (!('categories' in d) || (d.categories is list && d.categories.size() <= 5))
+               && (!('allergens' in d)  || (d.allergens is list  && d.allergens.size() <= 10))
+               && (!('nutrition' in d)  || (d.nutrition.basisG is number
+                                            && d.nutrition.basisG > 0
+                                            && d.nutrition.basisG <= 10000));
+      }
+    }
+
+    // ---------- recipes ----------
+    // Rezepte sind im Haushalt geteilt (bewusst nicht personenspezifisch –
+    // vgl. Entscheidung "Fuer wen"-Feld entfernt).
+    match /recipes/{recipeId} {
+      allow read: if isMember(hid);
+      allow create, update: if isMember(hid)
+                            && isString(request.resource.data.title, 120)
+                            && (!('ingredients' in request.resource.data)
+                                || request.resource.data.ingredients.size() <= 60);
+      allow delete: if isMember(hid);
+    }
+
+// ============================================================
+// AUF OBERSTER EBENE (neben /invites und /mail)
+// ============================================================
+
+    // ---------- clipperTokens ----------
+    // Enthaelt die SHA-256-Hashes der Geraete-Tokens. Kein Client-Zugriff:
+    // Anlegen, Auflisten und Trennen laufen ueber Callables, damit das
+    // Klartext-Token die Function nie verlaesst ausser einmal beim Erzeugen.
+    match /clipperTokens/{tokenId} {
+      allow read, write: if false;
+    }

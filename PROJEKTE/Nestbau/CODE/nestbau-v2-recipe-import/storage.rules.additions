@@ -1,0 +1,25 @@
+// Nestbau v2.0 – Storage-Rules-Ergaenzungen fuer den Rezept-Import.
+//
+// EINFUEGEN in die bestehende storage.rules, VOR dem abschliessenden
+// `match /{allPaths=**} { allow read, write: if false; }`.
+//
+// Hinweis zur Reichweite: Storage-Rules koennen die Haushalts-Mitgliedschaft
+// nicht guenstig pruefen (kein get() auf Firestore). Wie schon bei
+// /households/{hid}/... gilt deshalb "angemeldet + verifiziert" als Schranke.
+// Die Pfade enthalten zufaellige Firestore-IDs und sind nicht auflistbar –
+// wer die ID nicht kennt, kommt nicht an die Datei.
+
+    // Importierte Rohfotos. Nur der Server schreibt (Admin SDK umgeht Rules),
+    // damit keine Fremd-Uploads im Import-Posteingang landen.
+    match /households/{hid}/recipeImports/{importId}/{fileName} {
+      allow read:  if signedIn();
+      allow write: if false;
+    }
+
+    // Rezept-Fotos. Schreiben erlaubt, damit der Nutzer im Editor ein eigenes
+    // Foto ersetzen kann; der Import kopiert seinerseits per Admin SDK hierher.
+    match /households/{hid}/recipes/{recipeId}/{fileName} {
+      allow read:   if signedIn();
+      allow write:  if signedIn() && isImage() && underSize(8);
+      allow delete: if signedIn();
+    }

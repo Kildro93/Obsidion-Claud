@@ -1,0 +1,156 @@
+rules_version = '2';
+
+// Nestbau v2.0 – Firestore Security Rules
+// Grundsatz: Deny by default. KEINE `match /{document=**}` Catch-all-Regel,
+// denn Rules werden VEREINIGT (OR), nicht überschrieben – eine offene
+// Catch-all-Regel würde jede spezifischere Regel aushebeln.
+//
+// Schreibende Mitgliedschafts-Operationen laufen ausschliesslich über
+// Cloud Functions (Admin SDK umgeht Rules). Der Client darf Mitglieder
+// weder hinzufügen noch entfernen.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helper ----------
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function verified() {
+      return signedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function household(hid) {
+      return get(/databases/$(database)/documents/households/$(hid)).data;
+    }
+
+    function isMember(hid) {
+      return verified() && request.auth.uid in household(hid).members;
+    }
+
+    function isAdmin(hid) {
+      return verified() && household(hid).members[request.auth.uid].role == 'admin';
+    }
+
+    // Nur die aufgezählten Felder wurden verändert
+    function onlyChanged(allowed) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed);
+    }
+
+    function isString(v, maxLen) {
+      return v is string && v.size() > 0 && v.size() <= maxLen;
+    }
+
+    // ---------- users ----------
+    // Kontostamm. Wird von der Cloud Function `onUserCreated` angelegt.
+    // Der Client darf nur unkritische Felder pflegen – NICHT householdIds
+    // oder status (sonst könnte man sich selbst in Haushalte schreiben).
+    match /users/{uid} {
+      allow get: if isSelf(uid);
+      allow list: if false;
+
+      allow create: if isSelf(uid)
+                    && request.resource.data.email == request.auth.token.email
+                    && request.resource.data.householdIds.size() == 0
+                    && request.resource.data.status == 'pending_profile';
+
+      allow update: if isSelf(uid)
+                    && onlyChanged(['displayName', 'activeHouseholdId', 'lastLoginAt',
+                                    'locale', 'pushEnabled', 'updatedAt'])
+                    // activeHouseholdId muss ein Haushalt sein, in dem man Mitglied ist
+                    && (!('activeHouseholdId' in request.resource.data.diff(resource.data).affectedKeys())
+                        || request.resource.data.activeHouseholdId == null
+                        || request.resource.data.activeHouseholdId in resource.data.householdIds);
+
+      allow delete: if false;   // Kontolöschung läuft über Auth + Cloud Function
+    }
+
+    // ---------- profiles ----------
+    // PRIVAT. Allergien, Gewicht, Grösse verlassen dieses Dokument nur,
+    // wenn der User `shareAllergiesWithHousehold` aktiviert – dann kopiert
+    // eine Cloud Function ausschliesslich die Allergien in die Member-Card.
+    match /profiles/{uid} {
+      allow get: if isSelf(uid);
+      allow list: if false;
+
+      allow create, update: if isSelf(uid) && validProfile();
+
+      allow delete: if false;
+
+      function validProfile() {
+        let d = request.resource.data;
+        return isString(d.displayName, 40)
+               && d.color is string
+               && d.color.matches('^#[0-9a-fA-F]{6}$')
+               && (!('age' in d)          || d.age == null       || (d.age is int && d.age >= 13 && d.age <= 120))
+               && (!('heightCm' in d)     || d.heightCm == null  || (d.heightCm is number && d.heightCm >= 80  && d.heightCm <= 250))
+               && (!('weightKg' in d)     || d.weightKg == null  || (d.weightKg is number && d.weightKg >= 25  && d.weightKg <= 400))
+               && (!('fitnessLevel' in d) || d.fitnessLevel in ['low', 'medium', 'high', 'athlete'])
+               && (!('allergies' in d)    || (d.allergies is list && d.allergies.size() <= 30))
+               && (!('dietary' in d)      || (d.dietary is list && d.dietary.size() <= 10))
+               && (!('shareAllergiesWithHousehold' in d) || d.shareAllergiesWithHousehold is bool);
+      }
+    }
+
+    // ---------- households ----------
+    match /households/{hid} {
+      // Mitglieder lesen den Haushalt
+      allow get: if signedIn() && request.auth.uid in resource.data.members;
+      allow list: if signedIn()
+                  && request.query.limit <= 20
+                  && resource.data.memberUids.hasAny([request.auth.uid]);
+
+      // Erstellen darf jeder verifizierte User – aber nur mit sich selbst
+      // als einzigem Mitglied und als Admin.
+      allow create: if verified()
+                    && request.resource.data.adminUid == request.auth.uid
+                    && request.resource.data.members.keys().hasOnly([request.auth.uid])
+                    && request.resource.data.members[request.auth.uid].role == 'admin'
+                    && request.resource.data.memberUids == [request.auth.uid]
+                    && isString(request.resource.data.name, 60)
+                    && request.resource.data.createdAt == request.time;
+
+      // Admin darf Stammdaten ändern – Mitgliedschaft NICHT.
+      allow update: if isAdmin(hid)
+                    && onlyChanged(['name', 'description', 'color', 'updatedAt'])
+                    && isString(request.resource.data.name, 60);
+
+      // Löschen nur über Cloud Function (Cascade-Cleanup nötig)
+      allow delete: if false;
+
+      // Geteilte Member-Card: was Mitglieder voneinander sehen dürfen.
+      // Schreiben ausschliesslich per Cloud Function.
+      match /members/{memberUid} {
+        allow read: if signedIn() && request.auth.uid in household(hid).members;
+        allow write: if false;
+      }
+    }
+
+    // ---------- invites ----------
+    // Einladungen sind Server-Territorium. Der Client liest nur seine
+    // eigenen (per Email-Adresse) und schreibt nie.
+    match /invites/{inviteId} {
+      allow get: if signedIn()
+                 && (resource.data.email == request.auth.token.email
+                     || resource.data.invitedByUid == request.auth.uid);
+      // Auch beim Query wird pro Dokument geprueft: man sieht nur
+      // Einladungen an die eigene Email oder selbst verschickte.
+      allow list: if signedIn()
+                  && request.query.limit <= 20
+                  && (resource.data.email == request.auth.token.email
+                      || resource.data.invitedByUid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // ---------- mail ----------
+    // Ausgangs-Queue der "Trigger Email"-Extension. Nie vom Client lesbar.
+    match /mail/{docId} {
+      allow read, write: if false;
+    }
+  }
+}

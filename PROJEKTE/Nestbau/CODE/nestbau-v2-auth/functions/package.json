@@ -1,0 +1,21 @@
+{
+  "name": "nestbau-functions",
+  "description": "Cloud Functions fuer Nestbau v2.0 – Auth, Profile, Haushalte",
+  "main": "index.js",
+  "private": true,
+  "engines": { "node": "20" },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions,firestore,auth",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "lint": "node --check index.js && node --check lib/mail.js && node --check lib/households.js && node --check lib/users.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.1.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.3.0"
+  }
+}

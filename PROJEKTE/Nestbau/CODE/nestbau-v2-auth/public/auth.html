@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1c7d70">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Nestbau – Anmelden</title>
+<link rel="stylesheet" href="./css/nestbau.css">
+</head>
+<body>
+
+<div class="nb-shell">
+  <div class="nb-brand">
+    <div class="nb-brand__mark" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5 12 3l9 7.5"></path>
+        <path d="M5 9.8V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.8"></path>
+        <path d="M9.5 21v-5.5a2.5 2.5 0 0 1 5 0V21"></path>
+      </svg>
+    </div>
+    <div class="nb-brand__name">Nestbau</div>
+  </div>
+
+  <main class="nb-card">
+
+    <!-- ================= Laden ================= -->
+    <section id="screen-loading" class="nb-screen is-active" aria-busy="true">
+      <h1 class="nb-title">Einen Moment</h1>
+      <p class="nb-sub">Dein Konto wird geladen …</p>
+    </section>
+
+    <!-- ================= Login ================= -->
+    <section id="screen-login" class="nb-screen">
+      <h1 class="nb-title">Willkommen zurueck</h1>
+      <p class="nb-sub">Melde dich an, um Aufgaben, Kalender und Menueplan zu sehen.</p>
+
+      <form id="form-login" novalidate>
+        <div class="nb-field">
+          <label class="nb-label" for="login-email">Email</label>
+          <input class="nb-input" id="login-email" name="email" type="email"
+                 autocomplete="email" inputmode="email" required data-autofocus>
+          <div class="nb-error" id="login-email-error" role="alert"></div>
+        </div>
+
+        <div class="nb-field">
+          <label class="nb-label" for="login-password">Passwort</label>
+          <div class="nb-input-group">
+            <input class="nb-input" id="login-password" name="password" type="password"
+                   autocomplete="current-password" required>
+            <button type="button" class="nb-reveal" data-reveal="login-password"
+                    aria-label="Passwort anzeigen">Zeigen</button>
+          </div>
+          <div class="nb-error" id="login-password-error" role="alert"></div>
+        </div>
+
+        <label class="nb-toggle" style="margin-bottom:4px">
+          <input type="checkbox" id="login-remember" checked>
+          <span class="nb-toggle__text">
+            <strong>Angemeldet bleiben</strong>
+            <span>Auf einem geteilten Geraet besser ausschalten.</span>
+          </span>
+        </label>
+
+        <div class="nb-actions">
+          <button class="nb-btn nb-btn--primary" id="btn-login" type="submit">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Anmelden</span>
+          </button>
+          <button class="nb-btn nb-btn--ghost" type="button" data-goto="screen-reset">
+            <span class="nb-btn__label">Passwort vergessen?</span>
+          </button>
+        </div>
+      </form>
+
+      <p class="nb-switch">
+        Noch kein Konto?
+        <button class="nb-link" type="button" data-goto="screen-register">Registrieren</button>
+      </p>
+    </section>
+
+    <!-- ================= Registrierung ================= -->
+    <section id="screen-register" class="nb-screen">
+      <h1 class="nb-title">Konto erstellen</h1>
+      <p class="nb-sub">Eine Email, ein Passwort – der Rest kommt gleich danach.</p>
+
+      <form id="form-register" novalidate>
+        <div class="nb-field">
+          <label class="nb-label" for="reg-email">Email</label>
+          <input class="nb-input" id="reg-email" name="email" type="email"
+                 autocomplete="email" inputmode="email" required data-autofocus>
+          <div class="nb-error" id="reg-email-error" role="alert"></div>
+        </div>
+
+        <div class="nb-field">
+          <label class="nb-label" for="reg-password">Passwort</label>
+          <div class="nb-input-group">
+            <input class="nb-input" id="reg-password" name="password" type="password"
+                   autocomplete="new-password" required aria-describedby="reg-strength-text">
+            <button type="button" class="nb-reveal" data-reveal="reg-password"
+                    aria-label="Passwort anzeigen">Zeigen</button>
+          </div>
+          <div class="nb-strength">
+            <div class="nb-strength__bar"><div class="nb-strength__fill" id="reg-strength-fill"></div></div>
+            <span class="nb-strength__text" id="reg-strength-text" aria-live="polite">
+              Mindestens 10 Zeichen. Mehrere Woerter sind sicherer als Sonderzeichen.
+            </span>
+          </div>
+          <div class="nb-error" id="reg-password-error" role="alert"></div>
+        </div>
+
+        <div class="nb-field">
+          <label class="nb-label" for="reg-password2">Passwort wiederholen</label>
+          <input class="nb-input" id="reg-password2" name="password2" type="password"
+                 autocomplete="new-password" required>
+          <div class="nb-error" id="reg-password2-error" role="alert"></div>
+        </div>
+
+        <div class="nb-actions">
+          <button class="nb-btn nb-btn--primary" id="btn-register" type="submit">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Konto erstellen</span>
+          </button>
+        </div>
+      </form>
+
+      <p class="nb-switch">
+        Schon dabei?
+        <button class="nb-link" type="button" data-goto="screen-login">Anmelden</button>
+      </p>
+    </section>
+
+    <!-- ================= Passwort zuruecksetzen ================= -->
+    <section id="screen-reset" class="nb-screen">
+      <h1 class="nb-title">Passwort zuruecksetzen</h1>
+      <p class="nb-sub">Wir schicken dir einen Link, mit dem du ein neues Passwort setzen kannst.</p>
+
+      <form id="form-reset" novalidate>
+        <div class="nb-field">
+          <label class="nb-label" for="reset-email">Email</label>
+          <input class="nb-input" id="reset-email" type="email"
+                 autocomplete="email" inputmode="email" required data-autofocus>
+          <div class="nb-error" id="reset-email-error" role="alert"></div>
+        </div>
+        <div class="nb-actions">
+          <button class="nb-btn nb-btn--primary" id="btn-reset" type="submit">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Link senden</span>
+          </button>
+          <button class="nb-btn nb-btn--ghost" type="button" data-goto="screen-login">
+            <span class="nb-btn__label">Zurueck zur Anmeldung</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================= Email bestaetigen ================= -->
+    <section id="screen-verify" class="nb-screen">
+      <h1 class="nb-title">Bestaetige deine Email</h1>
+      <p class="nb-sub">
+        Wir haben einen Link an <strong id="verify-email">deine Adresse</strong> geschickt.
+        Klick ihn an und komm dann hierher zurueck.
+      </p>
+
+      <div class="nb-note nb-note--warn">
+        Nichts angekommen? Schau im Spam-Ordner nach. Der Link ist 24 Stunden gueltig.
+      </div>
+
+      <div class="nb-actions">
+        <button class="nb-btn nb-btn--primary" id="btn-verify-check" type="button">
+          <span class="nb-btn__spinner" aria-hidden="true"></span>
+          <span class="nb-btn__label">Ich habe bestaetigt</span>
+        </button>
+        <button class="nb-btn nb-btn--secondary" id="btn-verify-resend" type="button">
+          <span class="nb-btn__spinner" aria-hidden="true"></span>
+          <span class="nb-btn__label">Email erneut senden</span>
+        </button>
+        <button class="nb-btn nb-btn--ghost" data-action="logout" type="button">
+          <span class="nb-btn__label">Andere Adresse verwenden</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= Profil-Wizard ================= -->
+    <section id="screen-profile" class="nb-screen">
+      <div class="nb-steps" id="profile-steps"></div>
+
+      <!-- Schritt 1: Basis -->
+      <div class="nb-wizard-step" data-step="0">
+        <h1 class="nb-title">Wer bist du?</h1>
+        <p class="nb-sub">Name und Farbe erscheinen bei Aufgaben, Terminen und im Menueplan.</p>
+
+        <div class="nb-avatar-row">
+          <div class="nb-avatar" id="profile-avatar" aria-hidden="true">?</div>
+          <div>
+            <button class="nb-btn nb-btn--secondary nb-btn--sm" type="button" id="btn-avatar">
+              <span class="nb-btn__spinner" aria-hidden="true"></span>
+              <span class="nb-btn__label">Foto waehlen</span>
+            </button>
+            <div class="nb-hint">JPG, PNG oder WebP. Wird auf 512 px verkleinert.</div>
+          </div>
+          <input type="file" id="input-avatar" accept="image/jpeg,image/png,image/webp" class="nb-sr">
+        </div>
+
+        <div class="nb-field">
+          <label class="nb-label" for="profile-name">Anzeigename</label>
+          <input class="nb-input" id="profile-name" type="text" maxlength="40"
+                 autocomplete="nickname" required data-autofocus>
+          <div class="nb-error" id="profile-name-error" role="alert"></div>
+        </div>
+
+        <div class="nb-field">
+          <span class="nb-label">Deine Farbe</span>
+          <div class="nb-colors" id="profile-colors" role="group" aria-label="Profilfarbe"></div>
+        </div>
+
+        <div class="nb-actions">
+          <button class="nb-btn nb-btn--primary" type="button" data-wizard="next">
+            <span class="nb-btn__label">Weiter</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Schritt 2: Koerperdaten -->
+      <div class="nb-wizard-step" data-step="1" hidden>
+        <h1 class="nb-title">Koerperdaten</h1>
+        <p class="nb-sub">
+          Damit berechnet Nestbau deinen Kalorienbedarf im Menueplan.
+          Alles freiwillig – du kannst es spaeter nachtragen.
+        </p>
+
+        <div class="nb-row">
+          <div class="nb-field">
+            <label class="nb-label" for="profile-age">Alter</label>
+            <input class="nb-input" id="profile-age" type="number" inputmode="numeric"
+                   min="13" max="120" placeholder="28">
+            <div class="nb-error" id="profile-age-error" role="alert"></div>
+          </div>
+          <div class="nb-field">
+            <label class="nb-label" for="profile-height">Groesse</label>
+            <input class="nb-input" id="profile-height" type="number" inputmode="decimal"
+                   min="80" max="250" placeholder="cm">
+            <div class="nb-error" id="profile-height-error" role="alert"></div>
+          </div>
+          <div class="nb-field">
+            <label class="nb-label" for="profile-weight">Gewicht</label>
+            <input class="nb-input" id="profile-weight" type="number" inputmode="decimal"
+                   min="25" max="400" step="0.1" placeholder="kg">
+            <div class="nb-error" id="profile-weight-error" role="alert"></div>
+          </div>
+        </div>
+
+        <div class="nb-field">
+          <span class="nb-label">Fitnesslevel</span>
+          <div class="nb-segment" id="profile-fitness" role="group" aria-label="Fitnesslevel"></div>
+        </div>
+
+        <div class="nb-actions nb-actions--row">
+          <button class="nb-btn nb-btn--secondary" type="button" data-wizard="back">
+            <span class="nb-btn__label">Zurueck</span>
+          </button>
+          <button class="nb-btn nb-btn--primary" type="button" data-wizard="next">
+            <span class="nb-btn__label">Weiter</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Schritt 3: Ernaehrung -->
+      <div class="nb-wizard-step" data-step="2" hidden>
+        <h1 class="nb-title">Allergien &amp; Ernaehrung</h1>
+        <p class="nb-sub">Rezepte mit diesen Zutaten werden im Kochbuch markiert.</p>
+
+        <div class="nb-field">
+          <span class="nb-label">Allergien &amp; Unvertraeglichkeiten</span>
+          <div class="nb-chips" id="profile-allergies"></div>
+        </div>
+
+        <div class="nb-field">
+          <span class="nb-label">Ernaehrungsform</span>
+          <div class="nb-chips" id="profile-dietary"></div>
+        </div>
+
+        <div class="nb-field">
+          <label class="nb-toggle">
+            <input type="checkbox" id="profile-share-allergies">
+            <span class="nb-toggle__text">
+              <strong>Allergien im Haushalt teilen</strong>
+              <span>Mitglieder sehen dann deine Allergien beim Kochen.
+                    Alter, Groesse und Gewicht bleiben immer privat.</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="nb-actions nb-actions--row">
+          <button class="nb-btn nb-btn--secondary" type="button" data-wizard="back">
+            <span class="nb-btn__label">Zurueck</span>
+          </button>
+          <button class="nb-btn nb-btn--primary" id="btn-profile-save" type="button">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Profil speichern</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Haushalt: Auswahl ================= -->
+    <section id="screen-household" class="nb-screen">
+      <h1 class="nb-title">Dein Haushalt</h1>
+      <p class="nb-sub">Ein Haushalt teilt Aufgaben, Kalender, Finanzen und Menueplan.</p>
+
+      <div id="pending-invites-block" hidden>
+        <div class="nb-note">Du hast offene Einladungen.</div>
+        <ul class="nb-list" id="pending-invites"></ul>
+      </div>
+
+      <div class="nb-actions">
+        <button class="nb-btn nb-btn--primary" type="button" data-goto="screen-household-create">
+          <span class="nb-btn__label">Haushalt erstellen</span>
+        </button>
+        <button class="nb-btn nb-btn--ghost" type="button" data-action="skip-household">
+          <span class="nb-btn__label">Spaeter einrichten</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= Haushalt: erstellen ================= -->
+    <section id="screen-household-create" class="nb-screen">
+      <h1 class="nb-title">Haushalt erstellen</h1>
+      <p class="nb-sub">Du wirst automatisch Administrator und kannst danach einladen.</p>
+
+      <form id="form-household" novalidate>
+        <div class="nb-field">
+          <label class="nb-label" for="household-name">Name</label>
+          <input class="nb-input" id="household-name" type="text" maxlength="60"
+                 placeholder="Haushalt Zuerich" required data-autofocus>
+          <div class="nb-error" id="household-name-error" role="alert"></div>
+        </div>
+        <div class="nb-field">
+          <label class="nb-label" for="household-description">Beschreibung <span class="nb-text-3">(optional)</span></label>
+          <textarea class="nb-textarea" id="household-description" maxlength="240"
+                    placeholder="Zusammenleben, Wocheneinkauf, Menueplan"></textarea>
+        </div>
+        <div class="nb-actions nb-actions--row">
+          <button class="nb-btn nb-btn--secondary" type="button" data-goto="screen-household">
+            <span class="nb-btn__label">Zurueck</span>
+          </button>
+          <button class="nb-btn nb-btn--primary" id="btn-household" type="submit">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Erstellen</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================= Mitglieder einladen ================= -->
+    <section id="screen-invite" class="nb-screen">
+      <h1 class="nb-title">Mitglieder einladen</h1>
+      <p class="nb-sub">
+        Wer eingeladen wird, bekommt eine Email mit Beitritts-Link.
+        <span id="invite-household-name"></span>
+      </p>
+
+      <ul class="nb-list" id="member-list"></ul>
+
+      <form id="form-invite" novalidate>
+        <div class="nb-field">
+          <label class="nb-label" for="invite-email">Email der Person</label>
+          <input class="nb-input" id="invite-email" type="email"
+                 inputmode="email" autocomplete="off" placeholder="partnerin@example.com">
+          <div class="nb-error" id="invite-email-error" role="alert"></div>
+        </div>
+        <div class="nb-field">
+          <label class="nb-label" for="invite-role">Rolle</label>
+          <select class="nb-select" id="invite-role">
+            <option value="member">Mitglied – nutzt alles gemeinsam</option>
+            <option value="admin">Administrator – darf einladen und verwalten</option>
+          </select>
+        </div>
+        <div class="nb-actions">
+          <button class="nb-btn nb-btn--primary" id="btn-invite" type="submit">
+            <span class="nb-btn__spinner" aria-hidden="true"></span>
+            <span class="nb-btn__label">Einladung senden</span>
+          </button>
+          <button class="nb-btn nb-btn--ghost" type="button" data-action="finish">
+            <span class="nb-btn__label">Fertig</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================= Fertig ================= -->
+    <section id="screen-done" class="nb-screen">
+      <h1 class="nb-title">Alles bereit</h1>
+      <p class="nb-sub" id="done-text">Dein Nestbau ist eingerichtet.</p>
+      <div class="nb-actions">
+        <button class="nb-btn nb-btn--primary" type="button" data-action="enter-app">
+          <span class="nb-btn__label">Zur App</span>
+        </button>
+        <button class="nb-btn nb-btn--ghost" data-action="logout" type="button">
+          <span class="nb-btn__label">Abmelden</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script type="module" src="./js/auth-app.js"></script>
+</body>
+</html>

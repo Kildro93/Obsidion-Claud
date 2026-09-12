@@ -1,0 +1,10 @@
+{
+  "_hinweis": "Diese Eintraege in die bestehende functions/package.json mergen, nicht ersetzen.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0"
+  },
+  "scripts": {
+    "lint": "node --check index.js && node --check lib/mail.js && node --check lib/households.js && node --check lib/users.js && node --check lib/recipeImport.js && node --check lib/recipeParser.js && node --check lib/recipeNutrition.js && node --check lib/recipeUnits.js && node --check lib/recipeImage.js && node --check lib/clipperTokens.js",
+    "test:parser": "node test/parser.test.js"
+  }
+}
