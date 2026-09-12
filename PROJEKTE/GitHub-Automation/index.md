@@ -8,7 +8,7 @@
 
 | Projekt | Status | Repo-Name | Beschreibung | Tech-Stack |
 |---------|--------|-----------|-------------|-----------|
-| [Nestbau](Projekte/nestbau.md) | active | Nestbau | PWA für gemeinsames Haushalt-Management | Vanilla JS, Firebase, PWA |
+| [[../Nestbau/README|Nestbau]] | active | Nestbau | PWA für gemeinsames Haushalt-Management | Vanilla JS, Firebase, PWA |
 
 ---
 
