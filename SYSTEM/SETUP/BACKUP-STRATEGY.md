@@ -14,6 +14,7 @@ powershell -ExecutionPolicy Bypass -File .\install-backup-task.ps1
 ```
 
 - Laeuft sonntags 02:00, holt nach wenn der PC aus war
+- Start ueber `wscript.exe` + `weekly-backup-silent.vbs` (kein sichtbares Fenster, siehe [[AUTO-SYNC]])
 - Ziel: `backups/vault-backup-JJJJ-MM-TT.zip` (git-ignoriert)
 - Haelt die letzten 8 ZIPs, loescht aeltere automatisch
 - Ausgeschlossen **auf jeder Ebene** (nicht nur im Vault-Root): `node_modules`, `.git`, `build`, `dist`, `.gradle`, `www`, `backups`, `logs` sowie `.apk`, `.aab`, `.log`

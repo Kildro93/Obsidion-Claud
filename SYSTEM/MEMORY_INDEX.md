@@ -43,6 +43,7 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[Regeln]] und [[Profil]] lese
 - Alltags-Routinen: ROUTINEN/
 - Vault-Cleanup & Integration: [[2026-09-06-Vault-Cleanup-Integration]]
 - Vault-Analyse vom 12.09. abgearbeitet (alle 6 Befunde behoben): [[Vault-Analyse-Fazit-2026-09-12]]
+- Nestbau 5-Task-Koordination (Stand 12.09.2026): [[CEO-Nestbau-5-Task-Koordination-Tasks-2026-09-12]] · Fazit: [[CEO-Nestbau-5-Task-Koordination-Fazit-2026-09-12]]
 
 ---
 *Zuletzt aktualisiert: 2026-09-12 – Design-System-Fix abgeschlossen (PR #1 gemergt), Vault-Analyse-Befunde behoben*

@@ -24,6 +24,10 @@ Start-ScheduledTask -TaskName "Obsidian Vault Auto-Sync"
 Get-Content "C:\KI Programme\Obsidion für Claud\scripts\logs\vault-sync.log" -Tail 10
 ```
 
+## Kein sichtbares Fenster
+
+Die Aufgabe startet `wscript.exe` mit dem Wrapper `vault-sync-silent.vbs`, der `vault-sync.ps1` unsichtbar aufruft. Nicht `powershell.exe -WindowStyle Hidden` direkt — das blitzt beim Taskplaner-Start kurz als Konsolenfenster auf, `WScript.Shell.Run(...,0,...)` im VBS unterdrückt es zuverlässig.
+
 ## Was das Script tut
 
 1. Prueft, ob es Aenderungen gibt (`git status --porcelain`)
