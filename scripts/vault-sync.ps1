@@ -1,7 +1,7 @@
-﻿# OneNote to GitHub Sync Script
-param([string]$LogPath = "C:\KI Programme\Obsidion fÃ¼r Claud\scripts\logs\vault-sync.log")
+# OneNote to GitHub Sync Script
+param([string]$LogPath = "C:\KI Programme\Obsidion für Claud\scripts\logs\vault-sync.log")
 
-$VaultPath = "C:\KI Programme\Obsidion fÃ¼r Claud"
+$VaultPath = "C:\KI Programme\Obsidion für Claud"
 
 function Log {
     param([string]$Message, [string]$Level = "INFO")
@@ -22,25 +22,25 @@ try {
     $GitStatus = git status --porcelain
     
     if ([string]::IsNullOrWhiteSpace($GitStatus)) {
-        Log "âœ… No changes detected" "INFO"
+        Log "✅ No changes detected" "INFO"
     } else {
-        Log "ðŸ“ Changes detected:" "INFO"
+        Log "📝 Changes detected:" "INFO"
         $GitStatus | ForEach-Object { Log "  $_" }
 
-        git add STUDIUM/
-        Log "âœ… Files staged" "INFO"
+        git add PROJEKTE/Primarlehrer-Studium/Studienmaterial/
+        Log "✅ Files staged" "INFO"
 
         $CommitMsg = "Auto-Sync OneNote: $(Get-Date -Format 'dd.MM.yyyy HH:mm') [$(Get-Date -Format 'dddd')]"
         git commit -m $CommitMsg
-        Log "âœ… Committed" "INFO"
+        Log "✅ Committed" "INFO"
 
         git push origin main
-        Log "âœ… Pushed to GitHub" "INFO"
+        Log "✅ Pushed to GitHub" "INFO"
     }
 
     Log "=== Sync completed ===" "COMPLETE"
 }
 catch {
-    Log "âŒ Error: $($_.Exception.Message)" "ERROR"
+    Log "❌ Error: $($_.Exception.Message)" "ERROR"
     exit 1
 }
