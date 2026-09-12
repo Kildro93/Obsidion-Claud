@@ -6,8 +6,8 @@ aktualisiert: 2026-09-12
 # Fazit: CEO Nestbau 5-Task-Koordination – 2026-09-12
 
 ## Abgeschlossen
-- Task 1 (VBS-Umstellung): `install-autosync-task.ps1` + `install-backup-task.ps1` starten jetzt `wscript.exe //B "<...-silent.vbs>"` statt `powershell.exe -WindowStyle Hidden` — Code fertig, Live-Test steht aus (kein Windows in dieser Umgebung)
-- Task 2 (Weekly-Backup-Test): `weekly-backup.ps1`-Logik statisch geprüft, keine Bugs gefunden; echter erster Lauf über den neuen VBS-Pfad noch offen
+- Task 1 (VBS-Umstellung): `install-autosync-task.ps1` + `install-backup-task.ps1` starten jetzt `wscript.exe //B "<...-silent.vbs>"` statt `powershell.exe -WindowStyle Hidden` — auf Indras PC registriert und verifiziert (`Actions` zeigt `wscript.exe`)
+- Task 2 (Weekly-Backup-Test): live getestet, `vault-backup-2026-09-12.zip` mit 3.468.803 Bytes erzeugt — funktioniert
 - Task 3 (Pfade vereinheitlichen): Vault durchsucht, 0 Treffer für „Obsidian für Claude" — bereits durchgängig `Obsidion für Claud`, nichts zu ändern
 - Task 4 (GitHub PAT): Anleitung in [[SETUP-GITHUB-TOKEN]] geprüft und bestätigt, Kurzfassung an Indra gegeben — Tokenerzeugung ist manuelle User-Aktion
 - Task 5 (Loop-Vorbereitung): Vault-Struktur intakt, nächster Bot-Auftrag (Auth-Bot: Kalender-Token-Refresh) in [[PROJEKT-UPDATE]] hinterlegt, Fazit-Template getestet (dieses Dokument)
@@ -15,8 +15,8 @@ aktualisiert: 2026-09-12
 ## Zahlen
 - Dateien geändert: 6 (`install-autosync-task.ps1`, `install-backup-task.ps1`, `PROJEKT-UPDATE.md`, `MEMORY_INDEX.md`, `AUTO-SYNC.md`, `BACKUP-STRATEGY.md`)
 - Dateien erstellt: 2 (Task-Ergebnisse + dieses Fazit)
-- Commits: siehe Git-Log nach Push (diese Session committet direkt)
-- Tests bestanden: 0/2 live (Windows-Ausführung nicht möglich in dieser Sandbox), Code-Review bestanden für beide geänderten Scripts
+- Commits: `a74f3d4`, `1590342` auf `claude/nestbau-5-task-koordination-tsj44x`
+- Tests bestanden: 2/2 live auf Windows (Auto-Sync-Aktion korrekt, Weekly-Backup erzeugt korrektes ZIP)
 
 ## Wichtigste Erkenntnisse
 1. Die VBS-Wrapper existierten schon lange, waren aber nie an die Install-Scripts angeschlossen — die eigentliche Fenster-Unterdrückung lief nie über sie. Immer prüfen, ob vorhandene Bausteine tatsächlich verdrahtet sind, nicht nur ob die Datei existiert.
@@ -25,11 +25,9 @@ aktualisiert: 2026-09-12
 4. Die `.vbs`-Dateien sind absichtlich ANSI/Windows-1252-kodiert, nicht UTF-8 — beim Betrachten in UTF-8-Tools sieht `für` kaputt aus (`f?r`), ist es aber nicht. Nicht versehentlich „reparieren".
 
 ## Nächste Schritte
-1. Indra: `git pull` im Vault-Ordner, dann `install-autosync-task.ps1` und `install-backup-task.ps1` neu ausführen (überschreibt die bestehenden Scheduled Tasks) — siehe PowerShell-Code unten
-2. Indra: nach dem Neu-Registrieren beide Aufgaben einmal manuell starten und auf ausbleibendes Fensterflackern prüfen
-3. Indra: `backups\` nach dem Weekly-Backup-Lauf auf das neue ZIP prüfen
-4. Indra: GitHub PAT erzeugen/erneuern falls der bestehende Token abgelaufen ist (Anleitung: [[SETUP-GITHUB-TOKEN]])
-5. Nächste Nestbau-Session: Auth-Bot-Auftrag aus [[PROJEKT-UPDATE]] („Vorbereiteter nächster Bot-Auftrag") starten
+1. Indra: `git push origin main` — lokales `main` ist durch den Merge des Fix-Branches jetzt vor `origin/main`
+2. Indra: GitHub PAT erzeugen/erneuern falls der bestehende Token abgelaufen ist (Anleitung: [[SETUP-GITHUB-TOKEN]])
+3. Nächste Nestbau-Session: Auth-Bot-Auftrag aus [[PROJEKT-UPDATE]] („Vorbereiteter nächster Bot-Auftrag") starten
 
 ## Wo liegt was
 - Dateien: `scripts/install-autosync-task.ps1`, `scripts/install-backup-task.ps1`, `PROJEKTE/Nestbau/PROJEKT-UPDATE.md`, `SYSTEM/MEMORY_INDEX.md`, `SYSTEM/SETUP/AUTO-SYNC.md`, `SYSTEM/SETUP/BACKUP-STRATEGY.md`, `SYSTEM/Chat-Exports/CEO-Nestbau-5-Task-Koordination-Tasks-2026-09-12.md`
@@ -38,9 +36,9 @@ aktualisiert: 2026-09-12
 - Vault aktualisiert: ja
 
 ## Offene Probleme
-- Live-Test beider Scheduled Tasks auf Windows steht aus — kein Windows in dieser Sandbox verfügbar
-- Erster Weekly-Backup-Lauf über den neuen VBS-Pfad noch nicht erfolgt, `backups/` entsprechend noch leer/nicht vorhanden
+- Lokales `main` bei Indra ist vor `origin/main` (Fix-Branch dort hineingemergt statt in einen Feature-Branch) — Push steht noch aus
 - GitHub-PAT-Status (gültig/abgelaufen) unbekannt — nur Indra kann das im Windows Credential Manager prüfen
+- `claude/nestbau-5-task-koordination-tsj44x` ist noch nicht per PR nach `main` gemergt
 
 ## Für zukünftige Chats
 - Vor jeder „Script X funktioniert nicht"-Vermutung erst prüfen, ob der aufrufende Layer (hier: Install-Script) den vorhandenen Baustein (hier: VBS-Wrapper) überhaupt nutzt

@@ -8,27 +8,20 @@ aktualisiert: 2026-09-12
 Alle 5 Tasks selbst bearbeitet (kein Bot-Loop nötig, reine Vault-/Script-Arbeit). Umgebung: Cloud-Sandbox (Linux, kein Windows/Task Scheduler) mit Git-Zugriff auf `Kildro93/Obsidion-Claud`.
 
 ## Task 1: VBS-Umstellung Scripts
-**Status:** FERTIG (Code) / AUSSTEHEND (Live-Test auf Windows)
+**Status:** FERTIG — live auf Windows getestet
 
 - `scripts/install-autosync-task.ps1` und `scripts/install-backup-task.ps1` umgeschrieben: Task-Aktion ist jetzt `wscript.exe //B "<...-silent.vbs>"` statt `powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File ...`
 - Die VBS-Wrapper (`vault-sync-silent.vbs`, `weekly-backup-silent.vbs`) existierten schon, waren aber bisher nicht verdrahtet — die Install-Scripts riefen PowerShell direkt auf
 - Beide Install-Scripts prüfen jetzt per `Test-Path`, ob der VBS-Wrapper existiert, und brechen mit klarer Fehlermeldung ab, falls nicht
 - **Erkenntnis:** `-WindowStyle Hidden` unterdrückt unter dem Taskplaner das kurze Aufblitzen des Konsolenfensters nicht zuverlässig (bekanntes PowerShell-Verhalten). `WScript.Shell.Run(...,0,...)` im VBS ist der zuverlässige Weg.
-- **Nicht möglich in dieser Umgebung:** Scheduled Task registrieren/starten (kein Windows). Muss lokal verifiziert werden.
+- **Live-Test bestanden (12.09.2026, Indra):** `(Get-ScheduledTask -TaskName "Obsidian Vault Auto-Sync").Actions` bestätigt `Execute: wscript.exe`, `Arguments: //B "...\vault-sync-silent.vbs"`.
 
 ## Task 2: Weekly-Backup testen
-**Status:** AUSSTEHEND — Windows-Ausführung nötig
+**Status:** FERTIG — live auf Windows getestet
 
-- Kein `backups/`-Ordner im Repo (korrekt, `.gitignore` schliesst ihn aus) und kein Log vorhanden → bisher kein Lauf über den (jetzt erst verdrahteten) VBS-Pfad
 - `weekly-backup.ps1` statisch geprüft: Pfadlogik (`$VaultRoot = Split-Path -Parent $PSScriptRoot`), Skip-Filter (`node_modules`, `.git`, `build`, `dist`, `.gradle`, `www`, `backups`, `logs`, `.apk`, `.aab`, `.log`) und Retention (8 ZIPs) sind in sich konsistent, keine Bugs gefunden
-- **Erkenntnis:** Laut [[PROJEKT-UPDATE]] wurde die Aufgabe am 07.09.2026 schon einmal registriert und getestet — aber über den alten `-WindowStyle Hidden`-Pfad. Der erste Lauf über den neuen VBS-Wrapper steht noch aus.
-- **Test-Anleitung für Indra** (nach `git pull` auf dem PC):
-  ```powershell
-  cd "C:\KI Programme\Obsidion für Claud\scripts"
-  powershell -ExecutionPolicy Bypass -File .\install-backup-task.ps1
-  Start-ScheduledTask -TaskName "Obsidian Vault Weekly Backup"
-  ```
-  Danach `backups\` prüfen: `vault-backup-<Datum>.zip` sollte da sein, keine Konsole sichtbar gewesen sein.
+- **Live-Test bestanden (12.09.2026, Indra):** `Start-ScheduledTask` über den neuen VBS-Pfad ausgelöst → `vault-backup-2026-09-12.zip`, 3.468.803 Bytes (vergleichbar zum 07.09.-Backup mit 3.682.364 Bytes)
+- **Zwischenzeitlicher Fehlalarm:** Erster Check direkt nach `Start-ScheduledTask` zeigte 0 Bytes — reines Timing-Problem (`Start-ScheduledTask` kehrt sofort zurück, das ZIP wird im Hintergrund erst befüllt). Nach ~20 Sekunden Wartezeit korrekte Grösse. Kein Script-Bug.
 
 ## Task 3: Pfade vereinheitlichen
 **Status:** FERTIG — keine Änderung nötig
