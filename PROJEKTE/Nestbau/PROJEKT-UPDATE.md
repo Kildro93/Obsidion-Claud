@@ -1,13 +1,13 @@
 # PROJEKT-UPDATE: Nestbau
 
-**Stand:** 2026-09-07
-**Aktualisiert von:** Code-Bot (Vault-Reorganisation)
+**Stand:** 2026-09-12
+**Aktualisiert von:** Design-System-Bot (Claude Code)
 
 ## Status
 
-**Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen
-**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Regeln sind ausgerollt (07.09.2026).
-**Nächster Schritt:** Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
+**Gesamt-Progress:** v2.0 produktiv, Firebase Phase 1 abgeschlossen, Design-System-Bug behoben
+**Aktuell:** Kein Bot aktiv. Google-Kalender-Sync und Firebase-Anmeldung laufen, Design konsistent auf `claude/new-session-je60jy` (PR noch nicht erstellt).
+**Nächster Schritt:** PR für `claude/new-session-je60jy` erstellen und mergen; danach Phase 2 Testing – Two-Device-Sync, Offline, Fehlerszenarien.
 
 ## Erledigt (letzte Sessions)
 - Firebase Architect Phase 1: Datenmodell, Rules, Indexes, Functions-Templates
@@ -44,6 +44,8 @@
 - 2026-09-10: **Phase-2-Kernpfad bestanden** (Tests 1–5). Zwei weitere Ursachen gefunden: Brave Shields blockten `firestore.googleapis.com` im zweiten Profil (`ERR_BLOCKED_BY_CLIENT`), und ein vermeintlicher Beitritt der Partnerin hatte nie stattgefunden — die App zeigt die Haushalts-ID aus dem lokalen Speicher, ohne sie beim Server zu prüfen.
 - 2026-09-10: **Abgleich ohne Schalter umgebaut** (97583da): Speichern geht immer nach Firebase, der Live-Abgleich startet beim Laden, nach Auth-Wechsel und nach Netzunterbrechung von selbst. Eintreffende Snapshots überschreiben keine lokal geänderten, noch nicht hochgeladenen Dokumente mehr.
 
+- 2026-09-12: **Design-System-Bug gefunden und behoben.** Ursache für „Design nicht konsistent": `index.html` hatte ein dupliziertes Inline-`<style>` mit der alten Palette (`#1c7d70`/`#4a6741`/`#8B4545`), das nach dem `<link>` zu `nestbau-design.css` stand und die neue Palette per Cascade überschrieb. ~150 Zeilen dupliziertes/widersprüchliches CSS aus `index.html` entfernt, nur app-spezifische Styles (Kalender/Uhr/Kochbuch/Menüplan) bleiben inline. Zusätzlich mehrere WCAG-AA-Kontrastfehler in der neuen Palette gefunden (weisser Text auf hellen Orange/Peach/Grün-Verläufen, teils nur 1,6:1 statt 4,5:1) und behoben: neue Variablen `--on-warm`, `--flame-fg` (dunkler), `--amber-fg`, `--secondary-green-fg`, vereinheitlichtes `--maroon`. `.icon-btn`/`.todo-add-btn` auf 48×48px Touch-Targets gebracht. Alte Farben auch in `icon.svg` (jetzt Orange→Peach-Verlauf, Grün-Akzent), `capacitor.config.json`, `tools/generate-assets.js`, `firebase-bridge.html` ersetzt. Commit `eebccee` auf Branch `claude/new-session-je60jy`, gepusht. PR noch offen: https://github.com/Kildro93/Nestbau/pull/new/claude/new-session-je60jy
+
 ## Offen
 - [x] ~~`firebase deploy --only firestore:rules`~~ – 10.09.2026 ausgerollt, Upload läuft
 - [x] ~~Phase 2, Test 1–5~~ – 10.09.2026 bestanden (Haushalt, Upload, Beitritt, Sync in beide Richtungen)
@@ -65,8 +67,10 @@
 - [x] ~~Multi-Device-Konflikte, Option A~~ – 10.09.2026 umgesetzt: der 1,2-Sekunden-Fall ist geschlossen, offene lokale Änderungen überleben einen Snapshot und werden danach hochgeladen. Offen bleibt nur der echte Offline-Konflikt (beide Geräte ändern dasselbe Dokument offline) — dort gewinnt weiterhin der letzte Schreibvorgang, siehe [[Konzept-Multi-Device-Konflikte]]
 - [ ] Test 6–9 (Offline, Konflikt, Regeln, falscher Code) aus [[Phase-2-Testplan]]
 - [ ] Optional: Screenshots ins Manifest für die schönere Installations-UI (6 Stück à 1080x1920 liegen unter `play-store/screenshots/`; bewusst weggelassen, weil sie ~900 KB ins App-Bundle ziehen würden)
-- [ ] Design-Frage: `icon.svg` nutzt noch die alte Palette (Petrol/Grün `#1c7d70`/`#4a6741`), `theme_color` ist Orange `#FF8C42`
+- [x] ~~Design-Frage: `icon.svg` nutzt noch die alte Palette~~ – 12.09.2026 behoben, siehe Eintrag oben (Commit `eebccee`)
 - [x] ~~Service-Worker-Frage~~ – 07.09.2026 in Chrome geprüft: „#487 activated and is running". Die Registrierung scheitert nur in der Vorschau-Ansicht, die App ist in Ordnung.
+- [ ] PR für `claude/new-session-je60jy` → `main` erstellen und mergen
+- [ ] Vorgerenderte PNG-Icons unter `assets/icons/` (icon-192.png, icon-512.png) sind noch mit alter Palette generiert; werden aktuell nirgends referenziert (nur Build-Output von `tools/generate-assets.js`), bei Bedarf per `npm run assets` neu bauen (braucht `sharp`)
 
 ## Blockers
 - Play Store: GitHub Pages aktivieren (Mensch). Signaturschlüssel ✅ erledigt.
