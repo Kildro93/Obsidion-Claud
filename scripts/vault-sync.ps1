@@ -1,4 +1,4 @@
-# OneNote to GitHub Sync Script
+﻿# OneNote to GitHub Sync Script
 param([string]$LogPath = "C:\KI Programme\Obsidion für Claud\scripts\logs\vault-sync.log")
 
 $VaultPath = "C:\KI Programme\Obsidion für Claud"
@@ -27,7 +27,7 @@ try {
         Log "📝 Changes detected:" "INFO"
         $GitStatus | ForEach-Object { Log "  $_" }
 
-        git add PROJEKTE/Primarlehrer-Studium/Studienmaterial/
+        git add STUDIUM/
         Log "✅ Files staged" "INFO"
 
         $CommitMsg = "Auto-Sync OneNote: $(Get-Date -Format 'dd.MM.yyyy HH:mm') [$(Get-Date -Format 'dddd')]"
