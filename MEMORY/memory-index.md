@@ -1,7 +1,7 @@
 ---
 title: memory-index
 created: 2026-09-06
-updated: 2026-09-12
+updated: 2026-09-13
 status: aktuell
 tags: [typ/status, status/aktuell]
 autor: gehirn-admin
@@ -33,6 +33,12 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[MEMORY/regeln]] und [[MEMORY
 - Änderungsprotokoll: [[MEMORY/changelog]]
 - Chat-Closure-Protocol: [[MEMORY/chat-closure-protocol]]
 
+## Permanente Chats & Rollen
+- **Gehirn-CEO**: Vault-Infrastruktur, Projekt-Überblick, Koordination (dieser Chat)
+- **Gehirn-Feedback**: Meta-Optimierungen, Prompt-Verbesserungen, Fehleranalyse → [[MEMORY/gehirn-feedback-prompt]]
+- **Gehirn-Admin**: Cleanup, Ordnung, Monitoring (startet später)
+- **CEO-Nestbau**: Projekt-Koordination, Bot-Steuerung (startet später)
+
 ## Projekte
 
 ### Nestbau (Hauptprojekt) — Household-Management-App
@@ -54,4 +60,4 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[MEMORY/regeln]] und [[MEMORY
 - Alle Fazite: `FAZITE/`
 
 ---
-*Zuletzt aktualisiert: 2026-09-12 — Grosse Vault-Migration abgeschlossen, onenote-sync entfernt, drive-mirror.ps1 live*
+*Zuletzt aktualisiert: 2026-09-13 — Gehirn-Feedback Chat verknüpft, Prompt hinzugefügt*
