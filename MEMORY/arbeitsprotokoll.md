@@ -54,14 +54,18 @@ Zentrale Uebersicht aller aktiven Bots/Chats und ihrer Aufgaben. Wird von jedem 
 
 ## Regeln fuer dieses Protokoll
 
-1. **Wer aktualisiert:** Jeder Bot traegt seine eigenen Aufgaben ein
-2. **Wann aktualisieren:**
-   - Neue Aufgabe erhalten → Zeile mit `offen` eintragen
-   - Aufgabe begonnen → Status auf `in Bearbeitung` setzen
-   - Aufgabe abgeschlossen UND funktioniert → Status auf `erledigt` setzen
+1. **Wer traegt ein:** Der zustaendige CEO traegt die Aufgaben seiner Worker ein — er ist fuer die Aufgabenverteilung verantwortlich
+   - Gehirn-CEO: traegt Gehirn-Admin, Gehirn-Feedback und eigene Aufgaben ein
+   - Nestbau-CEO: traegt Nestbau-Worker und eigene Aufgaben ein
+   - Jeder CEO traegt auch seine eigenen Aufgaben ein
+2. **Ausnahme — Worker traegt selbst ein:** Nur wenn der User einen Worker direkt beauftragt hat (CEO uebergangen). Der Worker vermerkt: `(direkt vom User)` in der Details-Spalte
+3. **Status aktualisieren:**
+   - Neue Aufgabe → CEO traegt Zeile mit `offen` ein
+   - Aufgabe begonnen → Status auf `in Bearbeitung` setzen (darf der Worker selbst)
+   - Aufgabe abgeschlossen UND funktioniert → Status auf `erledigt` setzen (darf der Worker selbst)
    - Aufgabe abgebrochen → Zeile entfernen mit Kommentar im Changelog
-3. **Status-Werte:** `offen`, `in Bearbeitung`, `erledigt`
-4. **Erledigt = funktioniert.** Nicht "erledigt" setzen wenn ungetestet oder fehlerhaft
-5. **Gehirn-CEO liest dieses Protokoll bei JEDER Anfrage** und gibt zuerst eine Uebersicht
-6. **Erledigte Aufgaben:** bleiben 7 Tage sichtbar, dann entfernt der Gehirn-Admin sie
-7. **Neue Bots:** Werden hier eingetragen sobald sie einen Prompt und eine Aufgabe haben
+4. **Status-Werte:** `offen`, `in Bearbeitung`, `erledigt`
+5. **Erledigt = funktioniert.** Nicht "erledigt" setzen wenn ungetestet oder fehlerhaft
+6. **Gehirn-CEO liest dieses Protokoll bei JEDER Anfrage** und gibt zuerst eine Uebersicht
+7. **Erledigte Aufgaben:** bleiben 7 Tage sichtbar, dann entfernt der Gehirn-Admin sie
+8. **Neue Bots:** Werden hier eingetragen sobald sie einen Prompt und eine Aufgabe haben

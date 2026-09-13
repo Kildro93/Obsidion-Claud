@@ -324,13 +324,21 @@ Zentrale Datei: [[MEMORY/arbeitsprotokoll]]
 ### Zweck
 - Uebersicht aller aktiven Bots/Chats und ihrer Aufgaben (offen, in Bearbeitung, erledigt)
 - Gehirn-CEO liest diese Datei bei JEDER Anfrage und gibt zuerst eine Uebersicht
-- Jeder Bot traegt seine eigenen Aufgaben ein und aktualisiert den Status
+- Der zustaendige CEO traegt die Aufgaben seiner Worker ein (Aufgabenverteilung ist CEO-Sache)
+- Worker duerfen ihren eigenen Status aktualisieren (offen → in Bearbeitung → erledigt)
 
-### Bot-Pflichten
-1. **Neue Aufgabe erhalten:** Zeile mit Status `offen` eintragen
-2. **Aufgabe begonnen:** Status auf `in Bearbeitung` setzen
-3. **Aufgabe abgeschlossen UND funktioniert:** Status auf `erledigt` setzen
-4. **Aufgabe abgebrochen:** Zeile entfernen, Grund im Changelog
+### Wer traegt ein
+- **CEOs** tragen Aufgaben fuer sich und ihre Worker ein — sie sind verantwortlich fuer die Aufgabenverteilung
+  - Gehirn-CEO: eigene + Gehirn-Admin + Gehirn-Feedback
+  - Nestbau-CEO: eigene + Nestbau-Worker
+- **Worker** duerfen NUR in Ausnahmefaellen selbst eintragen: wenn der User den Worker direkt beauftragt hat (CEO uebergangen). Vermerk: `(direkt vom User)` in der Details-Spalte
+- **Status aktualisieren** darf jeder Bot fuer seine eigenen Aufgaben
+
+### Status-Ablauf
+1. CEO traegt neue Aufgabe mit `offen` ein
+2. Worker setzt auf `in Bearbeitung` wenn er beginnt
+3. Worker setzt auf `erledigt` wenn abgeschlossen UND funktioniert
+4. Bei Abbruch: Zeile entfernen, Grund im Changelog
 
 ### Regeln
 - `erledigt` bedeutet: getestet und funktioniert — nicht nur geschrieben
