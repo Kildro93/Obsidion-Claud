@@ -1,7 +1,7 @@
 ---
 title: feedback-log
 created: 2026-09-12
-updated: 2026-09-12
+updated: 2026-09-13
 status: aktuell
 tags: [typ/log, status/aktuell]
 autor: gehirn-feedback
@@ -49,3 +49,17 @@ Chronologisches Protokoll: Was lief schief, warum, was wurde geändert.
 - **Ursache:** Prompt-Vorlage für Git-Blöcke war unvollständig.
 - **Regel:** `REGEL-FB05` — Jeder Git-Block enthält immer: `git add`, `git commit`, `git push`, danach `drive-mirror.ps1`.
 - **Status:** erledigt — ab sofort in allen Chats angewendet
+
+### FB-006: Platzhalter-Pfad statt konkretem Pfad
+- **Chat:** Gehirn-Feedback
+- **Auslöser:** Git-Block und Script-Aufruf enthielten `PFAD\studium-umbenennung-und-setup.ps1` statt den konkreten Pfad `.\scripts\studium-umbenennung-und-setup.ps1`.
+- **Ursache:** Script wurde per SendUserFile geliefert, aber der Git-Block ging davon aus, dass der User den Speicherort selbst kennt. Platzhalter statt konkreter Anweisung.
+- **Regel:** `REGEL-FB06` — Keine Platzhalter in ausführbaren Blöcken. Jeder Pfad muss konkret und relativ zum Vault-Root sein. Wenn der Speicherort unklar ist: zuerst klären, dann Block liefern.
+- **Status:** erledigt — ab sofort in allen Chats angewendet
+
+### FB-007: PowerShell-Script ohne UTF-8 BOM
+- **Chat:** Gehirn-Feedback
+- **Auslöser:** Script mit Umlauten ("für") wurde als UTF-8 ohne BOM gespeichert. PowerShell 5.1 las es als ANSI → "für" wurde zu "fÃ¼r", Rename schlug fehl.
+- **Ursache:** Write-Tool erzeugt standardmässig UTF-8 ohne BOM. Technische Regel (UTF-8 MIT BOM für .ps1) war bekannt, aber beim Erstellen nicht angewendet.
+- **Regel:** `REGEL-FB07` — PowerShell-Scripts (.ps1) immer mit UTF-8 BOM erzeugen. Workaround: Umlaute als `$([char]0xFC)` etc. escapen, oder nachträglich BOM per Python voranstellen. Vor Commit prüfen: `Format-Hex .\script.ps1 | Select -First 1` — muss mit `EF BB BF` beginnen.
+- **Status:** erledigt — Workaround (char-Escape) im finalen Script angewendet
