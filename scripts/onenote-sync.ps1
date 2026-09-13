@@ -1,4 +1,4 @@
-﻿# OneNote-Sync: Automatische Studium-Modul-Normalisierung
+# OneNote-Sync: Automatische Studium-Modul-Normalisierung
 # UTF-8 with BOM required (REGEL-FB07)
 
 param(
@@ -21,7 +21,7 @@ $Farben = @{
 
 function Log {
     param([string]$Message, [string]$Status = "INFO")
-    $Farbe = $Farben[$Status] ?? "White"
+    $Farbe = if ($Farben.ContainsKey($Status)) { $Farben[$Status] } else { "White" }
     Write-Host "[$Status] $Message" -ForegroundColor $Farbe
 }
 
@@ -85,7 +85,7 @@ function Main {
     Log "OneNote-Sync startet..." "INFO"
     Log "Import-Pfad: $ImportPfad" "INFO"
     Log "Ziel-Semester: $ZielSemester" "INFO"
-    if ($WhatIf) { Log "WHATIF-MODUS: Keine $($([char]0xC4)nderungen vorgenommen" "INFO" }
+    if ($WhatIf) { Log "WHATIF-MODUS: Keine $([char]0xC4)nderungen vorgenommen" "INFO" }
 
     # Vollst$([char]0xE4)ndige Pfade
     $ImportFull = if ([System.IO.Path]::IsPathRooted($ImportPfad)) {
