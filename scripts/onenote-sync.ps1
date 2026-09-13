@@ -91,16 +91,14 @@ function Main {
     $ImportFull = if ([System.IO.Path]::IsPathRooted($ImportPfad)) {
         $ImportPfad
     } else {
-        Resolve-Path (Join-Path $PSScriptRoot "..\$ImportPfad" -Resolve -ErrorAction Stop)
+        Resolve-Path (Join-Path $PSScriptRoot "..\$ImportPfad") -ErrorAction Stop
     }
 
-    $ZielBase = if ([System.IO.Path]::IsPathRooted("STUDIUM")) {
-        "STUDIUM"
-    } else {
-        Resolve-Path (Join-Path $PSScriptRoot "..\STUDIUM" -Resolve -ErrorAction Stop)
-    }
+    $ZielBase = Resolve-Path (Join-Path $PSScriptRoot "..") -ErrorAction Stop
 
-    $ZielPath = Join-Path $ZielBase $ZielSemester "fhnw-bach" "module"
+    $ZielPath = Join-Path $ZielBase $ZielSemester
+    $ZielPath = Join-Path $ZielPath "fhnw-bach"
+    $ZielPath = Join-Path $ZielPath "module"
     if ($ZielGruppe) {
         $ZielPath = Join-Path $ZielPath $ZielGruppe
     }
