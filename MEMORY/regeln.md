@@ -1,7 +1,7 @@
 ---
 title: regeln
 created: 2026-09-06
-updated: 2026-09-12
+updated: 2026-09-13
 status: aktuell
 tags: [typ/regel, status/aktuell]
 autor: indra
@@ -31,6 +31,14 @@ autor: indra
 - Sobald ein Bot/Chat seine Arbeit erledigt hat, meldet er sofort und direkt: "Fertig. [1 Satz was erledigt wurde]."
 - Kein Drumherumreden — die Fertig-Meldung kommt so früh und knapp wie möglich
 - Danach: Fazit erstellen gemäss [[MEMORY/chat-closure-protocol]]
+
+## Status-Abfragen (alle Chats)
+- Jeder Bot muss auf "Was geht ab?", "Status?", "Was laeuft?" mit einem strukturierten Status-Block antworten: Offen / Erledigt / Wartend auf
+- Auf "Was sind deine Aufgaben?" antwortet der Bot mit seiner Rolle und Zustaendigkeit
+- Auf "Naechste Schritte?" listet er konkret 1-3 Aktionen, oder sagt "Alles erledigt"
+- Immer Chat-Name nennen (z.B. "STATUS: Gehirn-CEO")
+- Keine Floskeln, offene Aufgaben zuerst
+- Prompt-Block-Vorlage: [[FAZITE/allgemein/prompt-block-status-abfragen]]
 
 ## Verweise
 - Profil: [[MEMORY/profil]]
