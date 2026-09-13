@@ -81,3 +81,44 @@ Durchgefuehrt durch: Gehirn-Admin-Chat (Cowork)
 ### Aktualisierte Dateien
 - `MEMORY/ordnungs-regeln.md` — STUDIUM-Ausnahme, Frontmatter-Ausnahme dokumentiert
 - `MEMORY/changelog.md` — Dieser Eintrag
+
+## 2026-09-13 — Neue Regeln + Strukturentscheidungen
+
+Durchgefuehrt durch: Gehirn-Feedback-Chat (Cowork)
+
+### Neue Regeln in ordnungs-regeln.md
+- §5 STUDIUM/ komplett umgeschrieben: `STUDIUM/primarlehrer/` ist die neue Struktur (Indra entschieden), kebab-case fuer alle Modulnamen, Modul-Templates definiert
+- §7 Namenskonventionen: STUDIUM-Ausnahme fuer OneNote-Namen entfernt — alles kebab-case
+- §14 Prompt-Speicherort: `FAZITE/allgemein/prompts/<chat-name>-v<nr>.md`
+- §15 Claude-Outputs-Cleanup: `Claude outputs/` ist kein Vault-Ordner
+- §16 Leere-Ordner-Regel: leere Ordner nach Strukturaenderung entfernen
+- §17 Changelog-Pflicht: Aenderungen protokollieren VOR Git-Block
+- §18 Bot-Uebergabe-Protokoll: `FAZITE/allgemein/auftraege/` mit Lese-Pflicht bei Session-Start
+- §19 Datei-Zuordnungspflicht: Zuordnungsmatrix, Anti-Duplikat-Regeln, Bot-Pflichten
+- §20 Aenderungskontrolle (umnummeriert von alt-§14)
+- §21 Aufraeumung: von monatlich auf woechentlich geaendert, erweiterte Checkliste
+
+### Neue Dateien
+- `FAZITE/allgemein/auftraege/gehirn-admin-cleanup-auftrag.md` — Cleanup-Auftrag fuer Gehirn-Admin (Vault-Audit Ergebnisse)
+- `FAZITE/allgemein/prompts/gehirn-ceo-v3.md` — CEO-Prompt mit FEHLERVERHALTEN + STATUS-ABFRAGEN
+- `FAZITE/allgemein/prompt-block-status-abfragen.md` — Universeller Status-Block fuer alle Bots
+
+### Aktualisierte Dateien
+- `MEMORY/regeln.md` — Status-Abfragen-Sektion hinzugefuegt
+- `FAZITE/allgemein/feedback-log.md` — FB-006, FB-007 hinzugefuegt
+- `MEMORY/changelog.md` — Dieser Eintrag
+
+## 2026-09-13 — Arbeitsprotokoll + "Wie sieht es aus?" Trigger
+
+Durchgefuehrt durch: Gehirn-Feedback-Chat (Cowork)
+
+### Neue Dateien
+- `MEMORY/arbeitsprotokoll.md` — Zentrale Bot-Aufgaben-Uebersicht (wer macht was, Status aller Bots)
+- `FAZITE/allgemein/prompts/gehirn-ceo-v4.md` — CEO-Prompt mit Arbeitsprotokoll-Pflicht + "Wie sieht es aus?" Trigger
+
+### Aktualisierte Dateien
+- `FAZITE/allgemein/prompt-block-status-abfragen.md` — "Wie sieht es aus?" Trigger hinzugefuegt (Kompakt-Update)
+- `MEMORY/regeln.md` — "Wie sieht es aus?" in Status-Abfragen ergaenzt
+- `MEMORY/ordnungs-regeln.md` — §2 arbeitsprotokoll.md ergaenzt, §22 Arbeitsprotokoll-Regel neu
+- `FAZITE/allgemein/prompts/gehirn-ceo-v3.md` — Status auf `veraltet` gesetzt
+- `MEMORY/changelog.md` — Dieser Eintrag

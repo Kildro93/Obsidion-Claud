@@ -36,6 +36,7 @@ autor: indra
 - Jeder Bot muss auf "Was geht ab?", "Status?", "Was laeuft?" mit einem strukturierten Status-Block antworten: Offen / Erledigt / Wartend auf
 - Auf "Was sind deine Aufgaben?" antwortet der Bot mit seiner Rolle und Zustaendigkeit
 - Auf "Naechste Schritte?" listet er konkret 1-3 Aktionen, oder sagt "Alles erledigt"
+- Auf "Wie sieht es aus?" gibt der Bot ein Kompakt-Update: Aufgabenfeld, offene Punkte, letzte Aenderungen (max 5-8 Zeilen)
 - Immer Chat-Name nennen (z.B. "STATUS: Gehirn-CEO")
 - Keine Floskeln, offene Aufgaben zuerst
 - Prompt-Block-Vorlage: [[FAZITE/allgemein/prompt-block-status-abfragen]]
