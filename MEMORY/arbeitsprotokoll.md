@@ -29,12 +29,12 @@ Zentrale Uebersicht aller aktiven Bots/Chats und ihrer Aufgaben. Wird von jedem 
 
 | Status | Aufgabe | Seit | Details |
 |---|---|---|---|
-| offen | Vault-Cleanup nach Audit | 2026-09-13 | Auftrag: [[FAZITE/allgemein/auftraege/gehirn-admin-cleanup-auftrag]] |
+| erledigt | Vault-Cleanup nach Audit | 2026-09-13 | Auftrag: [[FAZITE/allgemein/auftraege/gehirn-admin-cleanup-auftrag]] |
 
 ### Gehirn-Feedback
 - **Typ:** Cowork | **Ordner:** C:\KI Programme\Obsidion fuer Claud
 - **Rolle:** Kommunikation, Prompts, Learnings, Regeln, Feedback-Analyse
-- **Prompt:** (noch kein versionierter Prompt)
+- **Prompt:** [[FAZITE/allgemein/prompts/gehirn-feedback-v1]]
 
 | Status | Aufgabe | Seit | Details |
 |---|---|---|---|
@@ -50,7 +50,7 @@ Zentrale Uebersicht aller aktiven Bots/Chats und ihrer Aufgaben. Wird von jedem 
 
 | Status | Aufgabe | Seit | Details |
 |---|---|---|---|
-| — | Keine offenen Aufgaben | — | Projekt pausiert |
+| offen | Nestbau-Strukturbereinigung | 2026-09-13 | [[FAZITE/allgemein/auftraege/nestbau-ceo-strukturbereinigung]] |
 
 ## Regeln fuer dieses Protokoll
 

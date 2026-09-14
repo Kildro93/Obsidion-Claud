@@ -1,7 +1,7 @@
 ---
 title: changelog
 created: 2026-09-12
-updated: 2026-09-12
+updated: 2026-09-13
 status: aktuell
 tags: [typ/status, status/aktuell]
 autor: gehirn-admin
@@ -122,3 +122,45 @@ Durchgefuehrt durch: Gehirn-Feedback-Chat (Cowork)
 - `MEMORY/ordnungs-regeln.md` — §2 arbeitsprotokoll.md ergaenzt, §22 Arbeitsprotokoll-Regel neu
 - `FAZITE/allgemein/prompts/gehirn-ceo-v3.md` — Status auf `veraltet` gesetzt
 - `MEMORY/changelog.md` — Dieser Eintrag
+
+## 2026-09-13 — Gehirn-Admin Cleanup
+
+Durchgefuehrt durch: Gehirn-Admin-Chat (Cowork)
+
+### Strukturaenderungen
+- `Claude outputs/` aufgeloest: 3 Duplikate geloescht, 3 Scripts nach `scripts/`, 1 Prompt nach `PROJEKTE/Primarlehrer-Studium/prompts/`
+- `import/` komplett entfernt (12+ leere OneNote-Stubs)
+- Root-Bild `Vorbereitungswoche image...png` entfernt (verwaist)
+- `MEMORY/gehirn-feedback-prompt.md` → `FAZITE/allgemein/prompts/gehirn-feedback-v1.md` (§14)
+- 13 Modulbeschreibungen von `STUDIUM/semester-01/fhnw-bach/module/` nach `STUDIUM/primarlehrer/modules/` migriert
+- `STUDIUM/semester-01/` komplett entfernt (obsolet nach Migration)
+- `STUDIUM/import/` entfernt (leer)
+
+### Geloeschte Dateien
+- `Claude outputs/ceo-auftrag-onenote-sync.md` (Duplikat)
+- `Claude outputs/prompt-block-status-abfragen.md` (Duplikat)
+- `Claude outputs/gehirn-ceo-v3.md` (Duplikat)
+- `FAZITE/allgemein/feedback-log-1.md` (Duplikat von feedback-log.md)
+- `FAZITE/allgemein/gehirn-admin-cleanup-auftrag.md` (aelteres Duplikat, neuere in auftraege/)
+- `REST/techniken.md` (gemergt in technik-notizen.md)
+- Leere Ordner: `FAZITE/github-automation/`, `STUDIUM/import/`
+
+### Verschobene Dateien
+- `MEMORY/gehirn-feedback-prompt.md` → `FAZITE/allgemein/prompts/gehirn-feedback-v1.md` (§14)
+
+### Zusaetzlich geloeschte Duplikate (Originale existierten bereits am Zielort)
+- `Claude outputs/onenote-sync.ps1` (Original in scripts/)
+- `Claude outputs/onenote-sync-FIXED.ps1` (Original in scripts/)
+- `Claude outputs/studium-umbenennung-und-setup.ps1` (Original in scripts/)
+- `Claude outputs/CHAT-PROMPT-KOPIERFERTIG.md` (Original in PROJEKTE/Primarlehrer-Studium/prompts/)
+
+### Neue Dateien
+- `FAZITE/allgemein/auftraege/nestbau-ceo-strukturbereinigung.md` — Auftrag fuer Nestbau-CEO
+
+### Aktualisierte Dateien
+- `MEMORY/memory-index.md` — STUDIUM-Pfad korrigiert, Prompt-Verweis aktualisiert, Arbeitsprotokoll verlinkt
+- `MEMORY/arbeitsprotokoll.md` — Gehirn-Admin Cleanup-Status aktualisiert
+- `MEMORY/changelog.md` — Dieser Eintrag
+- `REST/technik-notizen.md` — techniken.md Inhalt integriert
+- `.gitignore` — Claude outputs/ hinzugefuegt
+- `FAZITE/allgemein/auftraege/gehirn-admin-cleanup-auftrag.md` — Status auf erledigt

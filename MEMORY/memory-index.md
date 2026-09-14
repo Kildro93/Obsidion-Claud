@@ -32,11 +32,12 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[MEMORY/regeln]] und [[MEMORY
 - Tag-Liste & Glossar: [[MEMORY/glossar]]
 - Änderungsprotokoll: [[MEMORY/changelog]]
 - Chat-Closure-Protocol: [[MEMORY/chat-closure-protocol]]
+- Arbeitsprotokoll: [[MEMORY/arbeitsprotokoll]]
 
 ## Permanente Chats & Rollen
-- **Gehirn-CEO**: Vault-Infrastruktur, Projekt-Überblick, Koordination (dieser Chat)
-- **Gehirn-Feedback**: Meta-Optimierungen, Prompt-Verbesserungen, Fehleranalyse → [[MEMORY/gehirn-feedback-prompt]]
-- **Gehirn-Admin**: Cleanup, Ordnung, Monitoring (startet später)
+- **Gehirn-CEO**: Vault-Infrastruktur, Projekt-Überblick, Koordination
+- **Gehirn-Feedback**: Meta-Optimierungen, Prompt-Verbesserungen, Fehleranalyse → Prompt: [[FAZITE/allgemein/prompts/gehirn-feedback-v1]]
+- **Gehirn-Admin**: Cleanup, Ordnung, Monitoring (aktiv seit 2026-09-13)
 - **CEO-Nestbau**: Projekt-Koordination, Bot-Steuerung (startet später)
 
 ## Projekte
@@ -55,9 +56,10 @@ Einstiegspunkt für jeden Chat. Zuerst hier, dann [[MEMORY/regeln]] und [[MEMORY
 - Fazite: `FAZITE/github-automation/` (noch leer)
 
 ## Weitere Bereiche
-- Studium: `STUDIUM/semester-01/`
+- Studium: `STUDIUM/primarlehrer/`
 - Einzelnotizen (Anime, Technik, Koch-Wissen): `REST/`
 - Alle Fazite: `FAZITE/`
+- Alle Prompts: `FAZITE/allgemein/prompts/`
 
 ---
-*Zuletzt aktualisiert: 2026-09-13 — Gehirn-Feedback Chat verknüpft, Prompt hinzugefügt*
+*Zuletzt aktualisiert: 2026-09-13 — Gehirn-Admin Cleanup: STUDIUM-Pfad korrigiert, Prompt-Verweis aktualisiert, Arbeitsprotokoll verlinkt*
